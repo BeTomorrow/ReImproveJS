@@ -7,15 +7,15 @@ import * as tf from "@tensorflow/tfjs";
 
 const expect = chai.expect;
 
-const size = 20*20+2;
+const size = 20 * 20 + 2;
 const test = new Model({
     layers: [
         tf.layers.dense({units: 128, inputShape: [size], activation: 'relu'}),
         tf.layers.dense({units: 128, activation: 'relu'}),
         tf.layers.dense({units: 3, activation: 'softmax'})
     ],
-    name: "test"});
-test.compile({loss: 'categoricalCrossentropy', optimizer: 'rmsprop'});
+    name: "test"
+}).compile({loss: 'categoricalCrossentropy', optimizer: 'rmsprop'});
 
 const agent = Furnish.CreateAgent(test, {
     memorySize: 20000,

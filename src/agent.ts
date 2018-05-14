@@ -32,11 +32,14 @@ export class Agent {
     }
 
     replay() {
-        /*this.memory.sample(this.config.batchSize).forEach((memento => {
+        this.memory.sample(this.config.batchSize).forEach((memento => {
             let target = memento.reward;
             if (!this.done) {
-               target = memento.reward + this.config.learningConfig.gamma * max(this.model.predict(memento.nextState))
+               target = memento.reward + this.config.learningConfig.gamma * this.model.predict(memento.nextState).getHighestValue();
             }
-        }));*/
+
+            let future_target = this.model.predict(memento.state).getValue();
+
+        }));
     }
 }

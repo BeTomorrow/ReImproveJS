@@ -31,7 +31,11 @@ export class Result {
         this.result = result;
     }
 
-    getHighestValue(): Float32Array | Int32Array {
-        return this.result.argMax(1).dataSync();
+    getHighestValue(): number {
+        return this.result.argMax(1).dataSync()[0];
+    }
+
+    getValue(): Int32Array | Float32Array {
+        return this.result.dataSync();
     }
 }
