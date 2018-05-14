@@ -1,12 +1,37 @@
-import * as tf from '@tensorflow/tfjs';
+import {Sequential, SequentialConfig, ModelFitConfig, ModelCompileConfig, ModelPredictConfig} from '@tensorflow/tfjs-layers';
+import {Tensor} from '@tensorflow/tfjs-core';
 
-class Model {
-    model: tf.Sequential;
 
-    constructor(model = new tf.Sequential()) {
-        this.model = model;
-        this.model.add(tf.layers.dense({units: 32,  inputShape: [50]}));
+// TODO rework to make our own layers
+export class Model {
+    model: Sequential;
+
+    constructor(config?: SequentialConfig) {
+        this.model = new Sequential(config);
     }
 
-    add(layer: tf.LayerExports)
+    compile(config: ModelCompileConfig): Model {
+        this.model.compile(config);
+        return this;
+    }
+
+    predict(x: Tensor, config?: ModelPredictConfig): Result {
+        return new Result(<Tensor> this.model.predict(x, config));
+    }
+
+    fit(x: Tensor | Tensor[], y: Tensor | Tensor[], config?: ModelFitConfig) {
+        return this.model.fit(x, y, config);
+    }
+}
+
+export class Result {
+    result: Tensor;
+
+    constructor(result: Tensor) {
+        this.result = result;
+    }
+
+    getHighestValue(): Float32Array | Int32Array {
+        return this.result.argMax(1).dataSync();
+    }
 }
