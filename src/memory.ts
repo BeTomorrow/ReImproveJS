@@ -1,13 +1,13 @@
-import {Tensor} from "@tensorflow/tfjs-core";
-import {sampleSize} from "lodash";
+import {Tensor, Rank} from "@tensorflow/tfjs-core";
+import {sampleSize, random} from "lodash";
 
 export interface MemoryConfig {
-    windowSize: number;
+    memorySize: number;
 }
 
 export interface Memento {
     state: Tensor;
-    action: Tensor;
+    action: number;
     reward: number;
     nextState: Tensor;
 }
@@ -23,11 +23,22 @@ export class Memory {
         this.memory = [];
     }
 
-    remember(memento: Memento) {
-        this.memory.push(memento);
+    remember(memento: Memento, replaceIfFull: boolean = true) {
+        if (this.memory.length < this.config.memorySize)
+            this.memory.push(memento);
+        else if (replaceIfFull)
+            this.memory[random(0, this.memory.length-1)] = memento;
+    }
+
+    shift() {
+        this.memory.shift();
     }
 
     sample(batchSize: number) {
         return sampleSize(this.memory, batchSize);
+    }
+
+    get Length() {
+        return this.memory.length;
     }
 }
