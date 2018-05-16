@@ -24,7 +24,7 @@ export class Model {
     }
 
     async fit(x: Tensor, y: Tensor, config?: ModelFitConfig) {
-        return await this.model.fit(x, y, config).then(value => <number>value.history.losses[0], reason => {throw new Error("Error in fitting data")});
+        return await this.model.fit(x, y, config).then(value => <number>value.history.loss[0], reason => {throw new Error("Error in fitting data")});
     }
 
     randomOutput(): number {
