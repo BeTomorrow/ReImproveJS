@@ -20,7 +20,7 @@
     "lodash": "^4.17.10"
   },
   "scripts": {
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.test.ts'"
+    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.test.ts'",
     "prepublishOnly": "npm run compile",
     "compile": "npm run clean && tsc -p .",
     "watch": "tsc -w -p .",

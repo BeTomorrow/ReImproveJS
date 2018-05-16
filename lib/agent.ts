@@ -2,7 +2,7 @@ import {Memento, Memory} from "./memory";
 import {Model} from "./model";
 import {Tensor, tensor, tensor2d} from "@tensorflow/tfjs-core";
 import {range, random} from "lodash";
-import {TypedWindow} from "./window";
+import {TypedWindow} from "./typed_window";
 
 const MEM_WINDOW_MIN_SIZE = 2;
 const HIST_WINDOW_SIZE = 1000;
