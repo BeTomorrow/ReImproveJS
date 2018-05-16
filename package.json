@@ -1,14 +1,14 @@
 {
   "name": "furnishjs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/furnish.js",
+  "types": "./dist/furnish.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pravez/FurnishJS.git"
   },
-  "author": "",
+  "author": "Paul Breton <pbreton@betomorrow.com",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Pravez/FurnishJS/issues"
@@ -20,9 +20,11 @@
     "lodash": "^4.17.10"
   },
   "scripts": {
-    "watch": "NODE_ENV=development parcel --no-hmr --open index.html ",
-    "build": "NODE_ENV=production parcel build index.html  --no-minify --public-url ./",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.test.ts'"
+    "prepublishOnly": "npm run compile",
+    "compile": "npm run clean && tsc -p .",
+    "watch": "tsc -w -p .",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",
@@ -36,5 +38,10 @@
     "parcel-bundler": "~1.6.2",
     "ts-node": "^6.0.3",
     "typescript": "^2.8.3"
-  }
+  },
+  "files": [
+    "dist/furnish.js",
+    "dist/furnish.d.ts",
+    "dist/lib"
+  ]
 }

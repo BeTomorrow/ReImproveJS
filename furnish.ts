@@ -1,5 +1,5 @@
-import {Agent, AgentConfig} from './agent';
-import {Model} from "./model";
+import {Agent, AgentConfig} from './lib/agent';
+import {Model} from "./lib/model";
 
 export class Furnish {
     static CreateAgent(model: Model, config: AgentConfig) {

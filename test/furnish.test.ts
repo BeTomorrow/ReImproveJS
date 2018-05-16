@@ -1,5 +1,5 @@
-import {Furnish} from "../src/furnish";
-import {Model} from "../src/model";
+import {Furnish} from "../furnish";
+import {Model} from "../lib/model";
 
 import * as mocha from 'mocha';
 import * as chai from 'chai';
@@ -10,7 +10,7 @@ const expect = chai.expect;
 const screenInputSize = 20 * 20;
 const numActions = 3;
 const inputSize = screenInputSize * 1 + numActions * 1 + screenInputSize;
-const test = new Model({
+const model = new Model({
     layers: [
         tf.layers.dense({units: 128, inputShape: [inputSize], activation: 'relu'}),
         tf.layers.dense({units: 128, activation: 'relu'}),
@@ -20,20 +20,31 @@ const test = new Model({
     outputSize: numActions
 }).compile({loss: 'meanSquaredError', optimizer: 'adam'});
 
+console.log(tf.getBackend());
+
 describe('Model', () => {
     it('should give a 0 result', () => {
-        expect(test.predict(tf.randomNormal([1, inputSize])).getHighestValue()).to.be.within(0, numActions);
+        expect(model.predict(tf.randomNormal([1, inputSize])).getHighestValue()).to.be.within(0, numActions);
     });
 
     it('should give a random according to the size of the output tensor', () => {
         for (let i = 0; i < 10; ++i)
-            expect(test.randomOutput()).to.be.within(0, numActions);
-    })
+            expect(model.randomOutput()).to.be.within(0, numActions);
+    });
+
+    it('should fit fast', async() => {
+        let start = new Date().getTime();
+        for(let i = 0;i < 30; ++i) {
+            await model.fit(tf.randomNormal([128, 803]), tf.randomNormal([128, 3]), {stepsPerEpoch: 1, epochs: 1});
+            console.log(i);
+        }
+        expect(new Date().getTime() - start).to.be.lt(5000);
+    });
 });
 
 describe('Agent', () => {
     it('Should be a normal training', () => {
-        const agent = Furnish.CreateAgent(test, {
+        const agent = Furnish.CreateAgent(model, {
             memorySize: 20000,
             batchSize: 32,
             temporalWindow: 1,

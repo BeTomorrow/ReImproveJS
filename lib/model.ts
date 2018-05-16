@@ -7,7 +7,8 @@ export interface ModelConfig extends SequentialConfig {
 }
 
 export interface FitResult {
-    loss: number;
+    loss?: number;
+    error?: any;
 }
 
 // TODO rework to make our own layers
@@ -27,13 +28,8 @@ export class Model {
         return new Result(<Tensor> this.model.predict(x, config));
     }
 
-    fit(x: Tensor, y: Tensor, config?: ModelFitConfig): Promise<FitResult> {
-        return this.model.fit(x, y, config).then((history) => {
-            console.log("Ended promise");
-            console.log(history.history);
-
-            return ({loss: <number>history.history.loss[0]});
-        });
+    async fit(x: Tensor, y: Tensor, config?: ModelFitConfig) {
+        return await this.model.fit(x, y, config);
     }
 
     randomOutput(): number {

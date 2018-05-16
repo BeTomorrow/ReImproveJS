@@ -1,9 +1,8 @@
-import {Memory} from "./memory";
+import {Memento, Memory} from "./memory";
 import {Model} from "./model";
 import {Tensor, tensor, tensor2d} from "@tensorflow/tfjs-core";
-import {random, range} from "lodash";
+import {range, random} from "lodash";
 import {TypedWindow} from "./window";
-import {ModelLoggingVerbosity} from "@tensorflow/tfjs-layers/dist/engine/training";
 
 const MEM_WINDOW_MIN_SIZE = 2;
 const HIST_WINDOW_SIZE = 1000;
@@ -142,16 +141,28 @@ export class Agent {
     }
 
     private replay() {
-        this.memory.sample(this.config.batchSize).forEach((memento => {
-            let target = memento.reward;
-            if (!this.done) {
-                target = memento.reward + this.config.learningConfig.gamma * this.model.predict(memento.nextState).getHighestValue();
-            }
+        const trainData = this.memory.sample(this.config.batchSize)
+            .map(memento => this.createInOutFromMemento(memento))
+            .reduce((previousValue, currentValue) => {
+                return {x: previousValue.x.concat(currentValue.x), y: previousValue.y.concat(currentValue.y)};
+            });
+        this.model.fit(trainData.x, trainData.y, {epochs:1, stepsPerEpoch:1})
+            .then(
+                result => this.lossesHistory.add(<number>result.history.loss[0]),
+                reason => {throw new Error("Unable to realize fit correctly");}
+            );
+        this.setReward(0.);
+    }
 
-            let future_target = this.model.predict(memento.state).getValue();
-            future_target[memento.action] = target;
-            this.model.fit(memento.state, tensor2d(future_target, [1, 3]), {epochs:1, verbose: ModelLoggingVerbosity.VERBOSE}).then((result) => this.lossesHistory.add(result.loss));
-        }));
+    createInOutFromMemento(memento: Memento): {x: Tensor, y: Tensor} {
+        let target = memento.reward;
+        if (!this.done) {
+            target = memento.reward + this.config.learningConfig.gamma * this.model.predict(memento.nextState).getHighestValue();
+        }
+
+        let future_target = this.model.predict(memento.state).getValue();
+        future_target[memento.action] = target;
+        return {x: memento.state, y: tensor2d(future_target, [1, 3])};
     }
 
     addReward(value: number): void {
