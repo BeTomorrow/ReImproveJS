@@ -81,7 +81,7 @@ export class Agent {
     }
 
     private createNeuralNetInput(input: Tensor): Tensor {
-        let finalInput = input.clone();
+        let finalInput = input;
 
         for (let i = 0; i < <number>this.config.temporalWindow; ++i) {
             finalInput = finalInput.concat(this.statesBuffer[this.netInputWindowSize - 1 - i], 1);
@@ -100,7 +100,7 @@ export class Agent {
         return this.model.predict(input).getHighestValue();
     }
 
-    forward(input: Tensor): number {
+    forward(input: Float32Array): number {
         this.track.forwardPasses += 1;
 
         // First we check we're learning
@@ -114,8 +114,9 @@ export class Agent {
 
         let action;
         let netInput;
+        const tensorInput = tensor(input);
         if (this.track.forwardPasses > <number>this.config.temporalWindow) {
-            netInput = this.createNeuralNetInput(input);
+            netInput = this.createNeuralNetInput(tensorInput);
 
             if (random(0, 1, true) < <number>(<LearningConfig>this.config.learningConfig).epsilon) {
                 // Select a random action according to epsilon probability
@@ -133,7 +134,7 @@ export class Agent {
         this.actionsBuffer.shift();
         this.actionsBuffer.push(action);
         this.statesBuffer.shift();
-        this.statesBuffer.push(input);
+        this.statesBuffer.push(tensorInput);
         this.inputsBuffer.shift();
         this.inputsBuffer.push(netInput);
 

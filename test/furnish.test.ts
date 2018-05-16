@@ -1,9 +1,8 @@
-import {Furnish} from "../furnish";
-import {Model} from "../lib/model";
+import {Model} from "../src/furnish/model";
 
-import * as mocha from 'mocha';
 import * as chai from 'chai';
 import * as tf from "@tensorflow/tfjs";
+import {CreateAgent} from "../src/furnish";
 
 const expect = chai.expect;
 
@@ -41,7 +40,7 @@ describe('Model', () => {
 
 describe('Agent', () => {
     it('Should be a normal training', () => {
-        const agent = Furnish.CreateAgent(model, {
+        const agent = CreateAgent(model, {
             memorySize: 20000,
             batchSize: 32,
             temporalWindow: 1,
@@ -59,7 +58,7 @@ describe('Agent', () => {
 
         let val = 0;
         for (let i = 0; i < 2000; ++i) {
-            let action = agent.forward(tf.randomNormal([1, screenInputSize]));
+            let action = agent.forward(<Float32Array>tf.randomNormal([1, screenInputSize]).dataSync());
             agent.addReward(action == 1 ? 1. : 0.);
             agent.backward();
             if(i > 1900)

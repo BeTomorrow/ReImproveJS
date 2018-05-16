@@ -1,4 +1,4 @@
-import {Tensor, Rank} from "@tensorflow/tfjs-core";
+import {Tensor} from "@tensorflow/tfjs-core";
 import {sampleSize, random} from "lodash";
 
 export interface MemoryConfig {
