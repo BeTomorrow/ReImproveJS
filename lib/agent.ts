@@ -7,6 +7,20 @@ import {TypedWindow} from "./typed_window";
 const MEM_WINDOW_MIN_SIZE = 2;
 const HIST_WINDOW_SIZE = 1000;
 const HIST_WINDOW_MIN_SIZE = 10;
+const DEFAULT_AGENT_CONFIG: AgentConfig = {
+    memorySize: 30000,
+    batchSize: 32,
+    temporalWindow: 1,
+    learningConfig: {
+        learningStepsRandom: 1000,
+        learningTime: 100000,
+        epsilon: 1,
+        epsilonMin: 0.05,
+        epsilonDecay: 0.995,
+        gamma: 0.9,
+        learningRate: 0.001
+    }
+};
 
 export interface LearningConfig {
     gamma?: number;
@@ -19,9 +33,9 @@ export interface LearningConfig {
 }
 
 export interface AgentConfig {
-    memorySize: number;
-    batchSize: number;
-    temporalWindow: number;
+    memorySize?: number;
+    batchSize?: number;
+    temporalWindow?: number;
     learningConfig?: LearningConfig;
 }
 
@@ -46,7 +60,11 @@ export class Agent {
     private lossesHistory: TypedWindow<number>;
     private netInputWindowSize: number;
 
-    constructor(private model: Model, private config: AgentConfig, private memory: Memory = new Memory({memorySize: config.memorySize})) {
+    private memory: Memory;
+    private config: AgentConfig;
+
+    constructor(private model: Model, config: AgentConfig) {
+        this.config = {...DEFAULT_AGENT_CONFIG, ...config};
         this.done = false;
         this.track = {age: 0, forwardPasses: 0, learning: true, averageLoss: 0, averageReward: 0};
         this.currentReward = 0;
@@ -54,7 +72,9 @@ export class Agent {
         this.rewardsHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE);
         this.lossesHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE);
 
-        this.netInputWindowSize = Math.max(this.config.temporalWindow, MEM_WINDOW_MIN_SIZE);
+        this.memory = new Memory({memorySize: <number>this.config.memorySize});
+
+        this.netInputWindowSize = Math.max(<number>this.config.temporalWindow, MEM_WINDOW_MIN_SIZE);
         this.actionsBuffer = new Array(this.netInputWindowSize);
         this.inputsBuffer = new Array(this.netInputWindowSize);
         this.statesBuffer = new Array(this.netInputWindowSize);
@@ -63,7 +83,7 @@ export class Agent {
     private createNeuralNetInput(input: Tensor): Tensor {
         let finalInput = input.clone();
 
-        for (let i = 0; i < this.config.temporalWindow; ++i) {
+        for (let i = 0; i < <number>this.config.temporalWindow; ++i) {
             finalInput = finalInput.concat(this.statesBuffer[this.netInputWindowSize - 1 - i], 1);
 
             let ten = tensor([
@@ -84,20 +104,20 @@ export class Agent {
         this.track.forwardPasses += 1;
 
         // First we check we're learning
-        if (this.track.age < this.config.learningConfig.learningTime) {
+        if (this.track.age < <number>(<LearningConfig>this.config.learningConfig).learningTime) {
             // Then we verify if we're always taking random actions or if we can start decaying epsilon parameter
-            if (this.track.age > this.config.learningConfig.learningStepsRandom &&
-                this.config.learningConfig.epsilon > this.config.learningConfig.epsilonMin) {
-                this.config.learningConfig.epsilon *= this.config.learningConfig.epsilonDecay;
+            if (this.track.age > <number>(<LearningConfig>this.config.learningConfig).learningStepsRandom &&
+                <number>(<LearningConfig>this.config.learningConfig).epsilon > <number>(<LearningConfig>this.config.learningConfig).epsilonMin) {
+                (<number>(<LearningConfig>this.config.learningConfig).epsilon) *= <number>(<LearningConfig>this.config.learningConfig).epsilonDecay;
             }
         }
 
         let action;
         let netInput;
-        if (this.track.forwardPasses > this.config.temporalWindow) {
+        if (this.track.forwardPasses > <number>this.config.temporalWindow) {
             netInput = this.createNeuralNetInput(input);
 
-            if (random(0, 1, true) < this.config.learningConfig.epsilon) {
+            if (random(0, 1, true) < <number>(<LearningConfig>this.config.learningConfig).epsilon) {
                 // Select a random action according to epsilon probability
                 action = this.model.randomOutput();
             } else {
@@ -126,7 +146,7 @@ export class Agent {
 
         this.track.age += 1;
 
-        if (!this.track.learning || this.track.forwardPasses <= this.config.temporalWindow+1) return;
+        if (!this.track.learning || this.track.forwardPasses <= <number>this.config.temporalWindow+1) return;
         // Save experience
         this.memory.remember({
             action: this.actionsBuffer[this.netInputWindowSize - MEM_WINDOW_MIN_SIZE],
@@ -135,21 +155,20 @@ export class Agent {
             nextState: this.inputsBuffer[this.netInputWindowSize - 1]
         });
 
-        if (this.memory.Length <= this.config.learningConfig.learningStepsRandom) return;
+        if (this.memory.Length <= <number>(<LearningConfig>this.config.learningConfig).learningStepsRandom) return;
         this.replay();
 
     }
 
     private replay() {
-        const trainData = this.memory.sample(this.config.batchSize)
+        const trainData = this.memory.sample(<number>this.config.batchSize)
             .map(memento => this.createInOutFromMemento(memento))
             .reduce((previousValue, currentValue) => {
                 return {x: previousValue.x.concat(currentValue.x), y: previousValue.y.concat(currentValue.y)};
             });
         this.model.fit(trainData.x, trainData.y, {epochs:1, stepsPerEpoch:1})
             .then(
-                result => this.lossesHistory.add(<number>result.history.loss[0]),
-                reason => {throw new Error("Unable to realize fit correctly");}
+                result => this.lossesHistory.add(result)
             );
         this.setReward(0.);
     }
@@ -157,7 +176,7 @@ export class Agent {
     createInOutFromMemento(memento: Memento): {x: Tensor, y: Tensor} {
         let target = memento.reward;
         if (!this.done) {
-            target = memento.reward + this.config.learningConfig.gamma * this.model.predict(memento.nextState).getHighestValue();
+            target = memento.reward + <number>(<LearningConfig>this.config.learningConfig).gamma * this.model.predict(memento.nextState).getHighestValue();
         }
 
         let future_target = this.model.predict(memento.state).getValue();

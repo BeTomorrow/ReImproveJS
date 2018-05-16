@@ -1,4 +1,4 @@
-import {Sequential, SequentialConfig, ModelFitConfig, ModelCompileConfig, ModelPredictConfig, SymbolicTensor} from '@tensorflow/tfjs-layers';
+import {Sequential, SequentialConfig, ModelFitConfig, ModelCompileConfig, ModelPredictConfig} from '@tensorflow/tfjs-layers';
 import {Tensor} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 
@@ -6,16 +6,11 @@ export interface ModelConfig extends SequentialConfig {
     outputSize: number;
 }
 
-export interface FitResult {
-    loss?: number;
-    error?: any;
-}
-
 // TODO rework to make our own layers
 export class Model {
     model: Sequential;
 
-    constructor(private config?: ModelConfig) {
+    constructor(private config: ModelConfig) {
         this.model = new Sequential(config);
     }
 
@@ -29,7 +24,7 @@ export class Model {
     }
 
     async fit(x: Tensor, y: Tensor, config?: ModelFitConfig) {
-        return await this.model.fit(x, y, config);
+        return await this.model.fit(x, y, config).then(value => <number>value.history.losses[0], reason => {throw new Error("Error in fitting data")});
     }
 
     randomOutput(): number {
