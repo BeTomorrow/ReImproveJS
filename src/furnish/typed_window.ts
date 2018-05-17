@@ -3,11 +3,12 @@ import {mean} from 'lodash';
 export class TypedWindow<T> {
     window: Array<T>;
 
-    constructor(private size: number, private minSize: number) {
+    constructor(private size: number, private minSize: number, private nullValue: T) {
         this.window = [];
     }
 
     add(value: T): void {
+        if(value == this.nullValue) return;
         this.window.push(value);
         if(this.window.length > this.size)
             this.window.shift();

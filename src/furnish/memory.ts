@@ -28,15 +28,33 @@ export class Memory {
     remember(memento: Memento, replaceIfFull: boolean = true) {
         if (this.currentSize < this.config.memorySize)
             this.memory[this.currentSize++] = memento;
-        else if (replaceIfFull)
-            this.memory[random(0, this.memory.length-1)] = memento;
+        else if (replaceIfFull) {
+            let randPos = random(0, this.memory.length-1);
+            Memory.freeMemento(this.memory[randPos]);
+            this.memory[randPos] = memento;
+        }
     }
 
     sample(batchSize: number) {
         return sampleSize(this.memory.slice(0, this.currentSize), batchSize);
     }
 
-    get Length() {
+    get CurrentSize() {
+        return this.currentSize;
+    }
+
+    get Size() {
         return this.memory.length;
+    }
+
+    private static freeMemento(memento: Memento) {
+        memento.nextState.dispose();
+        memento.state.dispose();
+    }
+
+    reset(): void {
+        this.memory.forEach(memento => Memory.freeMemento(memento));
+        this.memory = new Array<Memento>(this.config.memorySize);
+        this.currentSize = 0;
     }
 }
