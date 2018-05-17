@@ -2,7 +2,7 @@ import {Tensor} from "@tensorflow/tfjs-core";
 import {sampleSize, random} from "lodash";
 
 export interface MemoryConfig {
-    memorySize: number;
+    size: number;
 }
 
 export interface Memento {
@@ -21,12 +21,12 @@ export class Memory {
     constructor(config: MemoryConfig) {
         this.config = config;
 
-        this.memory = new Array<Memento>(this.config.memorySize);
+        this.memory = new Array<Memento>(this.config.size);
         this.currentSize = 0;
     }
 
     remember(memento: Memento, replaceIfFull: boolean = true) {
-        if (this.currentSize < this.config.memorySize)
+        if (this.currentSize < this.config.size)
             this.memory[this.currentSize++] = memento;
         else if (replaceIfFull) {
             let randPos = random(0, this.memory.length-1);
@@ -54,7 +54,11 @@ export class Memory {
 
     reset(): void {
         this.memory.forEach(memento => Memory.freeMemento(memento));
-        this.memory = new Array<Memento>(this.config.memorySize);
+        this.memory = new Array<Memento>(this.config.size);
         this.currentSize = 0;
+    }
+
+    merge(other: Memory): void {
+        other.memory.forEach(memento => this.remember(memento));
     }
 }

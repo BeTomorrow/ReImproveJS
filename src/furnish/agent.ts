@@ -75,7 +75,7 @@ export class Agent {
         this.rewardsHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -2);
         this.lossesHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -1);
 
-        this.memory = new Memory({memorySize: <number>this.agentConfig.memorySize});
+        this.memory = new Memory({size: <number>this.agentConfig.memorySize});
 
         this.netInputWindowSize = Math.max(<number>this.agentConfig.temporalWindow, MEM_WINDOW_MIN_SIZE);
         this.actionsBuffer = new Array(this.netInputWindowSize);
