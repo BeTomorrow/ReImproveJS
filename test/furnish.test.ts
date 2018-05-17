@@ -29,41 +29,62 @@ describe('Model', () => {
             expect(model.randomOutput()).to.be.within(0, numActions);
     });
 
-    it('should fit fast', async() => {
+    it('should fit fast', async () => {
         let start = new Date().getTime();
-        for(let i = 0;i < 1; ++i) {
+        for (let i = 0; i < 1; ++i) {
             await model.fit(tf.randomNormal([1, 803]), tf.randomNormal([1, 3]), {stepsPerEpoch: 1, epochs: 1});
         }
         expect(new Date().getTime() - start).to.be.lt(5000);
     });
 });
 
+describe('Agent configuration', () => {
+    it('Should have the right configuration', () => {
+        expect(CreateAgent(model, {batchSize: 8}, {learningStepsRandom: 5000}).Config)
+            .to.deep.equal({
+                agent: {
+                    memorySize: 30000,
+                    batchSize: 8,
+                    temporalWindow: 1
+                },
+                learning: {
+                    learningStepsRandom: 5000,
+                    learningTime: 100000,
+                    epsilon: 1,
+                    epsilonMin: 0.05,
+                    epsilonDecay: 0.995,
+                    gamma: 0.9,
+                    learningRate: 0.001
+                }
+            });
+    });
+});
+
 describe('Agent', () => {
-    it('Should be a normal training', () => {
+    it('Should be a normal training', async () => {
         const agent = CreateAgent(model, {
             memorySize: 20000,
             batchSize: 32,
-            temporalWindow: 1,
-            learningConfig: {
-                gamma: 0.8,
-                epsilon: 1,
-                epsilonDecay: 0.995,
-                epsilonMin: 0.01,
-                learningRate: 0.001,
-                learningStepsRandom: 1997,
-                learningTime: 100000
-            }
+            temporalWindow: 1
+        }, {
+            gamma: 0.8,
+            epsilon: 1,
+            epsilonDecay: 0.995,
+            epsilonMin: 0.01,
+            learningRate: 0.001,
+            learningStepsRandom: 1997,
+            learningTime: 100000
         });
 
 
         let val = 0;
         for (let i = 0; i < 2000; ++i) {
-            let action = agent.forward(<Float32Array>tf.randomNormal([1, screenInputSize]).dataSync());
+            let action = await agent.forward(<Float32Array>tf.randomNormal([1, screenInputSize]).dataSync());
             agent.addReward(action == 1 ? 1. : 0.);
-            agent.backward();
-            if(i > 1900)
+            await agent.backward();
+            if (i > 1950)
                 val += action == 1 ? 1. : 0.;
-            }
+        }
 
         expect(val).to.be.approximately(75, 30);
 

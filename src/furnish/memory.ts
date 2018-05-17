@@ -16,26 +16,24 @@ export class Memory {
     config: MemoryConfig;
 
     memory: Array<Memento>;
+    currentSize: number;
 
     constructor(config: MemoryConfig) {
         this.config = config;
 
-        this.memory = [];
+        this.memory = new Array<Memento>(this.config.memorySize);
+        this.currentSize = 0;
     }
 
     remember(memento: Memento, replaceIfFull: boolean = true) {
-        if (this.memory.length < this.config.memorySize)
-            this.memory.push(memento);
+        if (this.currentSize < this.config.memorySize)
+            this.memory[this.currentSize++] = memento;
         else if (replaceIfFull)
             this.memory[random(0, this.memory.length-1)] = memento;
     }
 
-    shift() {
-        this.memory.shift();
-    }
-
     sample(batchSize: number) {
-        return sampleSize(this.memory, batchSize);
+        return sampleSize(this.memory.slice(0, this.currentSize), batchSize);
     }
 
     get Length() {

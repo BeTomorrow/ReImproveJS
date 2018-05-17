@@ -1,9 +1,9 @@
-import {Agent, AgentConfig} from './furnish/agent';
+import {Agent, AgentConfig, LearningConfig} from './furnish/agent';
 import {Model, ModelConfig} from "./furnish/model";
 import {ModelCompileConfig} from '@tensorflow/tfjs-layers';
 
-export function CreateAgent(model: Model, config: AgentConfig): Agent {
-    return new Agent(model, config);
+export function CreateAgent(model: Model, agentConfig: AgentConfig, learningConfig: LearningConfig): Agent {
+    return new Agent(model, agentConfig, learningConfig);
 }
 
 export function CreateModel(modelConfig?: ModelConfig, compileConfig?: ModelCompileConfig): Model {

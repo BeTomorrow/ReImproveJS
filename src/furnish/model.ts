@@ -7,7 +7,7 @@ import {
     layers,
     SymbolicTensor
 } from '@tensorflow/tfjs-layers';
-import {Tensor} from '@tensorflow/tfjs-core';
+import {Tensor, tidy} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 
 export interface ModelConfig extends SequentialConfig {
@@ -25,26 +25,35 @@ export interface LayerConfig {
     activation: string;
 }
 
-interface ToTfLayerConfig{
+interface ToTfLayerConfig {
     [key: string]: any;
 }
 
-// TODO rework to make our own layers
+interface FitBuffer {
+    xBuffer: Tensor;
+    yBuffer: Tensor;
+    config?: ModelPredictConfig;
+    bufferSize: number;
+}
+
 export class Model {
     model: Sequential;
+    fitBuffer: FitBuffer;
 
-    constructor(config?: ModelConfig) {
+    constructor(config?: ModelConfig, fitBufferSize: number = 8) {
         this.model = new Sequential(config);
+
+        // this.fitBuffer = {}
     }
 
     addLayer(config: LayerConfig) {
         let layer;
-        switch(config.layerType) {
+        switch (config.layerType) {
             case LayerType.DENSE:
                 layer = layers.dense;
         }
         let conf: ToTfLayerConfig = {units: config.units, activation: config.activation};
-        if(config.inputShape)
+        if (config.inputShape)
             conf.inputShape = config.inputShape;
 
         this.model.add(layer(<any>conf))
@@ -56,7 +65,7 @@ export class Model {
     }
 
     predict(x: Tensor, config?: ModelPredictConfig): Result {
-        return new Result(<Tensor> this.model.predict(x, config));
+        return new Result(tidy(() => <Tensor> this.model.predict(x, config)));
     }
 
     async fit(x: Tensor, y: Tensor, config?: ModelFitConfig): Promise<number> {
@@ -83,11 +92,17 @@ export class Result {
     constructor(private result: Tensor) {
     }
 
+    private static getResultAndDispose(t: Tensor): Float32Array | Int32Array | Uint8Array {
+        const val = t.dataSync();
+        t.dispose();
+        return val;
+    }
+
     getHighestValue(): number {
-        return this.result.argMax(1).dataSync()[0];
+        return Result.getResultAndDispose(this.result.as1D().argMax())[0];
     }
 
     getValue(): Int32Array | Float32Array | Uint8Array {
-        return this.result.dataSync();
+        return Result.getResultAndDispose(this.result);
     }
 }
