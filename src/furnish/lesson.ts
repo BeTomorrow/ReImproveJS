@@ -1,26 +1,23 @@
 import {Memory} from "./memory";
 import {Tensor} from "@tensorflow/tfjs-core";
 
+export const DEFAUT_LESSON_CONFIG: LessonConfig = {
+    length: 1000
+};
+
 export interface LessonConfig {
     length: number;
 }
 
-export enum LessonState {
-    EXPERIENCING=0,
-    LEARNING=1,
-    NONE=-1
-}
+
 
 export class Lesson {
 
     private age: number;
-    private state: LessonState;
-
     private memory: Memory;
 
-    constructor(private config: LessonConfig) {
+    constructor(private config?: LessonConfig) {
         this.age = 0;
-        this.state = LessonState.NONE;
         this.memory = new Memory({size: config.length});
     }
 

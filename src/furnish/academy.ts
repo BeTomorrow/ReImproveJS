@@ -1,28 +1,37 @@
 import {Agent} from "./agent";
-import {Lesson} from "./lesson";
+import {Lesson, LessonConfig} from "./lesson";
 
 const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
-    lessonsLength: 1000
 };
 
 export interface AcademyConfig {
-    lessonsLength: number;
+}
+
+export enum LessonState {
+    EXPERIENCING=0,
+    LEARNING=1,
+    NONE=-1
 }
 
 export class Academy {
 
     private config: AcademyConfig;
-    private agents: Agent[];
+    private lessonConfig: LessonConfig;
+    private agent: Agent;
 
-    private currentLesson: Lesson;
+    private lesson: Lesson;
+    private state: LessonState;
 
-    constructor(config?: AcademyConfig) {
+    constructor(config?: AcademyConfig, lessonConfig?: LessonConfig) {
         this.config = {...DEFAULT_ACADEMY_CONFIG, ...config};
+        this.lesson = new Lesson();
     }
 
-    addAgent(agent: Agent) {
-        this.agents.push(agent);
+    setAgent(agent: Agent) {
+        this.agent = agent;
     }
 
+    step(x: number[]) {
 
+    }
 }

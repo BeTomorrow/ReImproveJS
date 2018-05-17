@@ -17,6 +17,7 @@ const DEFAULT_LEARNING_CONFIG: LearningConfig = {
     learningRate: 0.001,
     learningStepsBeforeTraining: 1000
 };
+
 const DEFAULT_AGENT_CONFIG: AgentConfig = {
     memorySize: 30000,
     batchSize: 32,
@@ -105,7 +106,7 @@ export class Agent {
         return this.model.predict(input).getHighestValue();
     }
 
-    forward(input: Float32Array | Int32Array | Uint8Array): number {
+    forward(input: number[]): number {
         this.track.forwardPasses += 1;
 
         // First we check we're learning
