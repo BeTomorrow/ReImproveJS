@@ -83,35 +83,48 @@ export class Model {
         return new Result(tidy(() => <Tensor> this.model.predict(x, config)));
     }
 
-    async fit(x: Tensor, y: Tensor): Promise<number> {
-        if (this.fitBuffer.currentSize < this.fitBuffer.maxSize) {
-            // If the buffer is not full, we add training steps to it
-            this.fitBuffer.xBuffer[this.fitBuffer.currentSize] = x;
-            this.fitBuffer.yBuffer[this.fitBuffer.currentSize] = y;
-            this.fitBuffer.currentSize++;
+    fit(x: Tensor, y: Tensor) {
+        let result = Promise.resolve(-1);
+        if (this.fitBuffer.currentSize == this.fitBuffer.maxSize)
+            result = this.fitnFlush();
 
-            return Promise.resolve(-1);
-        } else {
-            const tensors = this.getBufferedTensors(true);
-            // If it's full, we do the training, then empty the buffer
-            return await this.model.fit(tensors.x, tensors.y, this.fitBuffer.config).then(
-                value => <number>value.history.loss[0],
-                reason => {
-                    throw new Error("Error in fitting data" + reason)
-                }
-            );
-        }
+        this.fitBuffer.xBuffer[this.fitBuffer.currentSize] = x;
+        this.fitBuffer.yBuffer[this.fitBuffer.currentSize] = y;
+        this.fitBuffer.currentSize++;
 
+        return result;
     }
 
-    getBufferedTensors(concatenated: boolean = true): {x: Tensor | Tensor[], y: Tensor | Tensor[]} {
-        return tidy(() => {
-            return concatenated && !(this.fitBuffer.currentSize <= 0) ?
-                {
-                    x: this.fitBuffer.xBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue)),
-                    y: this.fitBuffer.yBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue))
-                } : {x: this.fitBuffer.xBuffer, y: this.fitBuffer.yBuffer};
-        });
+    async fitnFlush() {
+        // Now start training
+        this.phase = ModelPhase.TRAINING;
+
+        const tensors = this.getBufferedTensors(true);
+        // If it's full, we do the training, then empty the buffer
+        const result = await this.model.fit(tensors.x, tensors.y, this.fitBuffer.config).then(
+            value => <number>value.history.loss[0],
+            reason => {
+                throw new Error("Error in fitting data" + reason)
+            }
+        );
+
+        // Clean a bit (empty the buffer, and restart buffering)
+        this.reset(ModelPhase.BUFFERING);
+        (<Tensor>tensors.x).dispose();
+        (<Tensor>tensors.y).dispose();
+
+        return result;
+    }
+
+    getBufferedTensors(concatenated: boolean = true): { x: Tensor | Tensor[], y: Tensor | Tensor[] } {
+        return tidy(() => concatenated && this.fitBuffer.currentSize > 0 ?
+            {
+                x: this.fitBuffer.xBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue)),
+                y: this.fitBuffer.yBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue))
+            }
+            :
+            {x: this.fitBuffer.xBuffer, y: this.fitBuffer.yBuffer}
+        );
     }
 
     randomOutput(): number {
@@ -119,12 +132,13 @@ export class Model {
         return random(0, (<SymbolicTensor>this.model.getOutputAt(0)).shape[1] - 1);
     }
 
-    reset() {
-        this.phase = ModelPhase.NONE;
+    reset(phase: ModelPhase = ModelPhase.NONE) {
+        this.phase = phase;
         this.fitBuffer.xBuffer.forEach(t => t.dispose());
         this.fitBuffer.xBuffer = new Array<Tensor>(this.fitBuffer.maxSize);
         this.fitBuffer.yBuffer.forEach(t => t.dispose());
         this.fitBuffer.yBuffer = new Array<Tensor>(this.fitBuffer.maxSize);
+        this.fitBuffer.currentSize = 0;
     }
 
     get OutputSize(): number {

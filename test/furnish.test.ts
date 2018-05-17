@@ -25,7 +25,7 @@ const model = new Model({
 const agent = new Agent(model, {batchSize: batchSize}, {learningStepsBeforeTraining: 100, learningStepsRandom: 1000});
 
 describe('Model', () => {
-    beforeEach(() => model.reset())
+    beforeEach(() => model.reset());
 
     it('should give a 0 result', () => {
         expect(model.predict(tf.randomNormal([1, inputSize])).getHighestValue()).to.be.within(0, numActions);
@@ -44,6 +44,12 @@ describe('Model', () => {
             expect((<tf.Tensor>buffered.y).shape[0]).to.be.equal((<tf.Tensor>buffered.x).shape[0]);
         }
     });
+
+    it('should return empty buffer arrays', () => {
+        const res = model.getBufferedTensors(true);
+        expect(res.x).to.be.deep.equal(new Array(8));
+        expect(res.y).to.be.deep.equal(new Array(8));
+    })
 });
 
 describe('Agent', () => {
