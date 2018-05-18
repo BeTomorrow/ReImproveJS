@@ -53,10 +53,14 @@ export class Teacher {
         this.agents.add(agent);
     }
 
+    removeStudent(agent: Agent): boolean {
+        return this.agents.delete(agent);
+    }
+
     start() {
         this.lessonsTeached = 0;
         this.currentLessonLength = 0;
-        this.state = TeachingState.LEARNING;
+        this.state = TeachingState.EXPERIENCING;
     }
 
     teach(inputs: number[]): Map<string, number> {
@@ -83,7 +87,9 @@ export class Teacher {
         if(this.state == TeachingState.EXPERIENCING) {
             this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.lessonsTeached >= this.config.lessonsWithRandom)));
         } else if(this.state == TeachingState.LEARNING) {
-            this.onLessonEnded(this, this.lessonsTeached);
+            if(this.onLessonEnded)
+                this.onLessonEnded(this, this.lessonsTeached);
+
             this.agents.forEach(a => a.learn());
 
             this.lessonsTeached += 1;
@@ -91,12 +97,14 @@ export class Teacher {
 
             if(this.lessonsTeached >= this.config.lessonsQuantity) {
                 this.state = TeachingState.TESTING;
-                this.onTeachingEnded(this);
+                if(this.onTeachingEnded)
+                    this.onTeachingEnded(this);
             } else {
                 this.agents.forEach(a => actions.set(a.Name, a.listen(inputs)));
             }
 
-            this.onLearningLessonEnded(this);
+            if(this.onLearningLessonEnded)
+                this.onLearningLessonEnded(this);
 
         }
 
@@ -125,6 +133,10 @@ export class Teacher {
 
     get Name() {
         return this.name;
+    }
+
+    get State() {
+        return this.state;
     }
 
     reset() {

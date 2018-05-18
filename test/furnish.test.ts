@@ -2,6 +2,8 @@
 import * as chai from 'chai';
 import * as tf from "@tensorflow/tfjs";
 import {Agent, Academy, Model, Teacher} from "../src/furnish";
+import {TeachingState} from "../src/furnish/teacher";
+import {range} from 'lodash';
 
 const expect = chai.expect;
 
@@ -48,14 +50,11 @@ describe('Agent', () => {
                 name: "testAgent"
             },
             learning: {
-                learningStepsRandom: 1000,
-                learningTime: 100000,
                 epsilon: 1,
                 epsilonMin: 0.05,
                 epsilonDecay: 0.995,
                 gamma: 0.9,
-                learningRate: 0.001,
-                learningStepsBeforeTraining: 100
+                learningRate: 0.001
             }
         });
     });
@@ -63,9 +62,32 @@ describe('Agent', () => {
 
 describe('Academy', () => {
     beforeEach(() => {
+        academy.reset();
+    });
+
+    it("should generate new agent name", () => {
+        expect(academy.addAgent(new Agent(model)).Name).to.not.be.null;
+    });
+
+    it("should generate new teacher name", () => {
+        expect(academy.addTeacher(new Teacher()).Name).to.not.be.null;
+    });
+});
+
+describe('Teacher', () => {
+    before(() => {
+        teacher.affectStudent(agent);
+    });
+
+    beforeEach(() => {
         teacher.reset();
         agent.reset();
     });
 
-    it("should fit at ")
+    it('should have started learning', () =>  {
+        teacher.teach(range(screenInputSize));
+
+        expect(teacher.State).to.be.equal(TeachingState.EXPERIENCING);
+        expect(teacher.currentLessonLength).to.be.equal(1);
+    })
 });

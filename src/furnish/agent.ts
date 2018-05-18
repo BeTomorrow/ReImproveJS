@@ -60,7 +60,7 @@ export class Agent {
     private agentConfig: AgentConfig;
     private learningConfig: LearningConfig;
 
-    constructor(private model: Model, agentConfig: AgentConfig, learningConfig?: LearningConfig) {
+    constructor(private model: Model, agentConfig?: AgentConfig, learningConfig?: LearningConfig) {
         this.agentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig};
         this.learningConfig = {...DEFAULT_LEARNING_CONFIG, ...learningConfig};
         this.done = false;

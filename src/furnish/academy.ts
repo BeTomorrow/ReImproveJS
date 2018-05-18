@@ -88,4 +88,9 @@ export class Academy {
             });
         })
     }
+
+    reset() {
+        this.teachers.clear();
+        this.agents.clear();
+    }
 }
