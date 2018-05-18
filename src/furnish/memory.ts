@@ -1,5 +1,5 @@
 import {Tensor} from "@tensorflow/tfjs-core";
-import {sampleSize, random} from "lodash";
+import {sampleSize, random, range, sample} from "lodash";
 
 export interface MemoryConfig {
     size: number;
@@ -35,8 +35,12 @@ export class Memory {
         }
     }
 
-    sample(batchSize: number) {
-        return sampleSize(this.memory.slice(0, this.currentSize), batchSize);
+    sample(batchSize: number, unique = true) {
+        let memslice = this.memory.slice(0, this.currentSize);
+        if(unique)
+            return sampleSize(memslice, batchSize);
+        else
+            return range(batchSize).map(() => sample(memslice));
     }
 
     get CurrentSize() {

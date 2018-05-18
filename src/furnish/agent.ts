@@ -8,14 +8,11 @@ const MEM_WINDOW_MIN_SIZE = 2;
 const HIST_WINDOW_SIZE = 1000;
 const HIST_WINDOW_MIN_SIZE = 10;
 const DEFAULT_LEARNING_CONFIG: LearningConfig = {
-    learningStepsRandom: 1000,
-    learningTime: 100000,
     epsilon: 1,
     epsilonMin: 0.05,
     epsilonDecay: 0.995,
     gamma: 0.9,
     learningRate: 0.001,
-    learningStepsBeforeTraining: 1000
 };
 
 const DEFAULT_AGENT_CONFIG: AgentConfig = {
@@ -30,15 +27,13 @@ export interface LearningConfig {
     epsilonDecay?: number;
     epsilonMin?: number;
     learningRate?: number;
-    learningTime?: number;
-    learningStepsRandom?: number;
-    learningStepsBeforeTraining?: number;
 }
 
 export interface AgentConfig {
     memorySize?: number;
     batchSize?: number;
     temporalWindow?: number;
+    name?: string;
 }
 
 export interface TrackingInformation {
@@ -58,7 +53,6 @@ export class Agent {
     private statesBuffer: Array<Tensor>;
     private inputsBuffer: Array<Tensor>;
 
-    private rewardsHistory: TypedWindow<number>;
     private lossesHistory: TypedWindow<number>;
     private netInputWindowSize: number;
 
@@ -66,14 +60,13 @@ export class Agent {
     private agentConfig: AgentConfig;
     private learningConfig: LearningConfig;
 
-    constructor(private model: Model, agentConfig: AgentConfig, learningConfig: LearningConfig) {
+    constructor(private model: Model, agentConfig: AgentConfig, learningConfig?: LearningConfig) {
         this.agentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig};
         this.learningConfig = {...DEFAULT_LEARNING_CONFIG, ...learningConfig};
         this.done = false;
         this.track = {age: 0, forwardPasses: 0, learning: true, averageLoss: 0, averageReward: 0};
         this.currentReward = 0;
 
-        this.rewardsHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -2);
         this.lossesHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -1);
 
         this.memory = new Memory({size: <number>this.agentConfig.memorySize});
@@ -106,17 +99,8 @@ export class Agent {
         return this.model.predict(input).getHighestValue();
     }
 
-    forward(input: number[]): number {
+    forward(input: number[], keepTensors: boolean = true): number {
         this.track.forwardPasses += 1;
-
-        // First we check we're learning
-        if (this.track.age < <number>this.learningConfig.learningTime) {
-            // Then we verify if we're always taking random actions or if we can start decaying epsilon parameter
-            if (this.track.age > <number>this.learningConfig.learningStepsRandom &&
-                <number>this.learningConfig.epsilon > <number>this.learningConfig.epsilonMin) {
-                (<number>this.learningConfig.epsilon) *= <number>this.learningConfig.epsilonDecay;
-            }
-        }
 
         let action;
         let netInput;
@@ -137,24 +121,22 @@ export class Agent {
             netInput = tensor([]);
         }
 
-        this.actionsBuffer.shift();
-        this.statesBuffer.shift();
-        this.inputsBuffer.shift();
+        if(keepTensors) {
+            this.actionsBuffer.shift();
+            this.statesBuffer.shift();
+            this.inputsBuffer.shift();
 
-        this.actionsBuffer.push(action);
-        this.statesBuffer.push(tensorInput);
-        this.inputsBuffer.push(netInput);
+            this.actionsBuffer.push(action);
+            this.statesBuffer.push(tensorInput);
+            this.inputsBuffer.push(netInput);
+        }
 
         return action;
     }
 
+    memorize(): void {
 
-    backward(): void {
-        this.rewardsHistory.add(this.currentReward);
-
-        this.track.age += 1;
-
-        if (!this.track.learning || this.track.forwardPasses <= <number>this.agentConfig.temporalWindow + 1) return;
+        if (this.track.forwardPasses <= <number>this.agentConfig.temporalWindow + 1) return;
         // Save experience
         this.memory.remember({
             action: this.actionsBuffer[this.netInputWindowSize - MEM_WINDOW_MIN_SIZE],
@@ -162,31 +144,15 @@ export class Agent {
             state: this.inputsBuffer[this.netInputWindowSize - MEM_WINDOW_MIN_SIZE],
             nextState: this.inputsBuffer[this.netInputWindowSize - 1]
         });
-
-        if (this.memory.CurrentSize < <number>this.learningConfig.learningStepsBeforeTraining) return;
-        return this.replay();
     }
 
-    private replay() {
-        const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
-            .map(memento => this.createInOutFromMemento(memento))
-            .reduce((previousValue, currentValue) => {
-                return {
-                    x: previousValue.x.concat(currentValue.x),
-                    y: previousValue.y.concat(currentValue.y)
-                };
-            });
-        this.model.fit(trainData.x, trainData.y)
-            .then(
-                (val) => {
-                    this.lossesHistory.add(val);
-                }
-            );
-
-        this.setReward(0.);
+    updateParameters() {
+        if (<number>this.learningConfig.epsilon > <number>this.learningConfig.epsilonMin) {
+            (<number>this.learningConfig.epsilon) *= <number>this.learningConfig.epsilonDecay;
+        }
     }
 
-    createInOutFromMemento(memento: Memento): { x: Tensor, y: Tensor } {
+    createTrainingDataFromMemento(memento: Memento): { x: Tensor, y: Tensor } {
         return tidy(() => {
             let target = memento.reward;
             if (!this.done) {
@@ -207,8 +173,37 @@ export class Agent {
         this.currentReward = value;
     }
 
+    listen(input: number[], paramsUpdate: boolean = true): number {
+        this.track.age += 1;
+
+        let action = this.forward(input);
+        this.memorize();
+        if(paramsUpdate)
+            this.updateParameters();
+        return action;
+    }
+
+    learn() {
+        const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
+            .map(memento => this.createTrainingDataFromMemento(memento))
+            .reduce((previousValue, currentValue) => {
+                return {
+                    x: previousValue.x.concat(currentValue.x),
+                    y: previousValue.y.concat(currentValue.y)
+                };
+            });
+
+        this.model.fit(trainData.x, trainData.y)
+            .then(
+                (val) => {
+                    this.lossesHistory.add(val);
+                }
+            );
+
+        this.setReward(0.);
+    }
+
     reset(): void {
-        this.model.reset();
         this.memory.reset();
         this.track.age = 0;
         this.track.forwardPasses = 0;
@@ -216,5 +211,13 @@ export class Agent {
 
     get Config() {
         return {agent: this.agentConfig, learning: this.learningConfig};
+    }
+
+    set Name(name: string) {
+        this.agentConfig.name = name;
+    }
+
+    get Name() {
+        return this.agentConfig.name;
     }
 }

@@ -10,6 +10,11 @@ import {
 import {Tensor, tidy} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 
+const DEFAULT_MODEL_FIT_CONFIG: ModelFitConfig = {
+    epochs: 10,
+    stepsPerEpoch: 200
+};
+
 export interface ModelConfig extends SequentialConfig {
     outputSize: number;
 }
@@ -29,36 +34,14 @@ interface ToTfLayerConfig {
     [key: string]: any;
 }
 
-interface FitBuffer {
-    xBuffer: Tensor[];
-    yBuffer: Tensor[];
-    config?: ModelFitConfig;
-    maxSize: number;
-    currentSize: number;
-}
-
-export enum ModelPhase {
-    BUFFERING = 0,
-    TRAINING = 1,
-    NONE = -1
-}
-
 export class Model {
+
     model: Sequential;
-    fitBuffer: FitBuffer;
-    phase: ModelPhase;
+    fitConfig: ModelFitConfig;
 
-    constructor(config?: ModelConfig, fitConfig?: ModelFitConfig, fitBufferSize: number = 8) {
+    constructor(config?: ModelConfig, fitConfig?: ModelFitConfig) {
         this.model = new Sequential(config);
-
-        this.phase = ModelPhase.NONE;
-        this.fitBuffer = {
-            xBuffer: new Array<Tensor>(fitBufferSize),
-            yBuffer: new Array<Tensor>(fitBufferSize),
-            config: fitConfig,
-            maxSize: fitBufferSize,
-            currentSize: 0
-        };
+        this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
 
     addLayer(config: LayerConfig) {
@@ -83,62 +66,18 @@ export class Model {
         return new Result(tidy(() => <Tensor> this.model.predict(x, config)));
     }
 
-    fit(x: Tensor, y: Tensor) {
-        let result = Promise.resolve(-1);
-        if (this.fitBuffer.currentSize == this.fitBuffer.maxSize)
-            result = this.fitnFlush();
-
-        this.fitBuffer.xBuffer[this.fitBuffer.currentSize] = x;
-        this.fitBuffer.yBuffer[this.fitBuffer.currentSize] = y;
-        this.fitBuffer.currentSize++;
-
-        return result;
-    }
-
-    async fitnFlush() {
-        // Now start training
-        this.phase = ModelPhase.TRAINING;
-
-        const tensors = this.getBufferedTensors(true);
-        // If it's full, we do the training, then empty the buffer
-        const result = await this.model.fit(tensors.x, tensors.y, this.fitBuffer.config).then(
+    async fit(x: Tensor, y: Tensor) {
+        return await this.model.fit(x, y, this.fitConfig).then(
             value => <number>value.history.loss[0],
             reason => {
                 throw new Error("Error in fitting data" + reason)
             }
-        );
-
-        // Clean a bit (empty the buffer, and restart buffering)
-        this.reset(ModelPhase.BUFFERING);
-        (<Tensor>tensors.x).dispose();
-        (<Tensor>tensors.y).dispose();
-
-        return result;
-    }
-
-    getBufferedTensors(concatenated: boolean = true): { x: Tensor | Tensor[], y: Tensor | Tensor[] } {
-        return tidy(() => concatenated && this.fitBuffer.currentSize > 0 ?
-            {
-                x: this.fitBuffer.xBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue)),
-                y: this.fitBuffer.yBuffer.reduce((previousValue, currentValue) => previousValue.concat(currentValue))
-            }
-            :
-            {x: this.fitBuffer.xBuffer, y: this.fitBuffer.yBuffer}
         );
     }
 
     randomOutput(): number {
         // TODO create a distribution of all taken actions, in order later to choose in what way we want the random to behave
         return random(0, (<SymbolicTensor>this.model.getOutputAt(0)).shape[1] - 1);
-    }
-
-    reset(phase: ModelPhase = ModelPhase.NONE) {
-        this.phase = phase;
-        this.fitBuffer.xBuffer.forEach(t => t.dispose());
-        this.fitBuffer.xBuffer = new Array<Tensor>(this.fitBuffer.maxSize);
-        this.fitBuffer.yBuffer.forEach(t => t.dispose());
-        this.fitBuffer.yBuffer = new Array<Tensor>(this.fitBuffer.maxSize);
-        this.fitBuffer.currentSize = 0;
     }
 
     get OutputSize(): number {
