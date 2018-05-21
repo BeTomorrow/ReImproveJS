@@ -1,7 +1,7 @@
 import {mean} from 'lodash';
 
 export class TypedWindow<T> {
-    window: Array<T>;
+    private window: Array<T>;
 
     constructor(private size: number, private minSize: number, private nullValue: T) {
         this.window = [];
@@ -20,5 +20,9 @@ export class TypedWindow<T> {
         } else {
             return mean(this.window);
         }
+    }
+
+    get Window() {
+        return this.window;
     }
 }

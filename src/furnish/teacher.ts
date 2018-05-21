@@ -8,9 +8,9 @@ const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
 };
 
 export interface TeachingConfig {
-    lessonLength: number;
-    lessonsQuantity: number;
-    lessonsWithRandom: number;
+    lessonLength?: number;
+    lessonsQuantity?: number;
+    lessonsWithRandom?: number;
 }
 
 export enum TeachingState {
@@ -30,7 +30,7 @@ export class Teacher {
     agents: Set<Agent>;
 
     currentLessonLength: number;
-    lessonsTeached: number;
+    lessonsTaught: number;
 
     onLearningLessonEnded: (teacher: Teacher) => void;
     onLessonEnded: (teacher: Teacher, lessonNumber: number) => void;
@@ -40,7 +40,7 @@ export class Teacher {
         this.config = {...DEFAULT_TEACHING_CONFIG, ...config};
         this.agents = new Set<Agent>();
         this.currentLessonLength = 0;
-        this.lessonsTeached = 0;
+        this.lessonsTaught = 0;
         this.state = TeachingState.NONE;
 
         this.onLessonEnded = null;
@@ -58,7 +58,7 @@ export class Teacher {
     }
 
     start() {
-        this.lessonsTeached = 0;
+        this.lessonsTaught = 0;
         this.currentLessonLength = 0;
         this.state = TeachingState.EXPERIENCING;
     }
@@ -85,17 +85,17 @@ export class Teacher {
 
 
         if(this.state == TeachingState.EXPERIENCING) {
-            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.lessonsTeached >= this.config.lessonsWithRandom)));
+            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.lessonsTaught >= this.config.lessonsWithRandom)));
         } else if(this.state == TeachingState.LEARNING) {
             if(this.onLessonEnded)
-                this.onLessonEnded(this, this.lessonsTeached);
+                this.onLessonEnded(this, this.lessonsTaught);
 
-            this.agents.forEach(a => a.learn());
+            this.agents.forEach(async a => await a.learn());
 
-            this.lessonsTeached += 1;
+            this.lessonsTaught += 1;
             this.currentLessonLength = 0;
 
-            if(this.lessonsTeached >= this.config.lessonsQuantity) {
+            if(this.lessonsTaught >= this.config.lessonsQuantity) {
                 this.state = TeachingState.TESTING;
                 if(this.onTeachingEnded)
                     this.onTeachingEnded(this);
@@ -140,7 +140,7 @@ export class Teacher {
     }
 
     reset() {
-        this.lessonsTeached = 0;
+        this.lessonsTaught = 0;
         this.currentLessonLength = 0;
         this.state = TeachingState.NONE;
     }

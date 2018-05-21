@@ -72,7 +72,7 @@ export class Academy {
         this.teachers.get(teacherName).affectStudent(this.agents.get(agentName));
     }
 
-    step(inputs: AcademyStepInput[]) {
+    async step(inputs: AcademyStepInput[]): Promise<Map<string, number>> {
         let actions = new Map<string, number>();
         inputs.forEach(input => {
             if(!this.teachers.has(input.teacherName)) {
@@ -86,7 +86,9 @@ export class Academy {
 
                 actions.set(key, value);
             });
-        })
+        });
+
+        return actions;
     }
 
     reset() {

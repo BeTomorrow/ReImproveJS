@@ -121,7 +121,7 @@ export class Agent {
             netInput = tensor([]);
         }
 
-        if(keepTensors) {
+        if (keepTensors) {
             this.actionsBuffer.shift();
             this.statesBuffer.shift();
             this.inputsBuffer.shift();
@@ -178,27 +178,27 @@ export class Agent {
 
         let action = this.forward(input);
         this.memorize();
-        if(paramsUpdate)
+        if (paramsUpdate)
             this.updateParameters();
         return action;
     }
 
-    learn() {
+    async learn() {
         const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
             .map(memento => this.createTrainingDataFromMemento(memento))
-            .reduce((previousValue, currentValue) => {
-                return {
+            .reduce((previousValue, currentValue) =>
+                tidy(() => ({
                     x: previousValue.x.concat(currentValue.x),
                     y: previousValue.y.concat(currentValue.y)
-                };
-            });
-
-        this.model.fit(trainData.x, trainData.y)
-            .then(
-                (val) => {
-                    this.lossesHistory.add(val);
-                }
+                }))
             );
+
+        const history = await this.model.fit(trainData.x, trainData.y);
+        const loss = history.history.loss[0];
+        this.lossesHistory.add(<number>loss);
+
+        trainData.x.dispose();
+        trainData.y.dispose();
 
         this.setReward(0.);
     }
@@ -219,5 +219,9 @@ export class Agent {
 
     get Name() {
         return this.agentConfig.name;
+    }
+
+    get Losses() {
+        return this.lossesHistory.Window;
     }
 }

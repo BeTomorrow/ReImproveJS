@@ -15,10 +15,6 @@ const DEFAULT_MODEL_FIT_CONFIG: ModelFitConfig = {
     stepsPerEpoch: 200
 };
 
-export interface ModelConfig extends SequentialConfig {
-    outputSize: number;
-}
-
 export enum LayerType {
     DENSE = "DENSE"
 }
@@ -39,7 +35,7 @@ export class Model {
     model: Sequential;
     fitConfig: ModelFitConfig;
 
-    constructor(config?: ModelConfig, fitConfig?: ModelFitConfig) {
+    constructor(config?: SequentialConfig, fitConfig?: ModelFitConfig) {
         this.model = new Sequential(config);
         this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
@@ -66,13 +62,8 @@ export class Model {
         return new Result(tidy(() => <Tensor> this.model.predict(x, config)));
     }
 
-    async fit(x: Tensor, y: Tensor) {
-        return await this.model.fit(x, y, this.fitConfig).then(
-            value => <number>value.history.loss[0],
-            reason => {
-                throw new Error("Error in fitting data" + reason)
-            }
-        );
+    fit(x: Tensor, y: Tensor) {
+        return this.model.fit(x, y, this.fitConfig);
     }
 
     randomOutput(): number {
@@ -92,7 +83,8 @@ export class Result {
 
     private static getResultAndDispose(t: Tensor): Float32Array | Int32Array | Uint8Array {
         const val = t.dataSync();
-        t.dispose();
+        if(t.dispose)
+            t.dispose();
         return val;
     }
 
