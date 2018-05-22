@@ -11,8 +11,7 @@ const DEFAULT_LEARNING_CONFIG: LearningConfig = {
     epsilon: 1,
     epsilonMin: 0.05,
     epsilonDecay: 0.995,
-    gamma: 0.9,
-    learningRate: 0.001,
+    gamma: 0.9
 };
 
 const DEFAULT_AGENT_CONFIG: AgentConfig = {
@@ -26,7 +25,6 @@ export interface LearningConfig {
     epsilon?: number;
     epsilonDecay?: number;
     epsilonMin?: number;
-    learningRate?: number;
 }
 
 export interface AgentConfig {
@@ -49,16 +47,16 @@ export class Agent {
     private track: TrackingInformation;
     private currentReward: number;
 
-    private actionsBuffer: Array<number>;
-    private statesBuffer: Array<Tensor>;
-    private inputsBuffer: Array<Tensor>;
+    private readonly actionsBuffer: Array<number>;
+    private readonly statesBuffer: Array<Tensor>;
+    private readonly inputsBuffer: Array<Tensor>;
 
     private lossesHistory: TypedWindow<number>;
-    private netInputWindowSize: number;
+    private readonly netInputWindowSize: number;
 
     private memory: Memory;
-    private agentConfig: AgentConfig;
-    private learningConfig: LearningConfig;
+    private readonly agentConfig: AgentConfig;
+    private readonly learningConfig: LearningConfig;
 
     constructor(private model: Model, agentConfig?: AgentConfig, learningConfig?: LearningConfig) {
         this.agentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig};

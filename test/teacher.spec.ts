@@ -3,9 +3,9 @@ import {expect, use} from "chai";
 import {range} from 'lodash';
 
 import generated from "sinon-chai";
-import {Agent, Model, Teacher} from "../src/furnish";
-import {TeachingState} from "../src/furnish/teacher";
-import * as tf from "@tensorflow/tfjs";
+import {LayerType, Model} from "../src/furnish";
+import {Teacher, TeachingState} from "../src/furnish/teacher";
+import {Agent} from "../src/furnish/agent";
 
 use(generated);
 
@@ -14,15 +14,11 @@ const lessons = 5;
 const screenInputSize = 20 * 20;
 const numActions = 3;
 const inputSize = screenInputSize * 1 + numActions * 1 + screenInputSize;
-const model = new Model({
-    layers: [
-        tf.layers.dense({units: 128, inputShape: [inputSize], activation: 'relu'}),
-        tf.layers.dense({units: 128, activation: 'relu'}),
-        tf.layers.dense({units: numActions, activation: 'linear'})
-    ],
-    name: "test",
-    outputSize: numActions
-}, {stepsPerEpoch: 1, epochs: 1}).compile({loss: 'meanSquaredError', optimizer: 'adam'});
+const model = new Model(null, {stepsPerEpoch: 1, epochs: 1});
+model.addLayer({layerType: LayerType.DENSE, units: 128, activation: 'relu', inputShape: [inputSize]});
+model.addLayer({layerType: LayerType.DENSE, units: 128, activation: 'relu'});
+model.addLayer({layerType: LayerType.DENSE, units: numActions, activation: 'relu'});
+model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
 const teacher = new Teacher({lessonsQuantity: lessons, lessonLength: lessonLength});
 const agent = new Agent(model);

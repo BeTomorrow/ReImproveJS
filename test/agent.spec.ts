@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Agent} from "../src/furnish";
+import {Agent} from "../src/furnish/agent";
 
 const batchSize = 18;
 const agent = new Agent(null, {batchSize: batchSize, name: "testAgent"});
@@ -19,8 +19,7 @@ describe('Agent', () => {
                 epsilon: 1,
                 epsilonMin: 0.05,
                 epsilonDecay: 0.995,
-                gamma: 0.9,
-                learningRate: 0.001
+                gamma: 0.9
             }
         });
     });

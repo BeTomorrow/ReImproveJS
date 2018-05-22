@@ -1,5 +1,7 @@
-import {Agent} from "./agent";
-import {Teacher} from "./teacher";
+import {Agent, LearningConfig, AgentConfig} from "./agent";
+import {Teacher, TeachingConfig} from "./teacher";
+import {v4} from 'uuid';
+import {Model} from "./model";
 
 /*const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
 };
@@ -10,6 +12,12 @@ export interface AcademyConfig {
 export interface AcademyStepInput {
     teacherName: string;
     agentsInput: number[];
+}
+
+export interface BuildAgentConfig {
+    model: Model;
+    learningConfig?: LearningConfig;
+    agentConfig?: AgentConfig;
 }
 
 export class Academy {
@@ -26,43 +34,36 @@ export class Academy {
         this.assigments = new Map<string, string>();
     }
 
-    addAgent(agent: Agent, name?: string): Agent {
+    addAgent(config: BuildAgentConfig, name?: string): string {
+        if(name && config.agentConfig && !config.agentConfig.name)
+            config.agentConfig.name = name;
+
+        let agent = new Agent(config.model, config.agentConfig, config.learningConfig);
         if(!agent.Name)
-            if(name)
+            if(name && !this.agents.has(name))
                 agent.Name = name;
             else
-                agent.Name = Math.random().toString(36).substr(2, 5);
+                agent.Name = v4();
 
         this.agents.set(agent.Name, agent);
 
-        return agent;
+        return agent.Name;
     }
 
-    addTeacher(teacher: Teacher, name?: string): Teacher {
+    addTeacher(config?: TeachingConfig, name?: string): string {
+        let teacher = new Teacher(config, name);
         if(!teacher.Name)
-            if(name)
+            if(name && !this.teachers.has(name))
                 teacher.Name = name;
             else
-                teacher.Name = Math.random().toString(36).substr(2, 5);
+                teacher.Name = v4();
 
         this.teachers.set(teacher.Name, teacher);
 
-        return teacher;
+        return teacher.Name;
     }
 
-    assignTeacherToAgent(agent: string | Agent, teacher: string | Teacher) {
-        let agentName, teacherName;
-
-        if(typeof agent == "string")
-            agentName = agent;
-        else
-            agentName = agent.Name;
-
-        if(typeof teacher == "string")
-            teacherName = teacher;
-        else
-            teacherName = teacher.Name;
-
+    assignTeacherToAgent(agentName: string, teacherName: string) {
         if(!this.agents.has(agentName))
             throw new Error("No such agent has been registered");
         if(!this.teachers.has(teacherName))
@@ -90,6 +91,20 @@ export class Academy {
         });
 
         return actions;
+    }
+
+    addRewardToAgent(name: string, reward: number) {
+        if(this.agents.has(name))
+            this.agents.get(name).addReward(reward);
+    }
+
+    setRewardOfAgent(name: string, reward: number) {
+        if(this.agents.has(name))
+            this.agents.get(name).setReward(reward);
+    }
+
+    getAgentLosses(agentName: string) {
+        return this.agents.get(agentName).Losses;
     }
 
     reset() {

@@ -17,13 +17,16 @@
   "dependencies": {
     "@tensorflow/tfjs": "^0.11.1",
     "@types/lodash": "^4.14.109",
-    "lodash": "^4.17.10"
+    "@types/uuid": "^3.4.3",
+    "lodash": "^4.17.10",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts'",
     "build-npm": "./scripts/build-npm.sh",
+    "build": "npm run test && npm run build-npm",
     "watch": "tsc -w -p .",
-    "publish": "npm run build-npm && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",

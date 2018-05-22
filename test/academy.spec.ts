@@ -1,5 +1,5 @@
-import {Academy, Agent, Teacher} from "../src/furnish";
 import {expect} from "chai";
+import {Academy} from "../src/furnish/academy";
 
 const academy = new Academy();
 
@@ -9,10 +9,10 @@ describe('Academy', () => {
     });
 
     it("should generate new agent name", () => {
-        expect(academy.addAgent(new Agent(null)).Name).to.not.be.null;
+        expect(academy.addAgent({model: null})).to.not.be.null;
     });
 
     it("should generate new teacher name", () => {
-        expect(academy.addTeacher(new Teacher()).Name).to.not.be.null;
+        expect(academy.addTeacher()).to.not.be.null;
     });
 });
