@@ -107,6 +107,21 @@ export class Academy {
         return this.agents.get(agentName).Losses;
     }
 
+    OnLearningLessonEnded(teacherName: string, callback: (teacher: Teacher) => void) {
+        if(this.teachers.has(teacherName))
+            this.teachers.get(teacherName).onLearningLessonEnded = callback;
+    }
+
+    OnLessonEnded(teacherName: string, callback: (teacher: Teacher, lessonNumber: number) => void) {
+        if(this.teachers.has(teacherName))
+            this.teachers.get(teacherName).onLessonEnded = callback;
+    }
+
+    OnTeachingEnded(teacherName: string, callback: (teacher: Teacher) => void) {
+        if(this.teachers.has(teacherName))
+            this.teachers.get(teacherName).onTeachingEnded = callback;
+    }
+
     reset() {
         this.teachers.clear();
         this.agents.clear();

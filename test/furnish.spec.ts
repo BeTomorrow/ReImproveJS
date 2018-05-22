@@ -26,7 +26,7 @@ const agent = academy.addAgent({model: model, agentConfig: {batchSize: batchSize
 const teacher = academy.addTeacher({lessonLength: lessonLength, lessonsQuantity: lessons, lessonsWithRandom: randomSteps});
 academy.assignTeacherToAgent(agent, teacher);
 
-describe("Teaching with agent", () => {
+describe("Furnish - Real", () => {
 
     it('should have decreasing loss', async () => {
         let input = shuffle(range(0, screenInputSize)).map(v => v / screenInputSize);
