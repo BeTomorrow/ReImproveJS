@@ -84,4 +84,10 @@ describe('Teacher', () => {
 
         expect(teacher.state).to.be.equal(TeachingState.TESTING);
     });
+
+    it('should have decreasing epsilon', async () => {
+        for(let i = 0;i < lessonLength*lessons+1; ++i) {
+            await teacher.teach(range(screenInputSize));
+        }
+    })
 });

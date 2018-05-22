@@ -7,7 +7,7 @@ const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
     lessonsWithRandom: 2,
     epsilon: 1,
     epsilonMin: 0.05,
-    epsilonDecay: 0.995,
+    epsilonDecay: 0.95,
     gamma: 0.9
 };
 
@@ -115,6 +115,8 @@ export class Teacher {
                 await agent.learn(this.config.gamma);
             }
 
+            this.updateParameters();
+
             this.lessonsTaught += 1;
             this.currentLessonLength = 0;
 
@@ -124,8 +126,9 @@ export class Teacher {
                     this.onTeachingEnded(this);
             } else {
                 this.state = TeachingState.EXPERIENCING;
-                this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
             }
+
+            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
 
             if (this.onLearningLessonEnded)
                 this.onLearningLessonEnded(this);
@@ -136,8 +139,11 @@ export class Teacher {
     }
 
     updateParameters() {
-        if (this.currentEpsilon > this.config.epsilonMin) {
+        if (this.lessonsTaught > this.config.lessonsWithRandom && this.currentEpsilon > this.config.epsilonMin) {
             this.currentEpsilon *= this.config.epsilonDecay;
+
+            if(this.currentEpsilon < this.config.epsilonMin)
+                this.currentEpsilon = this.config.epsilonMin;
         }
     }
 

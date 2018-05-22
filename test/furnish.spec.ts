@@ -61,7 +61,5 @@ describe("Furnish - Real", () => {
 
         expect(losses[0]).to.be.greaterThan(losses[losses.length - 1]);
         expect(rewards[0]).to.be.lessThan(rewards[rewards.length - 1]);
-
-
-    })
+    });
 });

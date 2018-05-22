@@ -27,6 +27,8 @@ export class LearningDataLogger {
         hrow.insertCell(0).innerHTML = "Name";
         hrow.insertCell(1).innerHTML = "Q loss average";
         hrow.insertCell(2).innerHTML = "Average reward";
+        hrow.insertCell(3).innerHTML = "Epsilon";
+        hrow.insertCell(4).innerHTML = "Lesson number";
 
 
         let studentsQuantity = this.academy.getTeacherData(teacherName).students.length;
@@ -35,6 +37,8 @@ export class LearningDataLogger {
             brow.insertCell(0).innerHTML = "";
             brow.insertCell(1).innerHTML = "";
             brow.insertCell(2).innerHTML = "";
+            brow.insertCell(3).innerHTML = "";
+            brow.insertCell(4).innerHTML = "";
         }
 
 
@@ -49,6 +53,8 @@ export class LearningDataLogger {
                 table.table.tBodies.item(0).rows.item(index).cells.item(0).innerHTML = data.name;
                 table.table.tBodies.item(0).rows.item(index).cells.item(1).innerHTML = data.averageLoss.toString().substr(0, 5);
                 table.table.tBodies.item(0).rows.item(index).cells.item(2).innerHTML = data.averageReward.toString().substr(0, 5);
+                table.table.tBodies.item(0).rows.item(index).cells.item(3).innerHTML = tData.epsilon.toString().substr(0, 5);
+                table.table.tBodies.item(0).rows.item(index).cells.item(4).innerHTML = tData.lessonNumber.toString();
             });
         });
     }
@@ -68,7 +74,7 @@ export class LearningDataLogger {
         table.tHead.style.padding = "5px";
         table.tHead.style.backgroundColor = "#d0e3fa";
         table.tHead.style.textAlign = "center";
-        table.tHead.style.margin = "3px";
+        table.tHead.style.margin = "8px";
 
         for(let i = 0;i < table.tBodies.length; ++i) {
             const item = table.tBodies.item(i);

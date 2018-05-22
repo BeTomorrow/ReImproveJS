@@ -30,7 +30,7 @@ export class Memory {
             this.memory[this.currentSize++] = memento;
         else if (replaceIfFull) {
             let randPos = random(0, this.memory.length-1);
-            Memory.freeMemento(this.memory[randPos]);
+            // Memory.freeMemento(this.memory[randPos]);
             this.memory[randPos] = memento;
         }
     }
