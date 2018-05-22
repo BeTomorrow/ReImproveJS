@@ -100,6 +100,7 @@ export class Teacher {
                 if(this.onTeachingEnded)
                     this.onTeachingEnded(this);
             } else {
+                this.state = TeachingState.EXPERIENCING;
                 this.agents.forEach(a => actions.set(a.Name, a.listen(inputs)));
             }
 

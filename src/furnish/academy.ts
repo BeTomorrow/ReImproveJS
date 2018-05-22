@@ -72,9 +72,10 @@ export class Academy {
         this.teachers.get(teacherName).affectStudent(this.agents.get(agentName));
     }
 
-    async step(inputs: AcademyStepInput[]): Promise<Map<string, number>> {
+    async step(inputs: AcademyStepInput[] | AcademyStepInput): Promise<Map<string, number>> {
         let actions = new Map<string, number>();
-        inputs.forEach(input => {
+        let finalInput = inputs instanceof Array ? inputs : [inputs];
+        finalInput.forEach(input => {
             if(!this.teachers.has(input.teacherName)) {
                 console.error("No teacher has name " + input.teacherName);
                 return;
