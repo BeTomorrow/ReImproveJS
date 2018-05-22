@@ -1,4 +1,4 @@
-import {Agent} from "./agent";
+import {Agent, TrackingInformation} from "./agent";
 
 
 const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
@@ -144,5 +144,11 @@ export class Teacher {
         this.lessonsTaught = 0;
         this.currentLessonLength = 0;
         this.state = TeachingState.NONE;
+    }
+
+    getData(): TrackingInformation[] {
+        let data: TrackingInformation[] = [];
+        this.agents.forEach(agent => data.push(agent.getTrackingInformation()));
+        return data;
     }
 }

@@ -2,10 +2,10 @@ import {Memento, Memory} from "./memory";
 import {Model} from "./model";
 import {Tensor, tensor, tensor2d, tidy} from "@tensorflow/tfjs-core";
 import {range, random} from "lodash";
-import {TypedWindow} from "./typed_window";
+import {TypedWindow} from "./misc/typed_window";
 
 const MEM_WINDOW_MIN_SIZE = 2;
-const HIST_WINDOW_SIZE = 1000;
+const HIST_WINDOW_SIZE = 100;
 const HIST_WINDOW_MIN_SIZE = 10;
 const DEFAULT_LEARNING_CONFIG: LearningConfig = {
     epsilon: 1,
@@ -40,6 +40,8 @@ export interface TrackingInformation {
     learning: boolean;
     averageLoss: number;
     averageReward: number;
+    epsilon: number;
+    name: string;
 }
 
 export class Agent {
@@ -52,6 +54,7 @@ export class Agent {
     private readonly inputsBuffer: Array<Tensor>;
 
     private lossesHistory: TypedWindow<number>;
+    private rewardsHistory: TypedWindow<number>;
     private readonly netInputWindowSize: number;
 
     private memory: Memory;
@@ -62,10 +65,11 @@ export class Agent {
         this.agentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig};
         this.learningConfig = {...DEFAULT_LEARNING_CONFIG, ...learningConfig};
         this.done = false;
-        this.track = {age: 0, forwardPasses: 0, learning: true, averageLoss: 0, averageReward: 0};
+        this.track = {age: 0, forwardPasses: 0, learning: true, averageLoss: 0, averageReward: 0, epsilon: 1, name: ""};
         this.currentReward = 0;
 
         this.lossesHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -1);
+        this.rewardsHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, null);
 
         this.memory = new Memory({size: <number>this.agentConfig.memorySize});
 
@@ -134,7 +138,10 @@ export class Agent {
 
     memorize(): void {
 
+        this.rewardsHistory.add(this.currentReward);
+
         if (this.track.forwardPasses <= <number>this.agentConfig.temporalWindow + 1) return;
+
         // Save experience
         this.memory.remember({
             action: this.actionsBuffer[this.netInputWindowSize - MEM_WINDOW_MIN_SIZE],
@@ -178,6 +185,9 @@ export class Agent {
         this.memorize();
         if (paramsUpdate)
             this.updateParameters();
+
+        this.setReward(0.);
+
         return action;
     }
 
@@ -197,8 +207,6 @@ export class Agent {
 
         trainData.x.dispose();
         trainData.y.dispose();
-
-        this.setReward(0.);
     }
 
     reset(): void {
@@ -219,7 +227,15 @@ export class Agent {
         return this.agentConfig.name;
     }
 
-    get Losses() {
-        return this.lossesHistory.Window;
+    getTrackingInformation(): TrackingInformation {
+        return {
+            age: this.track.age,
+            learning: this.done,
+            epsilon: this.learningConfig.epsilon,
+            forwardPasses: this.track.forwardPasses,
+            averageReward: this.rewardsHistory.mean(),
+            averageLoss: this.lossesHistory.mean(),
+            name: this.agentConfig.name
+        }
     }
 }

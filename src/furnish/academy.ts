@@ -1,7 +1,8 @@
-import {Agent, LearningConfig, AgentConfig} from "./agent";
+import {Agent, LearningConfig, AgentConfig, TrackingInformation} from "./agent";
 import {Teacher, TeachingConfig} from "./teacher";
 import {v4} from 'uuid';
 import {Model} from "./model";
+import {LearningDataLogger} from "./misc/learning_data_logger";
 
 /*const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
 };
@@ -26,6 +27,8 @@ export class Academy {
     private agents: Map<string, Agent>;
     private teachers: Map<string, Teacher>;
     private assigments: Map<string, string>;
+
+    private logger: LearningDataLogger;
 
     constructor(/*config?: AcademyConfig*/) {
         //this.config = {...DEFAULT_ACADEMY_CONFIG, ...config};
@@ -90,6 +93,9 @@ export class Academy {
             });
         });
 
+        if(this.logger)
+            this.logger.updateTables();
+
         return actions;
     }
 
@@ -101,10 +107,6 @@ export class Academy {
     setRewardOfAgent(name: string, reward: number) {
         if(this.agents.has(name))
             this.agents.get(name).setReward(reward);
-    }
-
-    getAgentLosses(agentName: string) {
-        return this.agents.get(agentName).Losses;
     }
 
     OnLearningLessonEnded(teacherName: string, callback: (teacher: Teacher) => void) {
@@ -125,5 +127,16 @@ export class Academy {
     reset() {
         this.teachers.clear();
         this.agents.clear();
+    }
+
+    get Teachers() { return Array.from(this.teachers.keys()); }
+
+    getTeacherData(name: string): TrackingInformation[] {
+        return this.teachers.get(name).getData();
+    }
+
+    createLogger(parent: HTMLElement): void {
+        if(this.logger) this.logger.dispose();
+        this.logger = new LearningDataLogger(parent, this);
     }
 }
