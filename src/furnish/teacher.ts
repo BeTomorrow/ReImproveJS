@@ -1,24 +1,42 @@
-import {Agent, TrackingInformation} from "./agent";
+import {Agent, AgentTrackingInformation} from "./agent";
 
 
 const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
     lessonLength: 1000,
     lessonsQuantity: 30,
-    lessonsWithRandom: 2
+    lessonsWithRandom: 2,
+    epsilon: 1,
+    epsilonMin: 0.05,
+    epsilonDecay: 0.995,
+    gamma: 0.9
 };
 
 export interface TeachingConfig {
     lessonLength?: number;
     lessonsQuantity?: number;
     lessonsWithRandom?: number;
+    gamma?: number;
+    epsilon?: number;
+    epsilonDecay?: number;
+    epsilonMin?: number;
 }
 
 export enum TeachingState {
-    EXPERIENCING=0,
-    LEARNING=1,
-    TESTING=2,
-    NONE=-1,
-    STOPPED=-2
+    EXPERIENCING = 0,
+    LEARNING = 1,
+    TESTING = 2,
+    NONE = -1,
+    STOPPED = -2
+}
+
+export interface TeacherTrackingInformation {
+    name: string;
+    gamma: number;
+    epsilon: number;
+    currentLessonLength: number;
+    lessonNumber: number;
+    maxLessons: number;
+    students: AgentTrackingInformation[];
 }
 
 export class Teacher {
@@ -36,12 +54,15 @@ export class Teacher {
     onLessonEnded: (teacher: Teacher, lessonNumber: number) => void;
     onTeachingEnded: (teacher: Teacher) => void;
 
+    currentEpsilon: number;
+
     constructor(config?: TeachingConfig, name?: string) {
         this.config = {...DEFAULT_TEACHING_CONFIG, ...config};
         this.agents = new Set<Agent>();
         this.currentLessonLength = 0;
         this.lessonsTaught = 0;
         this.state = TeachingState.NONE;
+        this.currentEpsilon = this.config.epsilon;
 
         this.onLessonEnded = null;
         this.onLearningLessonEnded = null;
@@ -63,53 +84,81 @@ export class Teacher {
         this.state = TeachingState.EXPERIENCING;
     }
 
-    teach(inputs: number[]): Map<string, number> {
-        if(this.state == TeachingState.STOPPED) return null;
+    async teach(inputs: number[]): Promise<Map<string, number>> {
+        if (this.state == TeachingState.STOPPED) return null;
 
-        if(this.state == TeachingState.NONE) {
+        if (this.state == TeachingState.NONE) {
             this.start();
         }
 
         let actions = new Map<string, number>();
         // If learning is ended, we only test : we only do forward prop through network
-        if(this.state == TeachingState.TESTING) {
-            this.agents.forEach(a => actions.set(a.Name, a.forward(inputs, false)));
+        if (this.state == TeachingState.TESTING) {
+            this.agents.forEach(a => actions.set(a.Name, a.forward(inputs, this.currentEpsilon, false)));
             return actions;
         }
 
         //Update lesson
         this.currentLessonLength += 1;
 
-        if(this.currentLessonLength >= this.config.lessonLength)
+        if (this.currentLessonLength >= this.config.lessonLength)
             this.state = TeachingState.LEARNING;
 
 
-        if(this.state == TeachingState.EXPERIENCING) {
-            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.lessonsTaught >= this.config.lessonsWithRandom)));
-        } else if(this.state == TeachingState.LEARNING) {
-            if(this.onLessonEnded)
+        if (this.state == TeachingState.EXPERIENCING) {
+            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
+        } else if (this.state == TeachingState.LEARNING) {
+            if (this.onLessonEnded)
                 this.onLessonEnded(this, this.lessonsTaught);
 
-            this.agents.forEach(async a => await a.learn());
+            for (let agent of Array.from(this.agents.keys())) {
+                await agent.learn(this.config.gamma);
+            }
 
             this.lessonsTaught += 1;
             this.currentLessonLength = 0;
 
-            if(this.lessonsTaught >= this.config.lessonsQuantity) {
+            if (this.lessonsTaught >= this.config.lessonsQuantity) {
                 this.state = TeachingState.TESTING;
-                if(this.onTeachingEnded)
+                if (this.onTeachingEnded)
                     this.onTeachingEnded(this);
             } else {
                 this.state = TeachingState.EXPERIENCING;
-                this.agents.forEach(a => actions.set(a.Name, a.listen(inputs)));
+                this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
             }
 
-            if(this.onLearningLessonEnded)
+            if (this.onLearningLessonEnded)
                 this.onLearningLessonEnded(this);
 
         }
 
         return actions;
+    }
+
+    updateParameters() {
+        if (this.currentEpsilon > this.config.epsilonMin) {
+            this.currentEpsilon *= this.config.epsilonDecay;
+        }
+    }
+
+    getData(): TeacherTrackingInformation {
+        let data: AgentTrackingInformation[] = [];
+        this.agents.forEach(agent => data.push(agent.getTrackingInformation()));
+        return {
+            epsilon: this.currentEpsilon,
+            gamma: this.config.gamma,
+            lessonNumber: this.lessonsTaught,
+            currentLessonLength: this.currentLessonLength,
+            maxLessons: this.config.lessonsQuantity,
+            name: this.name,
+            students: data
+        };
+    }
+
+    reset() {
+        this.lessonsTaught = 0;
+        this.currentLessonLength = 0;
+        this.state = TeachingState.NONE;
     }
 
     stop() {
@@ -138,17 +187,5 @@ export class Teacher {
 
     get State() {
         return this.state;
-    }
-
-    reset() {
-        this.lessonsTaught = 0;
-        this.currentLessonLength = 0;
-        this.state = TeachingState.NONE;
-    }
-
-    getData(): TrackingInformation[] {
-        let data: TrackingInformation[] = [];
-        this.agents.forEach(agent => data.push(agent.getTrackingInformation()));
-        return data;
     }
 }

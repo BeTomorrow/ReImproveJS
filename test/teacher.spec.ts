@@ -20,7 +20,7 @@ model.addLayer({layerType: LayerType.DENSE, units: 128, activation: 'relu'});
 model.addLayer({layerType: LayerType.DENSE, units: numActions, activation: 'relu'});
 model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
-const teacher = new Teacher({lessonsQuantity: lessons, lessonLength: lessonLength});
+const teacher = new Teacher({lessonsQuantity: lessons, lessonLength: lessonLength, gamma: 0.8, epsilonDecay: 0.990});
 const agent = new Agent(model);
 
 
@@ -40,8 +40,12 @@ describe('Teacher', () => {
         expect(teacher.config).to.be.deep.equal({
             lessonLength: lessonLength,
             lessonsQuantity: lessons,
-            lessonsWithRandom: 2
-        })
+            lessonsWithRandom: 2,
+            gamma: 0.8,
+            epsilon: 1,
+            epsilonDecay: 0.990,
+            epsilonMin: 0.05
+        });
     });
 
     it('should have started learning', () =>  {
@@ -51,7 +55,7 @@ describe('Teacher', () => {
         expect(teacher.currentLessonLength).to.be.equal(1);
     });
 
-    it('Should fire events', () => {
+    it('Should fire events', async () => {
         let lessonEnded = spy();
         let lessonLearningEnded = spy();
         let teachingEnded = spy();
@@ -60,7 +64,7 @@ describe('Teacher', () => {
         teacher.OnTeachingEnded = teachingEnded;
 
         for(let i = 0;i < lessonLength*lessons+1; ++i) {
-            teacher.teach(range(screenInputSize));
+            await teacher.teach(range(screenInputSize));
         }
 
         expect(lessonEnded).to.have.been.calledWith(teacher);
@@ -71,11 +75,11 @@ describe('Teacher', () => {
         expect(lessonLearningEnded).to.be.calledBefore(teachingEnded);
     });
 
-    it('Should end in the testing state', () => {
+    it('Should end in the testing state', async () => {
         expect(teacher.state).to.be.equal(TeachingState.NONE);
 
         for(let i = 0;i < lessonLength*lessons+1; ++i) {
-            teacher.teach(range(screenInputSize));
+            await teacher.teach(range(screenInputSize));
         }
 
         expect(teacher.state).to.be.equal(TeachingState.TESTING);

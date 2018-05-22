@@ -89,10 +89,14 @@ export class Result {
     }
 
     getHighestValue(): number {
+        return Result.getResultAndDispose(this.result.as1D().max())[0];
+    }
+
+    getAction(): number {
         return Result.getResultAndDispose(this.result.as1D().argMax())[0];
     }
 
     getValue(): Int32Array | Float32Array | Uint8Array {
-        return Result.getResultAndDispose(this.result);
+        return Result.getResultAndDispose(this.result.as1D());
     }
 }

@@ -1,5 +1,5 @@
-import {Agent, LearningConfig, AgentConfig, TrackingInformation} from "./agent";
-import {Teacher, TeachingConfig} from "./teacher";
+import {Agent, AgentConfig} from "./agent";
+import {Teacher, TeacherTrackingInformation, TeachingConfig} from "./teacher";
 import {v4} from 'uuid';
 import {Model} from "./model";
 import {LearningDataLogger} from "./misc/learning_data_logger";
@@ -17,7 +17,6 @@ export interface AcademyStepInput {
 
 export interface BuildAgentConfig {
     model: Model;
-    learningConfig?: LearningConfig;
     agentConfig?: AgentConfig;
 }
 
@@ -38,15 +37,9 @@ export class Academy {
     }
 
     addAgent(config: BuildAgentConfig, name?: string): string {
-        if(name && config.agentConfig && !config.agentConfig.name)
-            config.agentConfig.name = name;
-
-        let agent = new Agent(config.model, config.agentConfig, config.learningConfig);
-        if(!agent.Name)
-            if(name && !this.agents.has(name))
-                agent.Name = name;
-            else
-                agent.Name = v4();
+        let agent = new Agent(config.model, config.agentConfig, name);
+        if (!agent.Name)
+            agent.Name = v4();
 
         this.agents.set(agent.Name, agent);
 
@@ -55,11 +48,8 @@ export class Academy {
 
     addTeacher(config?: TeachingConfig, name?: string): string {
         let teacher = new Teacher(config, name);
-        if(!teacher.Name)
-            if(name && !this.teachers.has(name))
-                teacher.Name = name;
-            else
-                teacher.Name = v4();
+        if (!teacher.Name)
+            teacher.Name = v4();
 
         this.teachers.set(teacher.Name, teacher);
 
@@ -67,9 +57,9 @@ export class Academy {
     }
 
     assignTeacherToAgent(agentName: string, teacherName: string) {
-        if(!this.agents.has(agentName))
+        if (!this.agents.has(agentName))
             throw new Error("No such agent has been registered");
-        if(!this.teachers.has(teacherName))
+        if (!this.teachers.has(teacherName))
             throw new Error("No such teacher has been registered");
 
         this.assigments.set(agentName, teacherName);
@@ -79,48 +69,48 @@ export class Academy {
     async step(inputs: AcademyStepInput[] | AcademyStepInput): Promise<Map<string, number>> {
         let actions = new Map<string, number>();
         let finalInput = inputs instanceof Array ? inputs : [inputs];
-        finalInput.forEach(input => {
-            if(!this.teachers.has(input.teacherName)) {
-                console.error("No teacher has name " + input.teacherName);
-                return;
+        for(let input of finalInput) {
+            if (!this.teachers.has(input.teacherName)) {
+                throw new Error("No teacher has name " + input.teacherName);
             }
 
-            this.teachers.get(input.teacherName).teach(input.agentsInput).forEach((value, key) => {
-                if(actions.has(key))
+            const agentsActions = await this.teachers.get(input.teacherName).teach(input.agentsInput);
+            agentsActions.forEach((value, key) => {
+                if (actions.has(key))
                     throw new Error("Agent " + key + " has already registered an action.");
 
                 actions.set(key, value);
             });
-        });
+        }
 
-        if(this.logger)
+        if (this.logger)
             this.logger.updateTables();
 
         return actions;
     }
 
     addRewardToAgent(name: string, reward: number) {
-        if(this.agents.has(name))
+        if (this.agents.has(name))
             this.agents.get(name).addReward(reward);
     }
 
     setRewardOfAgent(name: string, reward: number) {
-        if(this.agents.has(name))
+        if (this.agents.has(name))
             this.agents.get(name).setReward(reward);
     }
 
     OnLearningLessonEnded(teacherName: string, callback: (teacher: Teacher) => void) {
-        if(this.teachers.has(teacherName))
+        if (this.teachers.has(teacherName))
             this.teachers.get(teacherName).onLearningLessonEnded = callback;
     }
 
     OnLessonEnded(teacherName: string, callback: (teacher: Teacher, lessonNumber: number) => void) {
-        if(this.teachers.has(teacherName))
+        if (this.teachers.has(teacherName))
             this.teachers.get(teacherName).onLessonEnded = callback;
     }
 
     OnTeachingEnded(teacherName: string, callback: (teacher: Teacher) => void) {
-        if(this.teachers.has(teacherName))
+        if (this.teachers.has(teacherName))
             this.teachers.get(teacherName).onTeachingEnded = callback;
     }
 
@@ -129,14 +119,16 @@ export class Academy {
         this.agents.clear();
     }
 
-    get Teachers() { return Array.from(this.teachers.keys()); }
+    get Teachers() {
+        return Array.from(this.teachers.keys());
+    }
 
-    getTeacherData(name: string): TrackingInformation[] {
+    getTeacherData(name: string): TeacherTrackingInformation {
         return this.teachers.get(name).getData();
     }
 
     createLogger(parent: HTMLElement): void {
-        if(this.logger) this.logger.dispose();
+        if (this.logger) this.logger.dispose();
         this.logger = new LearningDataLogger(parent, this);
     }
 }

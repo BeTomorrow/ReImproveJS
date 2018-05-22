@@ -27,16 +27,15 @@ export class LearningDataLogger {
         hrow.insertCell(0).innerHTML = "Name";
         hrow.insertCell(1).innerHTML = "Q loss average";
         hrow.insertCell(2).innerHTML = "Average reward";
-        hrow.insertCell(3).innerHTML = "Epsilon";
 
 
-        this.academy.getTeacherData(teacherName).forEach(data => {
-            const brow = tbody.insertRow(0);
-            brow.insertCell(0).innerHTML = data.name;
+        let studentsQuantity = this.academy.getTeacherData(teacherName).students.length;
+        for(let i = 0;i < studentsQuantity; ++i) {
+            const brow = tbody.insertRow(i);
+            brow.insertCell(0).innerHTML = "";
             brow.insertCell(1).innerHTML = "";
             brow.insertCell(2).innerHTML = "";
-            brow.insertCell(3).innerHTML = "";
-        });
+        }
 
 
         LearningDataLogger.tableStyle(table);
@@ -45,10 +44,11 @@ export class LearningDataLogger {
 
     updateTables(): void {
         this.tables.forEach(table => {
-            this.academy.getTeacherData(table.teacherName).forEach(data => {
-                table.table.tBodies.item(0).rows.item(0).cells.item(1).innerHTML = data.averageLoss.toString().substr(0, 5);
-                table.table.tBodies.item(0).rows.item(0).cells.item(2).innerHTML = data.averageReward.toString().substr(0, 5);
-                table.table.tBodies.item(0).rows.item(0).cells.item(3).innerHTML = data.epsilon.toString().substr(0, 5);
+            const tData = this.academy.getTeacherData(table.teacherName);
+            tData.students.forEach((data, index) => {
+                table.table.tBodies.item(0).rows.item(index).cells.item(0).innerHTML = data.name;
+                table.table.tBodies.item(0).rows.item(index).cells.item(1).innerHTML = data.averageLoss.toString().substr(0, 5);
+                table.table.tBodies.item(0).rows.item(index).cells.item(2).innerHTML = data.averageReward.toString().substr(0, 5);
             });
         });
     }
