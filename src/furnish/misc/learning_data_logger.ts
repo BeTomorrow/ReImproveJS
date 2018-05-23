@@ -1,10 +1,12 @@
 import {Academy} from "../academy";
+import {memory} from "@tensorflow/tfjs-core";
 
 
 
 export class LearningDataLogger {
     private parent: HTMLElement;
     private tables: {teacherName: string, table: HTMLTableElement}[];
+    private memory: HTMLTableElement;
 
     constructor(element: string | HTMLElement, private academy: Academy) {
         if(typeof element == "string") {
@@ -16,6 +18,28 @@ export class LearningDataLogger {
         this.tables = [];
         this.academy.Teachers.forEach(name => this.createTeacherTable(name));
         this.tables.forEach(val => this.parent.appendChild(val.table));
+        this.createMemoryTable();
+        this.parent.appendChild(this.memory);
+    }
+
+    createMemoryTable(): void {
+        this.memory = document.createElement('table');
+        const thead = <HTMLTableSectionElement> this.memory.createTHead();
+        const tbody = <HTMLTableSectionElement> this.memory.createTBody();
+
+        const hrow = thead.insertRow(0);
+        hrow.insertCell(0).innerHTML = "Bytes allocated (undisposed)";
+        hrow.insertCell(1).innerHTML = "Unique tensors allocated";
+        hrow.insertCell(2).innerHTML = "Data buffers allocated";
+        hrow.insertCell(3).innerHTML = "Unreliable";
+
+        const brow = tbody.insertRow(0);
+        brow.insertCell(0).innerHTML = "";
+        brow.insertCell(1).innerHTML = "";
+        brow.insertCell(2).innerHTML = "";
+        brow.insertCell(3).innerHTML = "";
+
+        LearningDataLogger.tableStyle(this.memory);
     }
 
     createTeacherTable(teacherName: string): void {
@@ -46,7 +70,7 @@ export class LearningDataLogger {
         this.tables.push({teacherName: teacherName, table: table});
     }
 
-    updateTables(): void {
+    updateTables(showMemory: boolean = false): void {
         this.tables.forEach(table => {
             const tData = this.academy.getTeacherData(table.teacherName);
             tData.students.forEach((data, index) => {
@@ -57,6 +81,14 @@ export class LearningDataLogger {
                 table.table.tBodies.item(0).rows.item(index).cells.item(4).innerHTML = tData.lessonNumber.toString();
             });
         });
+
+        if(showMemory) {
+            const tfMemory = memory();
+            this.memory.tBodies.item(0).rows.item(0).cells.item(0).innerHTML = tfMemory.numBytes.toString();
+            this.memory.tBodies.item(0).rows.item(0).cells.item(1).innerHTML = tfMemory.numTensors.toString();
+            this.memory.tBodies.item(0).rows.item(0).cells.item(2).innerHTML = tfMemory.numDataBuffers.toString();
+            this.memory.tBodies.item(0).rows.item(0).cells.item(3).innerHTML = tfMemory.unreliable.toString();
+        }
     }
 
     dispose(): void {

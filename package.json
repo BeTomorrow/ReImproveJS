@@ -22,7 +22,7 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts'",
+    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
     "build-npm": "./scripts/build-npm.sh",
     "build": "npm run test && npm run build-npm",
     "watch": "tsc -w -p .",

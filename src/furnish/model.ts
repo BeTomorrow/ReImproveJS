@@ -59,7 +59,7 @@ export class Model {
     }
 
     predict(x: Tensor, config?: ModelPredictConfig): Result {
-        return new Result(tidy(() => <Tensor> this.model.predict(x, config)));
+        return new Result(<Tensor> this.model.predict(x, config));
     }
 
     fit(x: Tensor, y: Tensor) {
@@ -68,11 +68,11 @@ export class Model {
 
     randomOutput(): number {
         // TODO create a distribution of all taken actions, in order later to choose in what way we want the random to behave
-        return random(0, (<SymbolicTensor>this.model.getOutputAt(0)).shape[1] - 1);
+        return tidy(() => random(0, (<SymbolicTensor>this.model.getOutputAt(0)).shape[1] - 1));
     }
 
     get OutputSize(): number {
-        return (<SymbolicTensor>this.model.getOutputAt(0)).shape[1];
+        return tidy(() => (<SymbolicTensor>this.model.getOutputAt(0)).shape[1]);
     }
 }
 
@@ -81,22 +81,27 @@ export class Result {
     constructor(private result: Tensor) {
     }
 
-    private static getResultAndDispose(t: Tensor): Float32Array | Int32Array | Uint8Array {
-        const val = t.dataSync();
-        if(t.dispose)
-            t.dispose();
-        return val;
+    private getResultAndDispose(t: Tensor): Float32Array | Int32Array | Uint8Array {
+        this.result.dispose();
+        return t.dataSync();
     }
 
+
     getHighestValue(): number {
-        return Result.getResultAndDispose(this.result.as1D().max())[0];
+        return tidy(() => this.getResultAndDispose(this.result.as1D().max())[0]);
     }
 
     getAction(): number {
-        return Result.getResultAndDispose(this.result.as1D().argMax())[0];
+        return tidy(() => this.getResultAndDispose(this.result.as1D().argMax())[0]);
     }
 
     getValue(): Int32Array | Float32Array | Uint8Array {
-        return Result.getResultAndDispose(this.result.as1D());
+        const resTensor = this.result.as1D();
+        const result = resTensor.dataSync();
+
+        resTensor.dispose();
+        this.result.dispose();
+
+        return result;
     }
 }

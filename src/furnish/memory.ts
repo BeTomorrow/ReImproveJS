@@ -6,10 +6,15 @@ export interface MemoryConfig {
 }
 
 export interface Memento {
-    state: Tensor;
+    state: MementoTensor;
     action: number;
     reward: number;
-    nextState: Tensor;
+    nextState: MementoTensor;
+}
+
+export interface MementoTensor {
+    tensor: Tensor;
+    references: number;
 }
 
 export class Memory {
@@ -26,18 +31,21 @@ export class Memory {
     }
 
     remember(memento: Memento, replaceIfFull: boolean = true) {
-        if (this.currentSize < this.config.size)
+        memento.state.references += 1;
+        memento.nextState.references += 1;
+
+        if (this.currentSize < this.config.size) {
             this.memory[this.currentSize++] = memento;
-        else if (replaceIfFull) {
-            let randPos = random(0, this.memory.length-1);
-            // Memory.freeMemento(this.memory[randPos]);
+        } else if (replaceIfFull) {
+            let randPos = random(0, this.memory.length - 1);
+            Memory.freeMemento(this.memory[randPos]);
             this.memory[randPos] = memento;
         }
     }
 
     sample(batchSize: number, unique = true) {
         let memslice = this.memory.slice(0, this.currentSize);
-        if(unique)
+        if (unique)
             return sampleSize(memslice, batchSize);
         else
             return range(batchSize).map(() => sample(memslice));
@@ -52,12 +60,19 @@ export class Memory {
     }
 
     private static freeMemento(memento: Memento) {
-        memento.nextState.dispose();
-        memento.state.dispose();
+        memento.nextState.references -= 1;
+        memento.state.references -= 1;
+        if (memento.nextState.references <= 0)
+            memento.nextState.tensor.dispose();
+        if (memento.state.references <= 0)
+            memento.state.tensor.dispose();
     }
 
     reset(): void {
-        this.memory.forEach(memento => Memory.freeMemento(memento));
+        this.memory.forEach(memento => {
+            memento.state.tensor.dispose();
+            memento.nextState.tensor.dispose();
+        });
         this.memory = new Array<Memento>(this.config.size);
         this.currentSize = 0;
     }

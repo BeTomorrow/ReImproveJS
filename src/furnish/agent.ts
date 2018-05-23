@@ -1,4 +1,4 @@
-import {Memento, Memory} from "./memory";
+import {Memento, MementoTensor, Memory} from "./memory";
 import {Model} from "./model";
 import {Tensor, tensor, tensor2d, tidy} from "@tensorflow/tfjs-core";
 import {range, random} from "lodash";
@@ -32,7 +32,7 @@ export class Agent {
 
     private readonly actionsBuffer: Array<number>;
     private readonly statesBuffer: Array<Tensor>;
-    private readonly inputsBuffer: Array<Tensor>;
+    private readonly inputsBuffer: Array<MementoTensor>;
 
     private lossesHistory: TypedWindow<number>;
     private rewardsHistory: TypedWindow<number>;
@@ -64,11 +64,14 @@ export class Agent {
 
     private createNeuralNetInput(input: Tensor): Tensor {
         return tidy(() => {
-            let finalInput = input;
+            let finalInput = input.clone();
 
             for (let i = 0; i < <number>this.agentConfig.temporalWindow; ++i) {
+                // Here we concatenate input with previous input
                 finalInput = finalInput.concat(this.statesBuffer[this.netInputWindowSize - 1 - i], 1);
 
+                // And we add to previous input previous action
+                // (range from 0 to actions, and give a 1 or a 0 if we took this action or not)
                 let ten = tensor([
                     range(0, this.model.OutputSize)
                         .map((val) => val == this.actionsBuffer[this.netInputWindowSize - 1 - i] ? 1.0 : 0.0)
@@ -108,12 +111,17 @@ export class Agent {
 
         if (keepTensors) {
             this.actionsBuffer.shift();
-            this.statesBuffer.shift();
+            const stateShift = this.statesBuffer.shift();
+            if(stateShift)
+                stateShift.dispose();
             this.inputsBuffer.shift();
 
             this.actionsBuffer.push(action);
             this.statesBuffer.push(tensorInput);
-            this.inputsBuffer.push(netInput);
+            this.inputsBuffer.push({tensor: netInput, references: 0});
+        } else {
+            tensorInput.dispose();
+            netInput.dispose();
         }
 
         return action;
@@ -138,21 +146,13 @@ export class Agent {
         return tidy(() => {
             let target = memento.reward;
             if (!this.done) {
-                target = memento.reward + gamma * (this.model.predict(memento.nextState).getHighestValue());
+                target = memento.reward + gamma * (this.model.predict(memento.nextState.tensor).getHighestValue());
             }
 
-            let future_target = this.model.predict(memento.state).getValue();
+            let future_target = this.model.predict(memento.state.tensor).getValue();
             future_target[memento.action] = target;
-            return {x: memento.state, y: tensor2d(future_target, [1, this.model.OutputSize])};
+            return {x: memento.state.tensor.clone(), y: tensor2d(future_target, [1, this.model.OutputSize])};
         });
-    }
-
-    addReward(value: number): void {
-        this.currentReward += value;
-    }
-
-    setReward(value: number): void {
-        this.currentReward = value;
     }
 
     listen(input: number[], epsilon: number): number {
@@ -167,12 +167,21 @@ export class Agent {
     async learn(gamma: number) {
         const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
             .map(memento => this.createTrainingDataFromMemento(memento, gamma))
-            .reduce((previousValue, currentValue) =>
-                tidy(() => ({
-                    x: previousValue.x.concat(currentValue.x),
-                    y: previousValue.y.concat(currentValue.y)
-                }))
+            .reduce((previousValue, currentValue) => {
+                    const res = {
+                        x: previousValue.x.concat(currentValue.x),
+                        y: previousValue.y.concat(currentValue.y)
+                    };
+
+                    previousValue.x.dispose();
+                    previousValue.y.dispose();
+                    currentValue.x.dispose();
+                    currentValue.y.dispose();
+
+                    return res;
+                }
             );
+
 
         const history = await this.model.fit(trainData.x, trainData.y);
         const loss = history.history.loss[0];
@@ -182,8 +191,18 @@ export class Agent {
         trainData.y.dispose();
     }
 
+    addReward(value: number): void {
+        this.currentReward += value;
+    }
+
+    setReward(value: number): void {
+        this.currentReward = value;
+    }
+
     reset(): void {
         this.memory.reset();
+        this.inputsBuffer.forEach(i => i.tensor.dispose());
+        this.statesBuffer.forEach(s => s.dispose());
         this.forwardPasses = 0;
     }
 

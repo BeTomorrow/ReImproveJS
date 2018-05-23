@@ -4,11 +4,17 @@ import {v4} from 'uuid';
 import {Model} from "./model";
 import {LearningDataLogger} from "./misc/learning_data_logger";
 
-/*const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
+const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
+    parentLogsElement: null,
+    agentsLogs: false,
+    memoryLogs: false
 };
 
 export interface AcademyConfig {
-}*/
+    parentLogsElement: HTMLElement;
+    agentsLogs: boolean;
+    memoryLogs: boolean;
+}
 
 export interface AcademyStepInput {
     teacherName: string;
@@ -22,18 +28,22 @@ export interface BuildAgentConfig {
 
 export class Academy {
 
-    // private config: AcademyConfig;
     private agents: Map<string, Agent>;
     private teachers: Map<string, Teacher>;
     private assigments: Map<string, string>;
 
     private logger: LearningDataLogger;
+    private config: AcademyConfig;
 
-    constructor(/*config?: AcademyConfig*/) {
-        //this.config = {...DEFAULT_ACADEMY_CONFIG, ...config};
+    constructor(config?: AcademyConfig) {
+        this.config = {...DEFAULT_ACADEMY_CONFIG, ...config};
         this.agents = new Map<string, Agent>();
         this.teachers = new Map<string, Teacher>();
         this.assigments = new Map<string, string>();
+
+        if(this.config.parentLogsElement) {
+            this.createLogger(this.config.parentLogsElement);
+        }
     }
 
     addAgent(config: BuildAgentConfig, name?: string): string {
@@ -84,7 +94,7 @@ export class Academy {
         }
 
         if (this.logger)
-            this.logger.updateTables();
+            this.logger.updateTables(true);
 
         return actions;
     }
@@ -114,7 +124,13 @@ export class Academy {
             this.teachers.get(teacherName).onTeachingEnded = callback;
     }
 
+    resetTeachersAndAgents() {
+        this.teachers.forEach(t => t.reset());
+        this.agents.forEach(a => a.reset());
+    }
+
     reset() {
+        this.resetTeachersAndAgents();
         this.teachers.clear();
         this.agents.clear();
     }
@@ -129,6 +145,14 @@ export class Academy {
 
     createLogger(parent: HTMLElement): void {
         if (this.logger) this.logger.dispose();
+        this.config.parentLogsElement = parent;
         this.logger = new LearningDataLogger(parent, this);
+    }
+
+    toggleLogs(memory = false): void {
+        const status = this.config.agentsLogs;
+        this.config.agentsLogs = !status;
+        if(status)
+            this.config.memoryLogs = memory;
     }
 }
