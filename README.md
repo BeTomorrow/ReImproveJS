@@ -121,3 +121,9 @@ requestAnimationFrame(step);
 ```
 
 Rewards are reset to 0 at each new step.
+
+Do not forget to include the javascript :
+
+```html
+    <script src="/path/to/your/lib/furnish.js"></script>
+```

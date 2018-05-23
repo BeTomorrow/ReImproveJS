@@ -66,7 +66,7 @@ describe("Furnish - Real", () => {
         expect(memory().numTensors).to.be.approximately(memorySize*2, memorySize*0.5);
     });
 
-    it('should have decreasing loss', async () => {
+    /*it('should have decreasing loss', async () => {
         let input = shuffle(range(0, initialInputSize)).map(v => v / initialInputSize);
         let losses: number[] = [];
         let rewards: number[] = [];
@@ -89,5 +89,5 @@ describe("Furnish - Real", () => {
 
         expect(losses[0]).to.be.greaterThan(losses[losses.length - 1]);
         expect(rewards[0]).to.be.lessThan(rewards[rewards.length - 1]);
-    });
+    });*/
 });
