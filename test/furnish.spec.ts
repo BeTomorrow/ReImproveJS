@@ -32,10 +32,6 @@ const teacher = academy.addTeacher({
 });
 academy.assignTeacherToAgent(agent, teacher);
 
-function getMemory() {
-    return memory();
-}
-
 describe("Furnish - Real", () => {
     beforeEach(() => {
         academy.resetTeachersAndAgents();
@@ -67,7 +63,7 @@ describe("Furnish - Real", () => {
             academy.addRewardToAgent(agent, results.get(agent) == 1 ? 1.0 : -1.0);
         }
 
-        expect(getMemory().numTensors).to.be.approximately(memorySize*2, memorySize*0.5);
+        expect(memory().numTensors).to.be.approximately(memorySize*2, memorySize*0.5);
     });
 
     it('should have decreasing loss', async () => {

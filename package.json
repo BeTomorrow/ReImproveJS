@@ -24,10 +24,8 @@
   },
   "scripts": {
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
-    "build-npm": "./scripts/build-npm.sh",
-    "build": "npm run test && npm run build-npm",
-    "watch": "tsc -w -p .",
-    "publish": "npm run build && npm publish"
+    "build": "./scripts/build-npm.sh",
+    "watch": "tsc -w -p ."
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",
