@@ -62,7 +62,7 @@ export class Model {
         return new Result(<Tensor> this.model.predict(x, config));
     }
 
-    fit(x: Tensor, y: Tensor) {
+    fit(x: Tensor, y: Tensor): Promise<any> {
         return this.model.fit(x, y, this.fitConfig);
     }
 

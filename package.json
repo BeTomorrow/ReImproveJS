@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": false,
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
-  "main": "./dist/furnish.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pravez/FurnishJS.git"
@@ -44,7 +45,8 @@
     "sinon-chai": "^3.0.0",
     "ts-node": "^6.0.3",
     "tsify": "^4.0.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "uglify-js": "^3.3.27"
   },
   "files": [
     "dist/furnish.js"
