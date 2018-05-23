@@ -3,3 +3,4 @@ tsconfig.json
 furnishjs-*.tgz
 docs/
 .travis.yml
+_config.yml

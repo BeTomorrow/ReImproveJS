@@ -23,6 +23,8 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
+    "setup": "npm install",
+    "clean": "rm -rf node_modules/ dist/",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
     "build": "./scripts/build-npm.sh",
     "watch": "tsc -w -p ."
@@ -43,6 +45,7 @@
     "sinon-chai": "^3.0.0",
     "ts-node": "^6.0.3",
     "tsify": "^4.0.0",
+    "typedoc": "^0.11.1",
     "typescript": "^2.8.3",
     "uglify-js": "^3.3.27"
   },
