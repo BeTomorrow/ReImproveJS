@@ -1,4 +1,9 @@
 # FurnishJS
+
+> A framework using TensorFlow.hs for Deep Reinforcement Learning
+
+[![npm version](https://badge.fury.io/js/furnishjs.svg)](https://badge.fury.io/js/furnishjs)
+
 `FurnishJS` is a little library to create Reinforcement Learning environments with Javascript.
 It currently implements DQN algorithm, but aims to allow users to change easily algorithms, like for instance A3C or Sarsa.
 
@@ -7,12 +12,16 @@ The library is using TensorFlow.js as a computing background, enabling the use o
 Getting started
 ------------------
 
-Install
+Installation
 ------------
 
-Simply run `npm install furnishjs`
+FurnishJS is available as a standalone or as a NPM package. As usual, you can use 
 
-Using FurnishJS
+```bash
+$ npm install furnishjs
+```
+
+Usage
 -----------
 
 With Furnish, you have an environment organized as if your agents were part of a "school". The idea is that you are managing

@@ -1,0 +1,5 @@
+tsconfig.json
+.npmignore
+furnishjs-*.tgz
+docs/
+.travis.yml

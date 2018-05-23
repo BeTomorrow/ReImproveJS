@@ -1,6 +1,6 @@
 {
   "name": "furnishjs",
-  "version": "0.0.1",
+  "version": "0.0.1a",
   "private": false,
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
   "main": "./dist/index.js",
