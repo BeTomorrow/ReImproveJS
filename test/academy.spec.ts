@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Academy} from "../src/furnish/academy";
+import {Academy} from "../src/reimprove/academy";
 
 const academy = new Academy();
 

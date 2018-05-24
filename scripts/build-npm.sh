@@ -4,6 +4,6 @@ set -e
 
 rm -rf dist/
 tsc -p .
-browserify --standalone Furnish src/furnish.ts -p [tsify] | uglifyjs > dist/furnish.js
+browserify --standalone ReImprove src/reimprove.ts -p [tsify] | uglifyjs > dist/reimprove.js
 echo "Prepared bundle"
 npm pack

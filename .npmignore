@@ -1,6 +1,6 @@
 tsconfig.json
 .npmignore
-furnishjs-*.tgz
+reimprovejs-*.tgz
 docs/
 .travis.yml
 _config.yml

@@ -1,11 +1,11 @@
-# FurnishJS
+# ReImproveJS
 
-> A framework using TensorFlow.hs for Deep Reinforcement Learning
+> A framework using TensorFlow.js for Deep Reinforcement Learning
 
-[![npm version](https://badge.fury.io/js/furnishjs.svg)](https://badge.fury.io/js/furnishjs)
-[![Build Status](https://travis-ci.com/Pravez/FurnishJS.svg?branch=master)](https://travis-ci.com/Pravez/FurnishJS)
+[![npm version](https://badge.fury.io/js/reimprovejs.svg)](https://badge.fury.io/js/reimprovejs)
+[![Build Status](https://travis-ci.com/Pravez/ReImproveJS.svg?branch=master)](https://travis-ci.com/Pravez/ReImproveJS)
 
-`FurnishJS` is a little library to create Reinforcement Learning environments with Javascript.
+`ReImproveJS` is a little library to create Reinforcement Learning environments with Javascript.
 It currently implements DQN algorithm, but aims to allow users to change easily algorithms, like for instance A3C or Sarsa.
 
 The library is using TensorFlow.js as a computing background, enabling the use of WebGL to empower computations.
@@ -16,16 +16,16 @@ Getting started
 Installation
 ------------
 
-FurnishJS is available as a standalone or as a NPM package. As usual, you can use 
+ReImproveJS is available as a standalone or as a NPM package. As usual, you can use 
 
 ```bash
-$ npm install furnishjs
+$ npm install reimprovejs
 ```
 
 Usage
 -----------
 
-With Furnish, you have an environment organized as if your agents were part of a "school". The idea is that you are managing
+With ReImproveJS, you have an environment organized as if your agents were part of a "school". The idea is that you are managing
 an `Academy`, possessing `Teachers` and `Agents` (Students). You add `Teachers` and assign `Agents` to them. At each step of
 your world, you just need to give the `Academy` each `Teacher`'s input, which will handle everything concerning learning.
 
@@ -36,7 +36,7 @@ For instance :
 ```javascript
 
 const modelConfig = {                 // Here we exactly have the tfjs's model configuration
-    name: 'furnish-model'             // You could give there layers[], but no need ...
+    name: 'reimprove-model'             // You could give there layers[], but no need ...
 };
 
 const modelFitConfig = {              // Exactly the same idea here by using tfjs's model's
@@ -52,7 +52,7 @@ const temporalWindow = 1;             // The window of data which will be sent y
 const totalInputSize = inputSize * temporalWindow + numActions * temporalWindow + inputSize;
 
 // Now we initialize our model, and start adding layers
-const model = new Furnish.model(modelConfig, modelFitConfig);
+const model = new ReImprove.model(modelConfig, modelFitConfig);
 // Input layer
 model.addLayer({
     layerType: "DENSE", 
@@ -94,7 +94,7 @@ const agentConfig = {
     temporalWindow: temporalWindow         // The temporal window giving previous inputs & actions
 };
 
-const academy = new Furnish.Academy();    // First we need an academy to host everything
+const academy = new ReImprove.Academy();    // First we need an academy to host everything
 const teacher = academy.addTeacher(teacherConfig);
 const agent = academy.addAgent(agentConfig);
 
@@ -126,7 +126,7 @@ async function step(time) {
     
 }
 
-// Start your loop (/!\ for your environment, not specific to FurnishJS.
+// Start your loop (/!\ for your environment, not specific to ReImproveJS).
 requestAnimationFrame(step);
 ```
 
@@ -135,5 +135,5 @@ Rewards are reset to 0 at each new step.
 Do not forget to include the javascript :
 
 ```html
-    <script src="/path/to/your/lib/furnish.js"></script>
+    <script src="/path/to/your/lib/reimprove.js"></script>
 ```

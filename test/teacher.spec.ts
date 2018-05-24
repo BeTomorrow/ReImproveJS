@@ -3,9 +3,9 @@ import {expect, use} from "chai";
 import {range} from 'lodash';
 
 import generated from "sinon-chai";
-import {LayerType, Model} from "../src/furnish";
-import {Teacher, TeachingState} from "../src/furnish/teacher";
-import {Agent} from "../src/furnish/agent";
+import {LayerType, Model} from "../src/reimprove";
+import {Teacher, TeachingState} from "../src/reimprove/teacher";
+import {Agent} from "../src/reimprove/agent";
 
 use(generated);
 

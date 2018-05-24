@@ -1,6 +1,6 @@
 import * as tf from "@tensorflow/tfjs";
 import {expect} from "chai";
-import {LayerType, Model} from "../src/furnish";
+import {LayerType, Model} from "../src/reimprove";
 
 const screenInputSize = 20 * 20;
 const numActions = 3;

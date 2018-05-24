@@ -1,20 +1,20 @@
 {
-  "name": "furnishjs",
-  "version": "0.0.1a",
+  "name": "reimprovejs",
+  "version": "0.0.1",
   "private": false,
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pravez/FurnishJS.git"
+    "url": "git+https://github.com/Pravez/ReImproveJS.git"
   },
   "author": "Paul Breton <pbreton@betomorrow.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Pravez/FurnishJS/issues"
+    "url": "https://github.com/Pravez/ReImproveJS/issues"
   },
-  "homepage": "https://github.com/Pravez/FurnishJS#readme",
+  "homepage": "https://github.com/Pravez/ReImproveJS#readme",
   "dependencies": {
     "@tensorflow/tfjs": "^0.11.1",
     "@types/lodash": "^4.14.109",
@@ -25,7 +25,7 @@
   "scripts": {
     "setup": "npm install",
     "clean": "rm -rf node_modules/ dist/",
-    "doc": "typedoc --out ./docs/ ./src/ --name FurnishJS --readme README.md --target ES5 --includeDeclarations",
+    "doc": "typedoc --out ./docs/ ./src/ --name ReImproveJS --readme README.md --target ES5 --includeDeclarations",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
     "build": "./scripts/build-npm.sh",
     "watch": "tsc -w -p ."
@@ -51,6 +51,6 @@
     "uglify-js": "^3.3.27"
   },
   "files": [
-    "dist/furnish.js"
+    "dist/reimprove.js"
   ]
 }

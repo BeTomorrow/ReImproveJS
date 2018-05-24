@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Agent} from "../src/furnish/agent";
+import {Agent} from "../src/reimprove/agent";
 
 const batchSize = 18;
 const agent = new Agent(null, {batchSize: batchSize});
