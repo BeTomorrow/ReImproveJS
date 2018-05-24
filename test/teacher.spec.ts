@@ -67,9 +67,9 @@ describe('Teacher', () => {
             await teacher.teach(range(screenInputSize));
         }
 
-        expect(lessonEnded).to.have.been.calledWith(teacher);
-        expect(lessonLearningEnded).to.have.been.calledWith(teacher);
-        expect(teachingEnded).to.have.been.calledWith(teacher);
+        expect(lessonEnded).to.have.been.calledWith(teacher.Name);
+        expect(lessonLearningEnded).to.have.been.calledWith(teacher.Name);
+        expect(teachingEnded).to.have.been.calledWith(teacher.Name);
 
         expect(lessonEnded).to.be.calledBefore(lessonLearningEnded);
         expect(lessonLearningEnded).to.be.calledBefore(teachingEnded);
