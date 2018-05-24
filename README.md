@@ -16,7 +16,18 @@ Getting started
 Installation
 ------------
 
-ReImproveJS is available as a standalone or as a NPM package. As usual, you can use 
+ReImproveJS is available as a standalone or as a NPM package.
+As usual, you can use the CDN 
+```html
+    <script src="https://cdn.jsdelivr.net/npm/reimprovejs@0.0.1/dist/reimprove.js"></script>
+```
+
+or if you have your local version
+
+```html
+    <script src="/path/to/your/lib/reimprove.js"></script>
+```
+You can also install it through NPM.
 
 ```bash
 $ npm install reimprovejs
@@ -132,8 +143,4 @@ requestAnimationFrame(step);
 
 Rewards are reset to 0 at each new step.
 
-Do not forget to include the javascript :
 
-```html
-    <script src="/path/to/your/lib/reimprove.js"></script>
-```
