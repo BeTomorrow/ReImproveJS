@@ -25,6 +25,7 @@
   "scripts": {
     "setup": "npm install",
     "clean": "rm -rf node_modules/ dist/",
+    "doc": "typedoc --out ./docs/ ./src/ --name FurnishJS --readme README.md --target ES5 --includeDeclarations",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
     "build": "./scripts/build-npm.sh",
     "watch": "tsc -w -p ."

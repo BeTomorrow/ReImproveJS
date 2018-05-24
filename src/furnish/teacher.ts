@@ -50,9 +50,9 @@ export class Teacher {
     currentLessonLength: number;
     lessonsTaught: number;
 
-    onLearningLessonEnded: (teacher: Teacher) => void;
-    onLessonEnded: (teacher: Teacher, lessonNumber: number) => void;
-    onTeachingEnded: (teacher: Teacher) => void;
+    onLearningLessonEnded: (teacher: string) => void;
+    onLessonEnded: (teacher: string, lessonNumber: number) => void;
+    onTeachingEnded: (teacher: string) => void;
 
     currentEpsilon: number;
 
@@ -109,7 +109,7 @@ export class Teacher {
             this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
         } else if (this.state == TeachingState.LEARNING) {
             if (this.onLessonEnded)
-                this.onLessonEnded(this, this.lessonsTaught);
+                this.onLessonEnded(this.name, this.lessonsTaught);
 
             for (let agent of Array.from(this.agents.keys())) {
                 await agent.learn(this.config.gamma);
@@ -123,7 +123,7 @@ export class Teacher {
             if (this.lessonsTaught >= this.config.lessonsQuantity) {
                 this.state = TeachingState.TESTING;
                 if (this.onTeachingEnded)
-                    this.onTeachingEnded(this);
+                    this.onTeachingEnded(this.name);
             } else {
                 this.state = TeachingState.EXPERIENCING;
             }
@@ -131,7 +131,7 @@ export class Teacher {
             this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
 
             if (this.onLearningLessonEnded)
-                this.onLearningLessonEnded(this);
+                this.onLearningLessonEnded(this.name);
 
         }
 
@@ -171,15 +171,15 @@ export class Teacher {
         this.state = TeachingState.STOPPED;
     }
 
-    set OnLearningLessonEnded(callback: (teacher: Teacher) => void) {
+    set OnLearningLessonEnded(callback: (teacher: string) => void) {
         this.onLearningLessonEnded = callback;
     }
 
-    set OnLessonEnded(callback: (teacher: Teacher, lessonNumber: number) => void) {
+    set OnLessonEnded(callback: (teacher: string, lessonNumber: number) => void) {
         this.onLessonEnded = callback;
     }
 
-    set OnTeachingEnded(callback: (teacher: Teacher) => void) {
+    set OnTeachingEnded(callback: (teacher: string) => void) {
         this.onTeachingEnded = callback;
     }
 
