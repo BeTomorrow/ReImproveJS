@@ -3,7 +3,7 @@
 > A framework using TensorFlow.js for Deep Reinforcement Learning
 
 [![npm version](https://badge.fury.io/js/reimprovejs.svg)](https://badge.fury.io/js/reimprovejs)
-[![Build Status](https://travis-ci.com/Pravez/ReImproveJS.svg?branch=master)](https://travis-ci.com/Pravez/ReImproveJS)
+[![Build Status](https://travis-ci.org/Pravez/ReImproveJS.svg?branch=master)](https://travis-ci.org/Pravez/ReImproveJS)
 
 `ReImproveJS` is a little library to create Reinforcement Learning environments with Javascript.
 It currently implements DQN algorithm, but aims to allow users to change easily algorithms, like for instance A3C or Sarsa.
@@ -16,7 +16,18 @@ Getting started
 Installation
 ------------
 
-ReImproveJS is available as a standalone or as a NPM package. As usual, you can use 
+ReImproveJS is available as a standalone or as a NPM package.
+As usual, you can use the CDN 
+```html
+    <script src="https://cdn.jsdelivr.net/npm/reimprovejs@0.0.1/dist/reimprove.js"></script>
+```
+
+or if you have your local version
+
+```html
+    <script src="/path/to/your/lib/reimprove.js"></script>
+```
+You can also install it through NPM.
 
 ```bash
 $ npm install reimprovejs
@@ -132,8 +143,4 @@ requestAnimationFrame(step);
 
 Rewards are reset to 0 at each new step.
 
-Do not forget to include the javascript :
 
-```html
-    <script src="/path/to/your/lib/reimprove.js"></script>
-```
