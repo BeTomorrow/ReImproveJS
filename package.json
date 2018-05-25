@@ -25,7 +25,7 @@
   "scripts": {
     "setup": "npm install",
     "clean": "rm -rf node_modules/ dist/",
-    "doc": "typedoc --out ./docs/ ./src/ --name ReImproveJS --readme README.md --target ES5 --includeDeclarations",
+    "doc": "typedoc --theme markdown --out ./docs/ ./src/ --excludeExternals --externalPattern \"**/node_modules/**\" --ignoreCompilerErrors --name \"ReImproveJS\" --mode \"file\" --target ES5 --includeDeclarations",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
     "build": "./scripts/build-npm.sh",
     "watch": "tsc -w -p ."
@@ -47,6 +47,7 @@
     "ts-node": "^6.0.3",
     "tsify": "^4.0.0",
     "typedoc": "^0.11.1",
+    "typedoc-plugin-markdown": "^1.1.12",
     "typescript": "^2.8.3",
     "uglify-js": "^3.3.27"
   },
