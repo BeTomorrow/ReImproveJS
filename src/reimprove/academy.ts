@@ -193,6 +193,14 @@ export class Academy {
     }
 
     /**
+     * Resets to 0 the current state of the lesson. It cannot forget
+     * @param {string} teacherName
+     */
+    resetTeacherLesson(teacherName: string) {
+        this.teachers.get(teacherName).resetLesson();
+    }
+
+    /**
      * Gives the list of teachers
      * @returns {string[]}
      * @constructor

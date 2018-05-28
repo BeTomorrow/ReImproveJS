@@ -12,9 +12,9 @@ const numActions = 2;
 const inputSize = initialInputSize + numActions + initialInputSize;
 
 const model = new Model(null, {stepsPerEpoch: 1, epochs: 1});
-model.addLayer({layerType: LayerType.DENSE, units: 128, activation: 'relu', inputShape: [inputSize]});
-model.addLayer({layerType: LayerType.DENSE, units: 128, activation: 'relu'});
-model.addLayer({layerType: LayerType.DENSE, units: numActions, activation: 'relu'});
+model.addLayer(LayerType.DENSE, {units: 128, activation: 'relu', inputShape: [inputSize]});
+model.addLayer(LayerType.DENSE, {units: 128, activation: 'relu'});
+model.addLayer(LayerType.DENSE, {units: numActions, activation: 'relu'});
 model.compile({loss: 'meanSquaredError', optimizer: 'adam'});
 
 const lessonLength = 10;

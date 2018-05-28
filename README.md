@@ -2,6 +2,8 @@
 
 > A framework using TensorFlow.js for Deep Reinforcement Learning
 
+[Documentation](docs/README.md) | [NPM](https://www.npmjs.com/package/reimprovejs) | [Wiki](https://github.com/Pravez/ReImproveJS/wiki)
+
 [![npm version](https://badge.fury.io/js/reimprovejs.svg)](https://badge.fury.io/js/reimprovejs)
 [![Build Status](https://travis-ci.org/Pravez/ReImproveJS.svg?branch=master)](https://travis-ci.org/Pravez/ReImproveJS)
 
@@ -19,13 +21,13 @@ Installation
 ReImproveJS is available as a standalone or as a NPM package.
 As usual, you can use the CDN 
 ```html
-    <script src="https://cdn.jsdelivr.net/npm/reimprovejs@0.0.1/dist/reimprove.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reimprovejs@0.0.1/dist/reimprove.js"></script>
 ```
 
 or if you have your local version
 
 ```html
-    <script src="/path/to/your/lib/reimprove.js"></script>
+<script src="/path/to/your/lib/root/reimprove.js"></script>
 ```
 You can also install it through NPM.
 

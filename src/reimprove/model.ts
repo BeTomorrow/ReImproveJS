@@ -1,37 +1,37 @@
-import {
-    Sequential,
-    SequentialConfig,
-    ModelFitConfig,
-    ModelCompileConfig,
-    ModelPredictConfig,
-    layers,
-    SymbolicTensor
-} from '@tensorflow/tfjs-layers';
+import * as tflayers from '@tensorflow/tfjs-layers';
 import {Tensor, tidy} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
+import {NeuralNetwork} from "./networks";
 
-const DEFAULT_MODEL_FIT_CONFIG: ModelFitConfig = {
+const DEFAULT_MODEL_FIT_CONFIG: tflayers.ModelFitConfig = {
     epochs: 10,
     stepsPerEpoch: 200
 };
 
 export enum LayerType {
-    DENSE = "DENSE"
+    DENSE = "DENSE",
+    CONV2D = "CONV2D",
+    FLATTEN = "FLATTEN"
 }
 
 /**
  * Simplified layer configuration where you only give your layer, your activation function and the number of units.
  */
 export interface LayerConfig {
-    /** The type of the layer, refer to [[LayerType]] */
-    layerType: LayerType;
     /** Number of neurons of this layer */
     units: number;
     /** If it is an input layer, the size of the input */
     inputShape?: Array<number>;
     /** The activation function ('relu', 'sigmoid', ...) */
     activation: string;
+    useBias?: boolean;
 }
+
+const DEFAULT_LAYER_CONFIG: LayerConfig = {
+    units: 32,
+    activation: 'relu',
+    useBias: false
+};
 
 interface ToTfLayerConfig {
     [key: string]: any;
@@ -42,8 +42,8 @@ interface ToTfLayerConfig {
  */
 export class Model {
 
-    model: Sequential;
-    fitConfig: ModelFitConfig;
+    model: tflayers.Model;
+    fitConfig: tflayers.ModelFitConfig;
 
     /**
      * The sequential config is truly optional and is to use only if you want to provide a complete tf.layers implementation
@@ -52,26 +52,46 @@ export class Model {
      * @param {SequentialConfig} config
      * @param {ModelFitConfig} fitConfig
      */
-    constructor(config?: SequentialConfig, fitConfig?: ModelFitConfig) {
-        this.model = new Sequential(config);
+    constructor(config?: tflayers.SequentialConfig, fitConfig?: tflayers.ModelFitConfig) {
+        this.model = new tflayers.Sequential(config);
         this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
+    }
+
+    async loadFromFile(file: string) {
+        this.model = await tflayers.loadModel(file);
     }
 
     /**
      * Method to just add a layer to the model, concatenating it with the previous ones.
+     * @param type  a type among DENSE, FLATTEN or CONV2D
      * @param {LayerConfig} config
      */
-    addLayer(config: LayerConfig) {
-        let layer;
-        switch (config.layerType) {
-            case LayerType.DENSE:
-                layer = layers.dense;
-        }
-        let conf: ToTfLayerConfig = {units: config.units, activation: config.activation};
-        if (config.inputShape)
-            conf.inputShape = config.inputShape;
+    addLayer(type: LayerType, config: LayerConfig) {
+        if(this.model instanceof tflayers.Sequential) {
+            let conf: ToTfLayerConfig = DEFAULT_LAYER_CONFIG;
+            if (config.inputShape)
+                conf.inputShape = config.inputShape;
 
-        this.model.add(layer(<any>conf))
+            switch (type) {
+                case LayerType.DENSE:
+                    conf.units = config.units;
+                    conf.activation = config.activation;
+                    this.model.add(tflayers.layers.dense(<any>conf));
+                    break;
+                case LayerType.CONV2D:
+                    conf.filters = config.units;
+                    conf.activation = config.activation;
+                    conf.useBias = config.useBias;
+                    this.model.add(tflayers.layers.conv2d(<any>conf));
+                    break;
+                case LayerType.FLATTEN:
+                    conf = {};
+                    this.model.add(tflayers.layers.flatten(<any> conf));
+                    break;
+            }
+        } else {
+            throw new Error("Unable to add a layer to an already created model managed by tensorflowjs");
+        }
     }
 
     /**
@@ -80,12 +100,12 @@ export class Model {
      * @param {ModelCompileConfig} config
      * @returns {Model}
      */
-    compile(config: ModelCompileConfig): Model {
+    compile(config: tflayers.ModelCompileConfig): Model {
         this.model.compile(config);
         return this;
     }
 
-    predict(x: Tensor, config?: ModelPredictConfig): Result {
+    predict(x: Tensor, config?: tflayers.ModelPredictConfig): Result {
         return new Result(<Tensor> this.model.predict(x, config));
     }
 
@@ -95,11 +115,22 @@ export class Model {
 
     randomOutput(): number {
         // TODO create a distribution of all taken actions, in order later to choose in what way we want the random to behave
-        return tidy(() => random(0, (<SymbolicTensor>this.model.getOutputAt(0)).shape[1] - 1));
+        return random(0, this.OutputSize);
     }
 
     get OutputSize(): number {
-        return tidy(() => (<SymbolicTensor>this.model.getOutputAt(0)).shape[1]);
+        return (<tflayers.SymbolicTensor>this.model.getOutputAt(0)).shape[1];
+    }
+
+    get InputSize(): number {
+        return this.model.layers[0].batchInputShape[1];
+    }
+
+    static FromNetwork(network: NeuralNetwork, fitconfig?: tflayers.ModelFitConfig): Model {
+        return new Model({
+            layers: network.createLayers()
+        }, fitconfig);
+
     }
 }
 

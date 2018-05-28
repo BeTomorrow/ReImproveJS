@@ -161,6 +161,11 @@ export class Teacher {
         };
     }
 
+    resetLesson() {
+        this.currentLessonLength = 0;
+        this.state = TeachingState.EXPERIENCING;
+    }
+
     reset() {
         this.lessonsTaught = 0;
         this.currentLessonLength = 0;
