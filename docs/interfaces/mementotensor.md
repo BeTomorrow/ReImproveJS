@@ -23,7 +23,7 @@
 
 **● references**: *`number`*
 
-*Defined in [reimprove/memory.ts:17](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L17)*
+*Defined in [reimprove/memory.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L17)*
 
 ___
 <a id="tensor"></a>
@@ -32,7 +32,7 @@ ___
 
 **● tensor**: *`Tensor`*
 
-*Defined in [reimprove/memory.ts:16](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L16)*
+*Defined in [reimprove/memory.ts:16](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L16)*
 
 ___
 

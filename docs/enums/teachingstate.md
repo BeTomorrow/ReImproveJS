@@ -22,7 +22,7 @@
 
 **EXPERIENCING**:  = 0
 
-*Defined in [reimprove/teacher.ts:25](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L25)*
+*Defined in [reimprove/teacher.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L25)*
 
 ___
 <a id="learning"></a>
@@ -31,7 +31,7 @@ ___
 
 **LEARNING**:  = 1
 
-*Defined in [reimprove/teacher.ts:26](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L26)*
+*Defined in [reimprove/teacher.ts:26](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L26)*
 
 ___
 <a id="none"></a>
@@ -40,7 +40,7 @@ ___
 
 **NONE**:  =  -1
 
-*Defined in [reimprove/teacher.ts:28](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L28)*
+*Defined in [reimprove/teacher.ts:28](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L28)*
 
 ___
 <a id="stopped"></a>
@@ -49,7 +49,7 @@ ___
 
 **STOPPED**:  =  -2
 
-*Defined in [reimprove/teacher.ts:29](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L29)*
+*Defined in [reimprove/teacher.ts:29](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L29)*
 
 ___
 <a id="testing"></a>
@@ -58,7 +58,7 @@ ___
 
 **TESTING**:  = 2
 
-*Defined in [reimprove/teacher.ts:27](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L27)*
+*Defined in [reimprove/teacher.ts:27](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L27)*
 
 ___
 

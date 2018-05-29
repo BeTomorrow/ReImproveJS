@@ -14,8 +14,8 @@ Simplified layer configuration where you only give your layer, your activation f
 
 * [activation](layerconfig.md#activation)
 * [inputShape](layerconfig.md#inputshape)
-* [layerType](layerconfig.md#layertype)
 * [units](layerconfig.md#units)
+* [useBias](layerconfig.md#usebias)
 
 ---
 
@@ -27,7 +27,7 @@ Simplified layer configuration where you only give your layer, your activation f
 
 **● activation**: *`string`*
 
-*Defined in [reimprove/model.ts:33](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L33)*
+*Defined in [reimprove/model.ts:27](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L27)*
 
 The activation function ('relu', 'sigmoid', ...)
 
@@ -38,20 +38,9 @@ ___
 
 **● inputShape**: *`Array`<`number`>*
 
-*Defined in [reimprove/model.ts:31](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L31)*
+*Defined in [reimprove/model.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L25)*
 
 If it is an input layer, the size of the input
-
-___
-<a id="layertype"></a>
-
-###  layerType
-
-**● layerType**: *[LayerType](../enums/layertype.md)*
-
-*Defined in [reimprove/model.ts:27](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L27)*
-
-The type of the layer, refer to [LayerType](../enums/layertype.md)
 
 ___
 <a id="units"></a>
@@ -60,9 +49,18 @@ ___
 
 **● units**: *`number`*
 
-*Defined in [reimprove/model.ts:29](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L29)*
+*Defined in [reimprove/model.ts:23](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L23)*
 
 Number of neurons of this layer
+
+___
+<a id="usebias"></a>
+
+### `<Optional>` useBias
+
+**● useBias**: *`boolean`*
+
+*Defined in [reimprove/model.ts:28](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L28)*
 
 ___
 

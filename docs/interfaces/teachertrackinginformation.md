@@ -28,7 +28,7 @@
 
 **● currentLessonLength**: *`number`*
 
-*Defined in [reimprove/teacher.ts:36](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L36)*
+*Defined in [reimprove/teacher.ts:36](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L36)*
 
 ___
 <a id="epsilon"></a>
@@ -37,7 +37,7 @@ ___
 
 **● epsilon**: *`number`*
 
-*Defined in [reimprove/teacher.ts:35](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L35)*
+*Defined in [reimprove/teacher.ts:35](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L35)*
 
 ___
 <a id="gamma"></a>
@@ -46,7 +46,7 @@ ___
 
 **● gamma**: *`number`*
 
-*Defined in [reimprove/teacher.ts:34](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L34)*
+*Defined in [reimprove/teacher.ts:34](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L34)*
 
 ___
 <a id="lessonnumber"></a>
@@ -55,7 +55,7 @@ ___
 
 **● lessonNumber**: *`number`*
 
-*Defined in [reimprove/teacher.ts:37](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L37)*
+*Defined in [reimprove/teacher.ts:37](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L37)*
 
 ___
 <a id="maxlessons"></a>
@@ -64,7 +64,7 @@ ___
 
 **● maxLessons**: *`number`*
 
-*Defined in [reimprove/teacher.ts:38](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L38)*
+*Defined in [reimprove/teacher.ts:38](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L38)*
 
 ___
 <a id="name"></a>
@@ -73,7 +73,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [reimprove/teacher.ts:33](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L33)*
+*Defined in [reimprove/teacher.ts:33](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L33)*
 
 ___
 <a id="students"></a>
@@ -82,7 +82,7 @@ ___
 
 **● students**: *[AgentTrackingInformation](agenttrackinginformation.md)[]*
 
-*Defined in [reimprove/teacher.ts:39](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L39)*
+*Defined in [reimprove/teacher.ts:39](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L39)*
 
 ___
 

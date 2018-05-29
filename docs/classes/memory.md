@@ -41,7 +41,7 @@
 
 ⊕ **new Memory**(config: *[MemoryConfig](../interfaces/memoryconfig.md)*): [Memory](memory.md)
 
-*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L24)*
+*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L24)*
 
 **Parameters:**
 
@@ -61,7 +61,7 @@ ___
 
 **● config**: *[MemoryConfig](../interfaces/memoryconfig.md)*
 
-*Defined in [reimprove/memory.ts:21](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L21)*
+*Defined in [reimprove/memory.ts:21](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L21)*
 
 ___
 <a id="currentsize"></a>
@@ -70,7 +70,7 @@ ___
 
 **● currentSize**: *`number`*
 
-*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L24)*
+*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L24)*
 
 ___
 <a id="memory-1"></a>
@@ -79,7 +79,7 @@ ___
 
 **● memory**: *`Array`<[Memento](../interfaces/memento.md)>*
 
-*Defined in [reimprove/memory.ts:23](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L23)*
+*Defined in [reimprove/memory.ts:23](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L23)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 getCurrentSize(): `number`
 
-*Defined in [reimprove/memory.ts:54](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L54)*
+*Defined in [reimprove/memory.ts:54](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L54)*
 
 **Returns:** `number`
 
@@ -102,7 +102,7 @@ ___
 
 getSize(): `number`
 
-*Defined in [reimprove/memory.ts:58](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L58)*
+*Defined in [reimprove/memory.ts:58](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L58)*
 
 **Returns:** `number`
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **merge**(other: *[Memory](memory.md)*): `void`
 
-*Defined in [reimprove/memory.ts:80](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L80)*
+*Defined in [reimprove/memory.ts:80](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L80)*
 
 **Parameters:**
 
@@ -133,7 +133,7 @@ ___
 
 ▸ **remember**(memento: *[Memento](../interfaces/memento.md)*, replaceIfFull?: *`boolean`*): `void`
 
-*Defined in [reimprove/memory.ts:33](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L33)*
+*Defined in [reimprove/memory.ts:33](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L33)*
 
 **Parameters:**
 
@@ -151,7 +151,7 @@ ___
 
 ▸ **reset**(): `void`
 
-*Defined in [reimprove/memory.ts:71](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L71)*
+*Defined in [reimprove/memory.ts:71](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L71)*
 
 **Returns:** `void`
 
@@ -162,7 +162,7 @@ ___
 
 ▸ **sample**(batchSize: *`number`*, unique?: *`boolean`*): [Memento](../interfaces/memento.md)[]
 
-*Defined in [reimprove/memory.ts:46](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L46)*
+*Defined in [reimprove/memory.ts:46](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L46)*
 
 **Parameters:**
 
@@ -180,7 +180,7 @@ ___
 
 ▸ **freeMemento**(memento: *[Memento](../interfaces/memento.md)*): `void`
 
-*Defined in [reimprove/memory.ts:62](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/memory.ts#L62)*
+*Defined in [reimprove/memory.ts:62](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L62)*
 
 **Parameters:**
 

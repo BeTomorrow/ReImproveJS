@@ -57,7 +57,7 @@
 
 ⊕ **new Agent**(model: *[Model](model.md)*, agentConfig?: *[AgentConfig](../interfaces/agentconfig.md)*, name?: *`string`*): [Agent](agent.md)
 
-*Defined in [reimprove/agent.ts:44](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L44)*
+*Defined in [reimprove/agent.ts:44](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L44)*
 
 **Parameters:**
 
@@ -79,7 +79,7 @@ ___
 
 **● actionsBuffer**: *`Array`<`number`>*
 
-*Defined in [reimprove/agent.ts:33](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L33)*
+*Defined in [reimprove/agent.ts:33](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L33)*
 
 ___
 <a id="agentconfig"></a>
@@ -88,7 +88,7 @@ ___
 
 **● agentConfig**: *[AgentConfig](../interfaces/agentconfig.md)*
 
-*Defined in [reimprove/agent.ts:42](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L42)*
+*Defined in [reimprove/agent.ts:42](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L42)*
 
 ___
 <a id="currentreward"></a>
@@ -97,7 +97,7 @@ ___
 
 **● currentReward**: *`number`*
 
-*Defined in [reimprove/agent.ts:31](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L31)*
+*Defined in [reimprove/agent.ts:31](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L31)*
 
 ___
 <a id="done"></a>
@@ -106,7 +106,7 @@ ___
 
 **● done**: *`boolean`*
 
-*Defined in [reimprove/agent.ts:30](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L30)*
+*Defined in [reimprove/agent.ts:30](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L30)*
 
 ___
 <a id="forwardpasses"></a>
@@ -115,7 +115,7 @@ ___
 
 **● forwardPasses**: *`number`*
 
-*Defined in [reimprove/agent.ts:44](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L44)*
+*Defined in [reimprove/agent.ts:44](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L44)*
 
 ___
 <a id="inputsbuffer"></a>
@@ -124,7 +124,7 @@ ___
 
 **● inputsBuffer**: *`Array`<[MementoTensor](../interfaces/mementotensor.md)>*
 
-*Defined in [reimprove/agent.ts:35](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L35)*
+*Defined in [reimprove/agent.ts:35](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L35)*
 
 ___
 <a id="losseshistory"></a>
@@ -133,7 +133,7 @@ ___
 
 **● lossesHistory**: *[TypedWindow](typedwindow.md)<`number`>*
 
-*Defined in [reimprove/agent.ts:37](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L37)*
+*Defined in [reimprove/agent.ts:37](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L37)*
 
 ___
 <a id="memory"></a>
@@ -142,7 +142,7 @@ ___
 
 **● memory**: *[Memory](memory.md)*
 
-*Defined in [reimprove/agent.ts:41](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L41)*
+*Defined in [reimprove/agent.ts:41](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L41)*
 
 ___
 <a id="model"></a>
@@ -151,7 +151,7 @@ ___
 
 **● model**: *[Model](model.md)*
 
-*Defined in [reimprove/agent.ts:47](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L47)*
+*Defined in [reimprove/agent.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L47)*
 
 ___
 <a id="name"></a>
@@ -160,7 +160,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [reimprove/agent.ts:47](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L47)*
+*Defined in [reimprove/agent.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L47)*
 
 ___
 <a id="netinputwindowsize"></a>
@@ -169,7 +169,7 @@ ___
 
 **● netInputWindowSize**: *`number`*
 
-*Defined in [reimprove/agent.ts:39](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L39)*
+*Defined in [reimprove/agent.ts:39](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L39)*
 
 ___
 <a id="rewardshistory"></a>
@@ -178,7 +178,7 @@ ___
 
 **● rewardsHistory**: *[TypedWindow](typedwindow.md)<`number`>*
 
-*Defined in [reimprove/agent.ts:38](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L38)*
+*Defined in [reimprove/agent.ts:38](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L38)*
 
 ___
 <a id="statesbuffer"></a>
@@ -187,7 +187,7 @@ ___
 
 **● statesBuffer**: *`Array`<`Tensor`>*
 
-*Defined in [reimprove/agent.ts:34](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L34)*
+*Defined in [reimprove/agent.ts:34](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L34)*
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 getConfig(): [AgentConfig](../interfaces/agentconfig.md)
 
-*Defined in [reimprove/agent.ts:209](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L209)*
+*Defined in [reimprove/agent.ts:209](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L209)*
 
 **Returns:** [AgentConfig](../interfaces/agentconfig.md)
 
@@ -210,11 +210,11 @@ ___
 
 getName(): `string`setName(name: *`string`*): `void`
 
-*Defined in [reimprove/agent.ts:217](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L217)*
+*Defined in [reimprove/agent.ts:217](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L217)*
 
 **Returns:** `string`
 
-*Defined in [reimprove/agent.ts:213](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L213)*
+*Defined in [reimprove/agent.ts:213](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L213)*
 
 **Parameters:**
 
@@ -234,7 +234,7 @@ ___
 
 ▸ **addReward**(value: *`number`*): `void`
 
-*Defined in [reimprove/agent.ts:194](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L194)*
+*Defined in [reimprove/agent.ts:194](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L194)*
 
 **Parameters:**
 
@@ -251,7 +251,7 @@ ___
 
 ▸ **createNeuralNetInput**(input: *`Tensor`*): `Tensor`
 
-*Defined in [reimprove/agent.ts:65](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L65)*
+*Defined in [reimprove/agent.ts:65](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L65)*
 
 **Parameters:**
 
@@ -268,7 +268,7 @@ ___
 
 ▸ **createTrainingDataFromMemento**(memento: *[Memento](../interfaces/memento.md)*, gamma: *`number`*): `object`
 
-*Defined in [reimprove/agent.ts:145](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L145)*
+*Defined in [reimprove/agent.ts:145](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L145)*
 
 **Parameters:**
 
@@ -286,7 +286,7 @@ ___
 
 ▸ **forward**(input: *`number`[]*, epsilon: *`number`*, keepTensors?: *`boolean`*): `number`
 
-*Defined in [reimprove/agent.ts:90](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L90)*
+*Defined in [reimprove/agent.ts:90](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L90)*
 
 **Parameters:**
 
@@ -305,7 +305,7 @@ ___
 
 ▸ **getTrackingInformation**(): [AgentTrackingInformation](../interfaces/agenttrackinginformation.md)
 
-*Defined in [reimprove/agent.ts:221](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L221)*
+*Defined in [reimprove/agent.ts:221](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L221)*
 
 **Returns:** [AgentTrackingInformation](../interfaces/agenttrackinginformation.md)
 
@@ -316,7 +316,7 @@ ___
 
 ▸ **learn**(gamma: *`number`*): `Promise`<`void`>
 
-*Defined in [reimprove/agent.ts:167](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L167)*
+*Defined in [reimprove/agent.ts:167](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L167)*
 
 **Parameters:**
 
@@ -333,7 +333,7 @@ ___
 
 ▸ **listen**(input: *`number`[]*, epsilon: *`number`*): `number`
 
-*Defined in [reimprove/agent.ts:158](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L158)*
+*Defined in [reimprove/agent.ts:158](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L158)*
 
 **Parameters:**
 
@@ -351,7 +351,7 @@ ___
 
 ▸ **memorize**(): `void`
 
-*Defined in [reimprove/agent.ts:130](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L130)*
+*Defined in [reimprove/agent.ts:130](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L130)*
 
 **Returns:** `void`
 
@@ -362,7 +362,7 @@ ___
 
 ▸ **policy**(input: *`Tensor`*): `number`
 
-*Defined in [reimprove/agent.ts:86](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L86)*
+*Defined in [reimprove/agent.ts:86](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L86)*
 
 **Parameters:**
 
@@ -379,7 +379,7 @@ ___
 
 ▸ **reset**(): `void`
 
-*Defined in [reimprove/agent.ts:202](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L202)*
+*Defined in [reimprove/agent.ts:202](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L202)*
 
 **Returns:** `void`
 
@@ -390,7 +390,7 @@ ___
 
 ▸ **setReward**(value: *`number`*): `void`
 
-*Defined in [reimprove/agent.ts:198](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L198)*
+*Defined in [reimprove/agent.ts:198](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L198)*
 
 **Parameters:**
 

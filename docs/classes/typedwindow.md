@@ -40,7 +40,7 @@
 
 ⊕ **new TypedWindow**(size: *`number`*, minSize: *`number`*, nullValue: *`T`*): [TypedWindow](typedwindow.md)
 
-*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L4)*
+*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L4)*
 
 **Parameters:**
 
@@ -62,7 +62,7 @@ ___
 
 **● minSize**: *`number`*
 
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L6)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
 
 ___
 <a id="nullvalue"></a>
@@ -71,7 +71,7 @@ ___
 
 **● nullValue**: *`T`*
 
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L6)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
 
 ___
 <a id="size"></a>
@@ -80,7 +80,7 @@ ___
 
 **● size**: *`number`*
 
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L6)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
 
 ___
 <a id="window"></a>
@@ -89,7 +89,7 @@ ___
 
 **● window**: *`Array`<`T`>*
 
-*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L4)*
+*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L4)*
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 getWindow(): `T`[]
 
-*Defined in [reimprove/misc/typed_window.ts:25](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L25)*
+*Defined in [reimprove/misc/typed_window.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L25)*
 
 **Returns:** `T`[]
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **add**(value: *`T`*): `void`
 
-*Defined in [reimprove/misc/typed_window.ts:10](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L10)*
+*Defined in [reimprove/misc/typed_window.ts:10](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L10)*
 
 **Parameters:**
 
@@ -132,7 +132,7 @@ ___
 
 ▸ **mean**(): `number`
 
-*Defined in [reimprove/misc/typed_window.ts:17](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/misc/typed_window.ts#L17)*
+*Defined in [reimprove/misc/typed_window.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L17)*
 
 **Returns:** `number`
 

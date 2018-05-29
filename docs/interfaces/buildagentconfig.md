@@ -25,7 +25,7 @@ Configuration to build an agent
 
 **● agentConfig**: *[AgentConfig](agentconfig.md)*
 
-*Defined in [reimprove/academy.ts:39](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L39)*
+*Defined in [reimprove/academy.ts:39](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L39)*
 
 The agent configuration, defaulted if not present
 
@@ -36,7 +36,7 @@ ___
 
 **● model**: *[Model](../classes/model.md)*
 
-*Defined in [reimprove/academy.ts:37](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L37)*
+*Defined in [reimprove/academy.ts:37](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L37)*
 
 The agent cannot have no model. But multiple agents can share the same one
 

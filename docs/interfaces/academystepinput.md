@@ -25,7 +25,7 @@ Input to give at each step of the Academy, where you specify the target teacher 
 
 **● agentsInput**: *`number`[]*
 
-*Defined in [reimprove/academy.ts:31](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L31)*
+*Defined in [reimprove/academy.ts:31](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L31)*
 
 ___
 <a id="teachername"></a>
@@ -34,7 +34,7 @@ ___
 
 **● teacherName**: *`string`*
 
-*Defined in [reimprove/academy.ts:30](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L30)*
+*Defined in [reimprove/academy.ts:30](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L30)*
 
 ___
 

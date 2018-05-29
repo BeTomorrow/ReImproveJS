@@ -39,6 +39,7 @@
 * [getData](teacher.md#getdata)
 * [removeStudent](teacher.md#removestudent)
 * [reset](teacher.md#reset)
+* [resetLesson](teacher.md#resetlesson)
 * [start](teacher.md#start)
 * [stop](teacher.md#stop)
 * [teach](teacher.md#teach)
@@ -54,7 +55,7 @@
 
 ⊕ **new Teacher**(config?: *[TeachingConfig](../interfaces/teachingconfig.md)*, name?: *`string`*): [Teacher](teacher.md)
 
-*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L57)*
+*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L57)*
 
 **Parameters:**
 
@@ -75,7 +76,7 @@ ___
 
 **● agents**: *`Set`<[Agent](agent.md)>*
 
-*Defined in [reimprove/teacher.ts:48](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L48)*
+*Defined in [reimprove/teacher.ts:48](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L48)*
 
 ___
 <a id="config"></a>
@@ -84,7 +85,7 @@ ___
 
 **● config**: *[TeachingConfig](../interfaces/teachingconfig.md)*
 
-*Defined in [reimprove/teacher.ts:45](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L45)*
+*Defined in [reimprove/teacher.ts:45](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L45)*
 
 ___
 <a id="currentepsilon"></a>
@@ -93,7 +94,7 @@ ___
 
 **● currentEpsilon**: *`number`*
 
-*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L57)*
+*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L57)*
 
 ___
 <a id="currentlessonlength"></a>
@@ -102,7 +103,7 @@ ___
 
 **● currentLessonLength**: *`number`*
 
-*Defined in [reimprove/teacher.ts:50](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L50)*
+*Defined in [reimprove/teacher.ts:50](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L50)*
 
 ___
 <a id="lessonstaught"></a>
@@ -111,7 +112,7 @@ ___
 
 **● lessonsTaught**: *`number`*
 
-*Defined in [reimprove/teacher.ts:51](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L51)*
+*Defined in [reimprove/teacher.ts:51](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L51)*
 
 ___
 <a id="name"></a>
@@ -120,7 +121,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [reimprove/teacher.ts:44](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L44)*
+*Defined in [reimprove/teacher.ts:44](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L44)*
 
 ___
 <a id="onlearninglessonended"></a>
@@ -129,7 +130,7 @@ ___
 
 **● onLearningLessonEnded**: *`function`*
 
-*Defined in [reimprove/teacher.ts:53](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L53)*
+*Defined in [reimprove/teacher.ts:53](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L53)*
 
 #### Type declaration
 ▸(teacher: *`string`*): `void`
@@ -149,7 +150,7 @@ ___
 
 **● onLessonEnded**: *`function`*
 
-*Defined in [reimprove/teacher.ts:54](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L54)*
+*Defined in [reimprove/teacher.ts:54](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L54)*
 
 #### Type declaration
 ▸(teacher: *`string`*, lessonNumber: *`number`*): `void`
@@ -170,7 +171,7 @@ ___
 
 **● onTeachingEnded**: *`function`*
 
-*Defined in [reimprove/teacher.ts:55](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L55)*
+*Defined in [reimprove/teacher.ts:55](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L55)*
 
 #### Type declaration
 ▸(teacher: *`string`*): `void`
@@ -190,7 +191,7 @@ ___
 
 **● state**: *[TeachingState](../enums/teachingstate.md)*
 
-*Defined in [reimprove/teacher.ts:46](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L46)*
+*Defined in [reimprove/teacher.ts:46](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L46)*
 
 ___
 
@@ -202,11 +203,11 @@ ___
 
 getName(): `string`setName(name: *`string`*): `void`
 
-*Defined in [reimprove/teacher.ts:190](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L190)*
+*Defined in [reimprove/teacher.ts:195](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L195)*
 
 **Returns:** `string`
 
-*Defined in [reimprove/teacher.ts:186](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L186)*
+*Defined in [reimprove/teacher.ts:191](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L191)*
 
 **Parameters:**
 
@@ -223,7 +224,7 @@ ___
 
 setOnLearningLessonEnded(callback: *`function`*): `void`
 
-*Defined in [reimprove/teacher.ts:174](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L174)*
+*Defined in [reimprove/teacher.ts:179](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L179)*
 
 **Parameters:**
 
@@ -240,7 +241,7 @@ ___
 
 setOnLessonEnded(callback: *`function`*): `void`
 
-*Defined in [reimprove/teacher.ts:178](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L178)*
+*Defined in [reimprove/teacher.ts:183](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L183)*
 
 **Parameters:**
 
@@ -257,7 +258,7 @@ ___
 
 setOnTeachingEnded(callback: *`function`*): `void`
 
-*Defined in [reimprove/teacher.ts:182](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L182)*
+*Defined in [reimprove/teacher.ts:187](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L187)*
 
 **Parameters:**
 
@@ -274,7 +275,7 @@ ___
 
 getState(): [TeachingState](../enums/teachingstate.md)
 
-*Defined in [reimprove/teacher.ts:194](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L194)*
+*Defined in [reimprove/teacher.ts:199](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L199)*
 
 **Returns:** [TeachingState](../enums/teachingstate.md)
 
@@ -288,7 +289,7 @@ ___
 
 ▸ **affectStudent**(agent: *[Agent](agent.md)*): `void`
 
-*Defined in [reimprove/teacher.ts:73](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L73)*
+*Defined in [reimprove/teacher.ts:73](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L73)*
 
 **Parameters:**
 
@@ -305,7 +306,7 @@ ___
 
 ▸ **getData**(): [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
 
-*Defined in [reimprove/teacher.ts:150](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L150)*
+*Defined in [reimprove/teacher.ts:150](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L150)*
 
 **Returns:** [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
 
@@ -316,7 +317,7 @@ ___
 
 ▸ **removeStudent**(agent: *[Agent](agent.md)*): `boolean`
 
-*Defined in [reimprove/teacher.ts:77](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L77)*
+*Defined in [reimprove/teacher.ts:77](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L77)*
 
 **Parameters:**
 
@@ -333,7 +334,18 @@ ___
 
 ▸ **reset**(): `void`
 
-*Defined in [reimprove/teacher.ts:164](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L164)*
+*Defined in [reimprove/teacher.ts:169](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L169)*
+
+**Returns:** `void`
+
+___
+<a id="resetlesson"></a>
+
+###  resetLesson
+
+▸ **resetLesson**(): `void`
+
+*Defined in [reimprove/teacher.ts:164](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L164)*
 
 **Returns:** `void`
 
@@ -344,7 +356,7 @@ ___
 
 ▸ **start**(): `void`
 
-*Defined in [reimprove/teacher.ts:81](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L81)*
+*Defined in [reimprove/teacher.ts:81](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L81)*
 
 **Returns:** `void`
 
@@ -355,7 +367,7 @@ ___
 
 ▸ **stop**(): `void`
 
-*Defined in [reimprove/teacher.ts:170](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L170)*
+*Defined in [reimprove/teacher.ts:175](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L175)*
 
 **Returns:** `void`
 
@@ -366,7 +378,7 @@ ___
 
 ▸ **teach**(inputs: *`number`[]*): `Promise`<`Map`<`string`, `number`>>
 
-*Defined in [reimprove/teacher.ts:87](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L87)*
+*Defined in [reimprove/teacher.ts:87](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L87)*
 
 **Parameters:**
 
@@ -383,7 +395,7 @@ ___
 
 ▸ **updateParameters**(): `void`
 
-*Defined in [reimprove/teacher.ts:141](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/teacher.ts#L141)*
+*Defined in [reimprove/teacher.ts:141](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L141)*
 
 **Returns:** `void`
 

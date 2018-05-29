@@ -35,7 +35,7 @@ Just a little wrapper around the result of a request to TensorflowJS. Because ev
 
 ⊕ **new Result**(result: *`Tensor`*): [Result](result.md)
 
-*Defined in [reimprove/model.ts:111](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L111)*
+*Defined in [reimprove/model.ts:154](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L154)*
 
 **Parameters:**
 
@@ -55,7 +55,7 @@ ___
 
 **● result**: *`Tensor`*
 
-*Defined in [reimprove/model.ts:113](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L113)*
+*Defined in [reimprove/model.ts:156](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L156)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 ▸ **getAction**(): `number`
 
-*Defined in [reimprove/model.ts:133](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L133)*
+*Defined in [reimprove/model.ts:176](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L176)*
 
 Returns the index of the highest value of an 1D tensor
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **getHighestValue**(): `number`
 
-*Defined in [reimprove/model.ts:125](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L125)*
+*Defined in [reimprove/model.ts:168](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L168)*
 
 Returns the highest value of an 1D tensor
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **getResultAndDispose**(t: *`Tensor`*):  `Float32Array` &#124; `Int32Array` &#124; `Uint8Array`
 
-*Defined in [reimprove/model.ts:116](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L116)*
+*Defined in [reimprove/model.ts:159](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L159)*
 
 **Parameters:**
 
@@ -110,7 +110,7 @@ ___
 
 ▸ **getValue**():  `Int32Array` &#124; `Float32Array` &#124; `Uint8Array`
 
-*Defined in [reimprove/model.ts:141](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/model.ts#L141)*
+*Defined in [reimprove/model.ts:184](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L184)*
 
 Returns an array reflecting the initial result tensor
 

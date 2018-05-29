@@ -28,7 +28,7 @@ element
 
 **● agentsLogs**: *`boolean`*
 
-*Defined in [reimprove/academy.ts:21](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L21)*
+*Defined in [reimprove/academy.ts:21](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L21)*
 
 If agents logs should be displayed, default to `false`
 
@@ -39,7 +39,7 @@ ___
 
 **● memoryLogs**: *`boolean`*
 
-*Defined in [reimprove/academy.ts:23](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L23)*
+*Defined in [reimprove/academy.ts:23](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L23)*
 
 If memory logs should be displayed, default to `false`
 
@@ -50,7 +50,7 @@ ___
 
 **● parentLogsElement**: *`HTMLElement`*
 
-*Defined in [reimprove/academy.ts:19](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L19)*
+*Defined in [reimprove/academy.ts:19](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L19)*
 
 Parent
 

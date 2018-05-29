@@ -24,7 +24,7 @@
 
 **● averageLoss**: *`number`*
 
-*Defined in [reimprove/agent.ts:24](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L24)*
+*Defined in [reimprove/agent.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L24)*
 
 ___
 <a id="averagereward"></a>
@@ -33,7 +33,7 @@ ___
 
 **● averageReward**: *`number`*
 
-*Defined in [reimprove/agent.ts:25](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L25)*
+*Defined in [reimprove/agent.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L25)*
 
 ___
 <a id="name"></a>
@@ -42,7 +42,7 @@ ___
 
 **● name**: *`string`*
 
-*Defined in [reimprove/agent.ts:26](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L26)*
+*Defined in [reimprove/agent.ts:26](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L26)*
 
 ___
 

@@ -38,6 +38,7 @@ Class to interact with when creating the environment and updating it.
 * [createLogger](academy.md#createlogger)
 * [getTeacherData](academy.md#getteacherdata)
 * [reset](academy.md#reset)
+* [resetTeacherLesson](academy.md#resetteacherlesson)
 * [resetTeachersAndAgents](academy.md#resetteachersandagents)
 * [setRewardOfAgent](academy.md#setrewardofagent)
 * [step](academy.md#step)
@@ -53,7 +54,7 @@ Class to interact with when creating the environment and updating it.
 
 ⊕ **new Academy**(config?: *[AcademyConfig](../interfaces/academyconfig.md)*): [Academy](academy.md)
 
-*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L52)*
+*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L52)*
 
 **Parameters:**
 
@@ -73,7 +74,7 @@ ___
 
 **● agents**: *`Map`<`string`, [Agent](agent.md)>*
 
-*Defined in [reimprove/academy.ts:47](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L47)*
+*Defined in [reimprove/academy.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L47)*
 
 ___
 <a id="assigments"></a>
@@ -82,7 +83,7 @@ ___
 
 **● assigments**: *`Map`<`string`, `string`>*
 
-*Defined in [reimprove/academy.ts:49](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L49)*
+*Defined in [reimprove/academy.ts:49](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L49)*
 
 ___
 <a id="config"></a>
@@ -91,7 +92,7 @@ ___
 
 **● config**: *[AcademyConfig](../interfaces/academyconfig.md)*
 
-*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L52)*
+*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L52)*
 
 ___
 <a id="logger"></a>
@@ -100,7 +101,7 @@ ___
 
 **● logger**: *[LearningDataLogger](learningdatalogger.md)*
 
-*Defined in [reimprove/academy.ts:51](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L51)*
+*Defined in [reimprove/academy.ts:51](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L51)*
 
 ___
 <a id="teachers"></a>
@@ -109,7 +110,7 @@ ___
 
 **● teachers**: *`Map`<`string`, [Teacher](teacher.md)>*
 
-*Defined in [reimprove/academy.ts:48](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L48)*
+*Defined in [reimprove/academy.ts:48](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L48)*
 
 ___
 
@@ -121,7 +122,7 @@ ___
 
 getTeachers(): `string`[]
 
-*Defined in [reimprove/academy.ts:200](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L200)*
+*Defined in [reimprove/academy.ts:208](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L208)*
 
 Gives the list of teachers
 *__constructor__*: 
@@ -138,7 +139,7 @@ ___
 
 ▸ **OnLearningLessonEnded**(teacherName: *`string`*, callback: *`function`*): `void`
 
-*Defined in [reimprove/academy.ts:151](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L151)*
+*Defined in [reimprove/academy.ts:151](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L151)*
 
 Callback which will be called each time the model's fit ends after the end of the lesson.
 *__constructor__*: 
@@ -159,7 +160,7 @@ ___
 
 ▸ **OnLessonEnded**(teacherName: *`string`*, callback: *`function`*): `void`
 
-*Defined in [reimprove/academy.ts:162](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L162)*
+*Defined in [reimprove/academy.ts:162](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L162)*
 
 Callback called when a lesson is ended
 *__constructor__*: 
@@ -180,7 +181,7 @@ ___
 
 ▸ **OnTeachingEnded**(teacherName: *`string`*, callback: *`function`*): `void`
 
-*Defined in [reimprove/academy.ts:173](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L173)*
+*Defined in [reimprove/academy.ts:173](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L173)*
 
 Callback called when a lesson is ended
 *__constructor__*: 
@@ -201,7 +202,7 @@ ___
 
 ▸ **addAgent**(config: *[BuildAgentConfig](../interfaces/buildagentconfig.md)*, name?: *`string`*): `string`
 
-*Defined in [reimprove/academy.ts:65](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L65)*
+*Defined in [reimprove/academy.ts:65](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L65)*
 
 **Parameters:**
 
@@ -219,7 +220,7 @@ ___
 
 ▸ **addRewardToAgent**(name: *`string`*, reward: *`number`*): `void`
 
-*Defined in [reimprove/academy.ts:130](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L130)*
+*Defined in [reimprove/academy.ts:130](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L130)*
 
 Add a reward to an agent, given its name. Be careful to give a reward normalized between -1.0 and 1.0 for an optimal learn.
 
@@ -239,7 +240,7 @@ ___
 
 ▸ **addTeacher**(config?: *[TeachingConfig](../interfaces/teachingconfig.md)*, name?: *`string`*): `string`
 
-*Defined in [reimprove/academy.ts:75](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L75)*
+*Defined in [reimprove/academy.ts:75](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L75)*
 
 **Parameters:**
 
@@ -257,7 +258,7 @@ ___
 
 ▸ **assignTeacherToAgent**(agentName: *`string`*, teacherName: *`string`*): `void`
 
-*Defined in [reimprove/academy.ts:85](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L85)*
+*Defined in [reimprove/academy.ts:85](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L85)*
 
 **Parameters:**
 
@@ -275,7 +276,7 @@ ___
 
 ▸ **createLogger**(parent: *`HTMLElement`*): `void`
 
-*Defined in [reimprove/academy.ts:217](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L217)*
+*Defined in [reimprove/academy.ts:225](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L225)*
 
 If not given in the configuration options in the constructor, you can choose to create the logger here
 
@@ -294,7 +295,7 @@ ___
 
 ▸ **getTeacherData**(name: *`string`*): [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
 
-*Defined in [reimprove/academy.ts:209](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L209)*
+*Defined in [reimprove/academy.ts:217](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L217)*
 
 Used for logs, returning the tracking informations of a teacher, see [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
 
@@ -313,9 +314,28 @@ ___
 
 ▸ **reset**(): `void`
 
-*Defined in [reimprove/academy.ts:189](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L189)*
+*Defined in [reimprove/academy.ts:189](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L189)*
 
 Function resetting everything in the academy, calling first [resetTeachersAndAgents](academy.md#resetteachersandagents), then cleaning everything concerning teachers and agents.
+
+**Returns:** `void`
+
+___
+<a id="resetteacherlesson"></a>
+
+###  resetTeacherLesson
+
+▸ **resetTeacherLesson**(teacherName: *`string`*): `void`
+
+*Defined in [reimprove/academy.ts:199](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L199)*
+
+Resets to 0 the current state of the lesson. It cannot forget
+
+**Parameters:**
+
+| Param | Type | Description |
+| ------ | ------ | ------ |
+| teacherName | `string` |   |
 
 **Returns:** `void`
 
@@ -326,7 +346,7 @@ ___
 
 ▸ **resetTeachersAndAgents**(): `void`
 
-*Defined in [reimprove/academy.ts:181](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L181)*
+*Defined in [reimprove/academy.ts:181](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L181)*
 
 Function to reset everything from teachers and agents (resetting parameters of teachers, and resetting memory and parameters of agents).
 
@@ -339,7 +359,7 @@ ___
 
 ▸ **setRewardOfAgent**(name: *`string`*, reward: *`number`*): `void`
 
-*Defined in [reimprove/academy.ts:140](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L140)*
+*Defined in [reimprove/academy.ts:140](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L140)*
 
 In case where you just want to clearly set the agent's current reward for this step.
 
@@ -359,7 +379,7 @@ ___
 
 ▸ **step**(inputs: * [AcademyStepInput](../interfaces/academystepinput.md)[] &#124; [AcademyStepInput](../interfaces/academystepinput.md)*): `Promise`<`Map`<`string`, `number`>>
 
-*Defined in [reimprove/academy.ts:101](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L101)*
+*Defined in [reimprove/academy.ts:101](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L101)*
 
 A step in the academy, giving the teachers their inputs, and propagating it to agents. Returns a \[\[Map\]\] where you just have to pick for each agent's name its decision. At each step all the rewards are reset to 0.
 
@@ -378,7 +398,7 @@ ___
 
 ▸ **toggleLogs**(memory?: *`boolean`*): `void`
 
-*Defined in [reimprove/academy.ts:227](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/academy.ts#L227)*
+*Defined in [reimprove/academy.ts:235](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L235)*
 
 Method to toggle logs, taking an argument to toggle memory logs.
 

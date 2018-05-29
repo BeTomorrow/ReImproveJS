@@ -24,7 +24,7 @@
 
 **● batchSize**: *`number`*
 
-*Defined in [reimprove/agent.ts:19](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L19)*
+*Defined in [reimprove/agent.ts:19](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L19)*
 
 ___
 <a id="memorysize"></a>
@@ -33,7 +33,7 @@ ___
 
 **● memorySize**: *`number`*
 
-*Defined in [reimprove/agent.ts:18](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L18)*
+*Defined in [reimprove/agent.ts:18](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L18)*
 
 ___
 <a id="temporalwindow"></a>
@@ -42,7 +42,7 @@ ___
 
 **● temporalWindow**: *`number`*
 
-*Defined in [reimprove/agent.ts:20](https://github.com/Pravez/FurnishJS/blob/8ae2d2d/src/reimprove/agent.ts#L20)*
+*Defined in [reimprove/agent.ts:20](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L20)*
 
 ___
 
