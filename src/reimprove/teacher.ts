@@ -84,7 +84,7 @@ export class Teacher {
         this.state = TeachingState.EXPERIENCING;
     }
 
-    async teach(inputs: number[]): Promise<Map<string, number>> {
+    async teach(inputs: number[] | number[][] | number[][][] | number[][][][]): Promise<Map<string, number>> {
         if (this.state == TeachingState.STOPPED) return null;
 
         if (this.state == TeachingState.NONE) {

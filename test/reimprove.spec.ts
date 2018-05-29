@@ -3,7 +3,7 @@ import {range, shuffle} from 'lodash';
 import {memory} from '@tensorflow/tfjs-core';
 
 import generated from "sinon-chai";
-import {Academy, LayerType, Model} from "../src/reimprove";
+import {Academy, Model, NeuralNetwork} from "../src/reimprove";
 
 use(generated);
 
@@ -11,10 +11,10 @@ const initialInputSize = 100;
 const numActions = 2;
 const inputSize = initialInputSize + numActions + initialInputSize;
 
-const model = new Model(null, {stepsPerEpoch: 1, epochs: 1});
-model.addLayer(LayerType.DENSE, {units: 128, activation: 'relu', inputShape: [inputSize]});
-model.addLayer(LayerType.DENSE, {units: 128, activation: 'relu'});
-model.addLayer(LayerType.DENSE, {units: numActions, activation: 'relu'});
+const network = new NeuralNetwork();
+network.addNeuralNetworkLayers([128, 128, numActions]);
+network.InputShape = [inputSize];
+const model = Model.FromNetwork(network, {stepsPerEpoch: 1, epochs: 1});
 model.compile({loss: 'meanSquaredError', optimizer: 'adam'});
 
 const lessonLength = 10;
@@ -45,7 +45,7 @@ describe("ReImprove - Real", () => {
             results = await academy.step([
                 {
                     teacherName: teacher,
-                    agentsInput: input
+                    agentsInput: [input]
                 }
             ]);
             academy.addRewardToAgent(agent, results.get(agent) == 1 ? 1.0 : -1.0);
@@ -57,7 +57,7 @@ describe("ReImprove - Real", () => {
             results = await academy.step([
                 {
                     teacherName: teacher,
-                    agentsInput: input
+                    agentsInput: [input]
                 }
             ]);
             academy.addRewardToAgent(agent, results.get(agent) == 1 ? 1.0 : -1.0);
@@ -66,28 +66,36 @@ describe("ReImprove - Real", () => {
         expect(memory().numTensors).to.be.approximately(memorySize*2, memorySize*0.5);
     });
 
-    /*it('should have decreasing loss', async () => {
-        let input = shuffle(range(0, initialInputSize)).map(v => v / initialInputSize);
-        let losses: number[] = [];
-        let rewards: number[] = [];
+    /*it('should be handling 2d conv input', async () => {
+        const convnet = new ConvolutionalNeuralNetwork();
+        convnet.addConvolutionalLayer(16)
+            .addMaxPooling2DLayer()
+            .addConvolutionalLayer(16)
+            .addMaxPooling2DLayer()
+            .addNeuralNetworkLayer(64)
+            .addNeuralNetworkLayer(64)
+            .addNeuralNetworkLayer(numActions);
+        convnet.InputShape = [initialInputSize, initialInputSize, 3];
+        academy.changeAgentModel(agent, Model.FromNetwork(convnet));
 
-        academy.OnLearningLessonEnded(teacher, (t) => {
-            losses.push(t.getData().students[0].averageLoss);
-            rewards.push(t.getData().students[0].averageReward);
-        });
+        let input = new Array<number[][]>(initialInputSize);
+        for(let i = 0;i < initialInputSize; ++i) {
+            input[i] = new Array<number[]>(initialInputSize);
+            for (let j = 0; j < initialInputSize; ++j)
+                input[i][j] = [random(0, 255), random(0, 255), random(0, 255)];
+        }
+
 
         let results;
-        for (let i = 0; i < lessonLength * lessons; ++i) {
+        for(let i = 0;i < lessonLength * lessons; ++i) {
             results = await academy.step([
                 {
                     teacherName: teacher,
-                    agentsInput: input
+                    agentsInput: [input]
                 }
             ]);
             academy.addRewardToAgent(agent, results.get(agent) == 1 ? 1.0 : -1.0);
         }
-
-        expect(losses[0]).to.be.greaterThan(losses[losses.length - 1]);
-        expect(rewards[0]).to.be.lessThan(rewards[rewards.length - 1]);
     });*/
+
 });

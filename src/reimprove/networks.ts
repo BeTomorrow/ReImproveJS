@@ -66,7 +66,7 @@ export class NeuralNetwork {
         this.inputShape = [0];
     }
 
-    addNeuralNetworkLayer(layer: number | NeuralNetworkLayer): void {
+    addNeuralNetworkLayer(layer: number | NeuralNetworkLayer): NeuralNetwork {
         if (typeof layer == 'number') {
             this.neuralNetworkLayers.push(<DenseLayer>{
                 units: layer,
@@ -76,10 +76,13 @@ export class NeuralNetwork {
         } else {
             this.neuralNetworkLayers.push({...NeuralNetwork.DEFAULT_LAYER, ...layer})
         }
+
+        return this;
     }
 
-    addNeuralNetworkLayers(layers: Array<number | NeuralNetworkLayer>): void {
+    addNeuralNetworkLayers(layers: Array<number | NeuralNetworkLayer>): NeuralNetwork {
         layers.forEach(l => this.addNeuralNetworkLayer(l));
+        return this;
     }
 
     set InputShape(shape: number[]) {
@@ -122,11 +125,12 @@ export class ConvolutionalNeuralNetwork extends NeuralNetwork {
         this.flattenLayer = {type: 'flatten'};
     }
 
-    addMaxPooling2DLayer(layer?: MaxPooling2DLayer): void {
+    addMaxPooling2DLayer(layer?: MaxPooling2DLayer): ConvolutionalNeuralNetwork {
         this.convolutionalLayers.push(<MaxPooling2DLayer>{...ConvolutionalNeuralNetwork.DEFAULT_POOLING_LAYER, ...layer});
+        return this;
     }
 
-    addConvolutionalLayer(layer: number | ConvolutionalNetworkLayer): void {
+    addConvolutionalLayer(layer: number | ConvolutionalNetworkLayer): ConvolutionalNeuralNetwork {
         if (typeof layer == 'number') {
             this.convolutionalLayers.push(<ConvolutionalLayer>{
                 filters: layer,
@@ -137,10 +141,12 @@ export class ConvolutionalNeuralNetwork extends NeuralNetwork {
         } else {
             this.convolutionalLayers.push(<ConvolutionalLayer>{...ConvolutionalNeuralNetwork.DEFAULT_CONV_LAYER, ...layer});
         }
+        return this;
     }
 
-    addConvolutionalLayers(layers: Array<number | ConvolutionalNetworkLayer>): void {
+    addConvolutionalLayers(layers: Array<number | ConvolutionalNetworkLayer>): ConvolutionalNeuralNetwork {
         layers.forEach(l => this.addConvolutionalLayer(l));
+        return this;
     }
 
     createLayers(includeInputShape: boolean = true): Array<any> {

@@ -87,12 +87,13 @@ export class Agent {
         return this.model.predict(input).getAction();
     }
 
-    forward(input: number[], epsilon: number, keepTensors: boolean = true): number {
+    forward(input: number[] | number[][] | number[][][] | number[][][][], epsilon: number, keepTensors: boolean = true): number {
         this.forwardPasses += 1;
 
         let action;
         let netInput;
-        const tensorInput = tensor2d(input, [1, input.length]);
+
+        const tensorInput = tensor(input, Model.getArrayDimensions(input));
         if (this.forwardPasses > <number>this.agentConfig.temporalWindow) {
             netInput = this.createNeuralNetInput(tensorInput);
 
@@ -155,7 +156,7 @@ export class Agent {
         });
     }
 
-    listen(input: number[], epsilon: number): number {
+    listen(input: number[] | number[][] | number[][][] | number[][][][], epsilon: number): number {
         let action = this.forward(input, epsilon, true);
         this.memorize();
 
@@ -224,5 +225,11 @@ export class Agent {
             averageLoss: this.lossesHistory.mean(),
             name: this.name
         }
+    }
+
+    changeModel(model: Model): void {
+        this.model.destroy();
+        this.model = model;
+        this.memory.reset();
     }
 }

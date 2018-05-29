@@ -1,6 +1,6 @@
 import * as tflayers from '@tensorflow/tfjs-layers';
 import {Tensor, tidy} from '@tensorflow/tfjs-core';
-import {random} from 'lodash';
+import {random, isArray} from 'lodash';
 import {NeuralNetwork} from "./networks";
 import v4 from 'uuid/v4';
 
@@ -120,6 +120,10 @@ export class Model {
         return random(0, this.OutputSize);
     }
 
+    destroy(): void {
+        this.model = null;
+    }
+
     get OutputSize(): number {
         return (<tflayers.SymbolicTensor>this.model.getOutputAt(0)).shape[1];
     }
@@ -142,7 +146,14 @@ export class Model {
             name: name,
             layers: network.createLayers()
         }, fitConfig);
+    }
 
+    static getArrayDimensions(array: number[] | number[][] | number[][][] | number[][][][]): number[] {
+        if(!isArray(array[0])) {
+            return [array.length]
+        }
+
+        return [array.length].concat(Model.getArrayDimensions(<number[]>array[0]));
     }
 }
 

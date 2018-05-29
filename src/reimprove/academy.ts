@@ -28,7 +28,7 @@ export interface AcademyConfig {
  */
 export interface AcademyStepInput {
     teacherName: string;
-    agentsInput: number[];
+    agentsInput: number[] | number[][] | number[][][] | number[][][][];
 }
 
 /** Configuration to build an agent */
@@ -237,5 +237,9 @@ export class Academy {
         this.config.agentsLogs = !status;
         if(status)
             this.config.memoryLogs = memory;
+    }
+
+    changeAgentModel(agent: string, model: Model): void {
+        this.agents.get(agent).changeModel(model);
     }
 }
