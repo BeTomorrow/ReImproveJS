@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs";
 import {expect} from "chai";
 import {LayerType, Model} from "../src/reimprove";
-import {ConvolutionalNetwork} from "../src/reimprove/networks";
+import {ConvolutionalNeuralNetwork} from "../src/reimprove/networks";
 
 const screenInputSize = 20 * 20;
 const numActions = 3;
@@ -23,9 +23,10 @@ describe('Old model', () => {
     });
 });
 
-const network = new ConvolutionalNetwork();
+const network = new ConvolutionalNeuralNetwork();
 network.InputShape = [5, 5, 1];
 network.addConvolutionalLayers([32, 64]);
+network.addMaxPooling2DLayer();
 network.addNeuralNetworkLayers([128, 128, 2]);
 const nmodel = Model.FromNetwork(network);
 nmodel.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
@@ -38,11 +39,13 @@ describe('New model', () => {
 
     it('should have correct layers', () => {
         const layers = network.createLayers();
-        expect(layers.length).to.be.equal(6);
+        expect(layers.length).to.be.equal(7);
         for (let i = 0; i < 6; ++i) {
-            if(i < 2)
+            if (i < 2)
                 expect(layers[i].name).to.contain('conv');
-            else if(i == 2)
+            else if (i == 2)
+                expect(layers[i].name).to.contain('pool');
+            else if (i == 3)
                 expect(layers[i].name).to.contain('flatten');
             else
                 expect(layers[i].name).to.contain('dense');

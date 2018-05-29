@@ -2,7 +2,7 @@
 
 > A framework using TensorFlow.js for Deep Reinforcement Learning
 
-[Documentation](docs/README.md) | [NPM](https://www.npmjs.com/package/reimprovejs) | [Wiki](https://github.com/Pravez/ReImproveJS/wiki)
+[Documentation](docs/README.md) | [NPM](https://www.npmjs.com/package/reimprovejs) | [Wiki](https://github.com/Pravez/ReImproveJS/wiki) | [Changelog](CHANGELOG.md)
 
 [![npm version](https://badge.fury.io/js/reimprovejs.svg)](https://badge.fury.io/js/reimprovejs)
 [![Build Status](https://travis-ci.org/Pravez/ReImproveJS.svg?branch=master)](https://travis-ci.org/Pravez/ReImproveJS)
@@ -48,10 +48,6 @@ For instance :
 
 ```javascript
 
-const modelConfig = {                 // Here we exactly have the tfjs's model configuration
-    name: 'reimprove-model'             // You could give there layers[], but no need ...
-};
-
 const modelFitConfig = {              // Exactly the same idea here by using tfjs's model's
     epochs: 1,                        // fit config.
     stepsPerEpoch: 16
@@ -64,23 +60,18 @@ const temporalWindow = 1;             // The window of data which will be sent y
 
 const totalInputSize = inputSize * temporalWindow + numActions * temporalWindow + inputSize;
 
+const network = new ReImprove.NeuralNetwork();
+network.InputShape = [totalInputSize];
+network.addNeuralNetworkLayers([
+    {type: 'dense', units: 32, activation: 'relu'},
+    {type: 'dense', units: numActions, activation: 'softmax'}
+]);
 // Now we initialize our model, and start adding layers
-const model = new ReImprove.model(modelConfig, modelFitConfig);
-// Input layer
-model.addLayer({
-    layerType: "DENSE", 
-    units: 32, 
-    inputShape: [totalInputSize], 
-    activation: 'relu'
-});
-// Hidden layer
-model.addLayer({layerType: "DENSE", units: 32, activation: 'relu'});
-// Output layer
-model.addLayer({layerType: "DENSE", units: numActions, activation: 'relu'});
+const model = new ReImprove.Model.FromNetwork(network, modelFitConfig);
 
 // Finally compile the model, we also exactly use tfjs's optimizers and loss functions
 // (So feel free to choose one among tfjs's)
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'})
+model.compile({loss: 'crossEntropy', optimizer: 'sgd'})
 
 ```
 

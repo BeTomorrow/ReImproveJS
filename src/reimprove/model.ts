@@ -2,6 +2,7 @@ import * as tflayers from '@tensorflow/tfjs-layers';
 import {Tensor, tidy} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 import {NeuralNetwork} from "./networks";
+import v4 from 'uuid/v4';
 
 const DEFAULT_MODEL_FIT_CONFIG: tflayers.ModelFitConfig = {
     epochs: 10,
@@ -65,6 +66,7 @@ export class Model {
      * Method to just add a layer to the model, concatenating it with the previous ones.
      * @param type  a type among DENSE, FLATTEN or CONV2D
      * @param {LayerConfig} config
+     * @deprecated Please now use [[NeuralNetwork]]
      */
     addLayer(type: LayerType, config: LayerConfig) {
         if(this.model instanceof tflayers.Sequential) {
@@ -126,10 +128,20 @@ export class Model {
         return this.model.layers[0].batchInputShape[1];
     }
 
-    static FromNetwork(network: NeuralNetwork, fitconfig?: tflayers.ModelFitConfig): Model {
+    /**
+     * Static method to create a [[Model]] from a [[NeuralNetwork]]. The fit config is optional as well as the name. It
+     * returns a prepared model, but not compiled.
+     * @param {NeuralNetwork} network
+     * @param {ModelFitConfig} fitConfig
+     * @param {string} name
+     * @returns {Model}
+     * @constructor
+     */
+    static FromNetwork(network: NeuralNetwork, fitConfig?: tflayers.ModelFitConfig, name: string = v4()): Model {
         return new Model({
+            name: name,
             layers: network.createLayers()
-        }, fitconfig);
+        }, fitConfig);
 
     }
 }

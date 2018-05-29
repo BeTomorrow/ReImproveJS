@@ -1,6 +1,6 @@
 {
   "name": "reimprovejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
   "main": "./dist/index.js",

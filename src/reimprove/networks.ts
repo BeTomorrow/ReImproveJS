@@ -46,7 +46,7 @@ export interface FlattenLayer extends NeuralNetworkLayer {
     trainable?: boolean;
     updatable?: boolean;
     weights?: Tensor[];
-    type: "flatten"
+    type: "flatten";
 }
 
 
@@ -97,7 +97,7 @@ export class NeuralNetwork {
     }
 }
 
-export class ConvolutionalNetwork extends NeuralNetwork {
+export class ConvolutionalNeuralNetwork extends NeuralNetwork {
     private readonly convolutionalLayers: ConvolutionalNetworkLayer[];
     private flattenLayer: FlattenLayer;
 
@@ -120,19 +120,19 @@ export class ConvolutionalNetwork extends NeuralNetwork {
     }
 
     addMaxPooling2DLayer(layer?: MaxPooling2DLayer): void {
-        this.convolutionalLayers.push(<MaxPooling2DLayer>{...ConvolutionalNetwork.DEFAULT_POOLING_LAYER, layer});
+        this.convolutionalLayers.push(<MaxPooling2DLayer>{...ConvolutionalNeuralNetwork.DEFAULT_POOLING_LAYER, layer});
     }
 
     addConvolutionalLayer(layer: number | ConvolutionalNetworkLayer): void {
         if (typeof layer == 'number') {
             this.convolutionalLayers.push(<ConvolutionalLayer>{
                 filters: layer,
-                activation: ConvolutionalNetwork.DEFAULT_CONV_LAYER.activation,
+                activation: ConvolutionalNeuralNetwork.DEFAULT_CONV_LAYER.activation,
                 type: 'convolutional',
-                kernelSize: ConvolutionalNetwork.DEFAULT_CONV_LAYER.kernelSize
+                kernelSize: ConvolutionalNeuralNetwork.DEFAULT_CONV_LAYER.kernelSize
             })
         } else {
-            this.convolutionalLayers.push(<ConvolutionalLayer>{...ConvolutionalNetwork.DEFAULT_CONV_LAYER, ...layer});
+            this.convolutionalLayers.push(<ConvolutionalLayer>{...ConvolutionalNeuralNetwork.DEFAULT_CONV_LAYER, ...layer});
         }
     }
 
