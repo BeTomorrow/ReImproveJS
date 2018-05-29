@@ -99,6 +99,10 @@ export class NeuralNetwork {
     getLayers(): Layer[] { return this.neuralNetworkLayers; }
 }
 
+/**
+ * @deprecated Do not use convolutional networks with ReImproveJS for now, they are not fully implemented and tested in
+ * the library.
+ */
 export class ConvolutionalNeuralNetwork extends NeuralNetwork {
     private readonly convolutionalLayers: ConvolutionalNetworkLayer[];
     private flattenLayer: FlattenLayer;

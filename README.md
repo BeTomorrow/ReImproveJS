@@ -136,4 +136,7 @@ requestAnimationFrame(step);
 
 Rewards are reset to 0 at each new step.
 
+__Please be careful__ : Convolutional networks are implemented and operational as models, but currently not 
+fully implemented and tested in the Reinforcement Learning, so please __do not use them__ for now.
+
 

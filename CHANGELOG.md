@@ -9,10 +9,11 @@ from Keras or TensorFlow models.
 * Added Neural Networks, a class which permits to create a neural network. This class corresponds to
 the pre-creation of the model, only giving each layer its configuration. 
 * Add layers to your neural network (dense, dropout, flatten)
-* Added Convolutional Neural Network, an extension of the Neural Networks which permits to add 
-convolutional layers (conv2d, maxpool2d).
-* In the Convolutional Neural Network, the structure is managed automatically (conv layers => dense layers), you
-just have to set the content of each part.
+    * Added Convolutional Neural Network, an extension of the Neural Networks which permits to add 
+    convolutional layers (conv2d, maxpool2d).
+    * In the Convolutional Neural Network, the structure is managed automatically (conv layers => dense layers), you
+    just have to set the content of each part.
+    * __Convolutional Networks are not ready for use for now__
 
 
 Version 0.0.1
