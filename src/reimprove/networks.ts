@@ -20,8 +20,8 @@ export interface ConvolutionalLayer extends ConvolutionalNetworkLayer {
 }
 
 export interface MaxPooling2DLayer extends ConvolutionalNetworkLayer {
-    poolSize: number;
-    strides: [number, number];
+    poolSize?: number;
+    strides?: [number, number];
     type: 'maxpooling'
 }
 
@@ -40,7 +40,7 @@ export interface DropoutLayer extends NeuralNetworkLayer {
     seed?: number;
 }
 
-export interface FlattenLayer extends NeuralNetworkLayer {
+export interface FlattenLayer extends Layer {
     batchInputShape?: number[];
     batchSize?: number;
     trainable?: boolean;
@@ -95,6 +95,8 @@ export class NeuralNetwork {
         }
         return genLayers;
     }
+
+    getLayers(): Layer[] { return this.neuralNetworkLayers; }
 }
 
 export class ConvolutionalNeuralNetwork extends NeuralNetwork {
@@ -117,10 +119,11 @@ export class ConvolutionalNeuralNetwork extends NeuralNetwork {
     constructor() {
         super();
         this.convolutionalLayers = [];
+        this.flattenLayer = {type: 'flatten'};
     }
 
     addMaxPooling2DLayer(layer?: MaxPooling2DLayer): void {
-        this.convolutionalLayers.push(<MaxPooling2DLayer>{...ConvolutionalNeuralNetwork.DEFAULT_POOLING_LAYER, layer});
+        this.convolutionalLayers.push(<MaxPooling2DLayer>{...ConvolutionalNeuralNetwork.DEFAULT_POOLING_LAYER, ...layer});
     }
 
     addConvolutionalLayer(layer: number | ConvolutionalNetworkLayer): void {
@@ -155,4 +158,6 @@ export class ConvolutionalNeuralNetwork extends NeuralNetwork {
     set FlattenLayer(layer: FlattenLayer) {
         this.flattenLayer = layer;
     }
+
+    getLayers(): Layer[] { return (<Array<Layer>>this.convolutionalLayers).concat(this.flattenLayer, super.getLayers()); }
 }

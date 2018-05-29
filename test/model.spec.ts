@@ -36,19 +36,4 @@ describe('New model', () => {
         for (let i = 0; i < 10; ++i)
             expect(nmodel.randomOutput()).to.be.within(0, numActions);
     });
-
-    it('should have correct layers', () => {
-        const layers = network.createLayers();
-        expect(layers.length).to.be.equal(7);
-        for (let i = 0; i < 6; ++i) {
-            if (i < 2)
-                expect(layers[i].name).to.contain('conv');
-            else if (i == 2)
-                expect(layers[i].name).to.contain('pool');
-            else if (i == 3)
-                expect(layers[i].name).to.contain('flatten');
-            else
-                expect(layers[i].name).to.contain('dense');
-        }
-    });
 });

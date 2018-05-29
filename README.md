@@ -21,7 +21,7 @@ Installation
 ReImproveJS is available as a standalone or as a NPM package.
 As usual, you can use the CDN 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/reimprovejs@0.0.1/dist/reimprove.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reimprovejs@0/dist/reimprove.js"></script>
 ```
 
 or if you have your local version
