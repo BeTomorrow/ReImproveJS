@@ -24,16 +24,35 @@ describe('Old model', () => {
 });
 
 const network = new ConvolutionalNeuralNetwork();
-network.InputShape = [5, 5, 1];
-network.addConvolutionalLayers([32, 64]);
+network.InputShape = [40, 40, 3];
+network.addConvolutionalLayer(32);
 network.addMaxPooling2DLayer();
-network.addNeuralNetworkLayers([128, 128, 2]);
-const nmodel = Model.FromNetwork(network);
-nmodel.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+network.addConvolutionalLayer(64);
+network.addMaxPooling2DLayer();
+network.addNeuralNetworkLayers([128, {type: 'dense', activation:'softmax', units:2}]);
+const nmodel = Model.FromNetwork(network, {stepsPerEpoch:10, epochs:1});
+nmodel.compile({loss: tf.losses.softmaxCrossEntropy, optimizer: 'adam'});
 
 describe('New model', () => {
     it('should have the right output size', () => {
         for (let i = 0; i < 10; ++i)
             expect(nmodel.randomOutput()).to.be.within(0, numActions);
     });
+
+    it('can be trained', async () => {
+        const x = tf.randomNormal([1, 40, 40, 3]);
+        const y = tf.tensor([[0, 1]]);
+
+        for(let i = 0;i < 5; ++i) {
+            await nmodel.fit(x, y);
+        }
+
+        let results = [];
+        for(let i = 0;i < 10; ++i)
+            results.push(nmodel.predict(x).getAction());
+
+        expect(results.reduce((p, c) => p + c)).to.be.greaterThan(7);
+    });
 });
+
+

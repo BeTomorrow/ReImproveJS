@@ -26,7 +26,7 @@
     "setup": "npm install",
     "clean": "rm -rf node_modules/ dist/",
     "doc": "typedoc --theme markdown --out ./docs/ ./src/ --excludeExternals --externalPattern \"**/node_modules/**\" --ignoreCompilerErrors --name \"ReImproveJS\" --mode \"file\" --target ES5 --includeDeclarations",
-    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 15000",
+    "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/*.spec.ts' --timeout 120000",
     "build": "./scripts/build-npm.sh",
     "watch": "tsc -w -p ."
   },

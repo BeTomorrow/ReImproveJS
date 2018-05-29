@@ -8,7 +8,7 @@ describe('Networks', () => {
         network.InputShape = [5, 5, 1];
         network.addConvolutionalLayers([32, 64]);
         network.addMaxPooling2DLayer({type: "maxpooling", strides: [5, 5]});
-        network.addNeuralNetworkLayers([128, 128, 2]);
+        network.addNeuralNetworkLayers([{type: 'dense', units: 256, name: 'test'}, 128, 2]);
 
         const layers = network.getLayers();
 
@@ -29,10 +29,11 @@ describe('Networks', () => {
             type: 'flatten'
         });
 
-        expect(layers[5]).to.be.deep.equal({
+        expect(layers[4]).to.be.deep.equal({
             type: 'dense',
-            units: 128,
-            activation: 'relu'
+            units: 256,
+            activation: 'relu',
+            name:'test'
         });
 
     });
