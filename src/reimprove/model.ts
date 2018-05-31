@@ -63,6 +63,16 @@ export class Model {
     }
 
     /**
+     * Export model to as destination.
+     * @param {string} destination Can be one of 'downloads' (triggers browser download) [default], 'localstorage', 'indexeddb' or in http request 'http', 'https'.
+     * @param {string} place
+     * @returns {Promise<void>}
+     */
+    async export(destination: string, place = 'downloads') {
+        await this.model.save(`${place}://${destination}`);
+    }
+
+    /**
      * Method to just add a layer to the model, concatenating it with the previous ones.
      * @param type  a type among DENSE, FLATTEN or CONV2D
      * @param {LayerConfig} config

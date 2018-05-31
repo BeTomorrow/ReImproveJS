@@ -44,7 +44,8 @@ describe('Teacher', () => {
             gamma: 0.8,
             epsilon: 1,
             epsilonDecay: 0.990,
-            epsilonMin: 0.05
+            epsilonMin: 0.05,
+            alpha: 1
         });
     });
 

@@ -109,18 +109,18 @@ export class Agent {
             netInput = tensor([]);
         }
 
+        const stateShifted = this.statesBuffer.shift();
+        if(stateShifted)
+            stateShifted.dispose();
+        this.statesBuffer.push(tensorInput);
+
         if (keepTensors) {
             this.actionsBuffer.shift();
-            const stateShift = this.statesBuffer.shift();
-            if(stateShift)
-                stateShift.dispose();
             this.inputsBuffer.shift();
 
             this.actionsBuffer.push(action);
-            this.statesBuffer.push(tensorInput);
             this.inputsBuffer.push({tensor: netInput, references: 0});
         } else {
-            tensorInput.dispose();
             netInput.dispose();
         }
 
@@ -142,15 +142,15 @@ export class Agent {
         });
     }
 
-    createTrainingDataFromMemento(memento: Memento, gamma: number): { x: Tensor, y: Tensor } {
+    createTrainingDataFromMemento(memento: Memento, gamma: number, alpha: number): { x: Tensor, y: Tensor } {
         return tidy(() => {
             let target = memento.reward;
             if (!this.done) {
-                target = memento.reward + gamma * (this.model.predict(memento.nextState.tensor).getHighestValue());
+                target = alpha*(memento.reward + gamma * (this.model.predict(memento.nextState.tensor).getHighestValue()));
             }
 
             let future_target = this.model.predict(memento.state.tensor).getValue();
-            future_target[memento.action] = target;
+            future_target[memento.action] += target;
             return {x: memento.state.tensor.clone(), y: tensor2d(future_target, [1, this.model.OutputSize])};
         });
     }
@@ -159,14 +159,12 @@ export class Agent {
         let action = this.forward(input, epsilon, true);
         this.memorize();
 
-        this.setReward(0.);
-
         return action;
     }
 
-    async learn(gamma: number) {
+    async learn(gamma: number, alpha: number) {
         const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
-            .map(memento => this.createTrainingDataFromMemento(memento, gamma))
+            .map(memento => this.createTrainingDataFromMemento(memento, gamma, alpha))
             .reduce((previousValue, currentValue) => {
                     const res = {
                         x: previousValue.x.concat(currentValue.x),

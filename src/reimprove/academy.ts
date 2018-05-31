@@ -238,4 +238,11 @@ export class Academy {
         if(status)
             this.config.memoryLogs = memory;
     }
+
+    toggleTeaching(teacher: string, toggle: boolean): void {
+        if(toggle === true)
+            this.teachers.get(teacher).startTeaching();
+        else
+            this.teachers.get(teacher).stopTeaching();
+    }
 }

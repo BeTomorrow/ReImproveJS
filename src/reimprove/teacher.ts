@@ -8,7 +8,8 @@ const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
     epsilon: 1,
     epsilonMin: 0.05,
     epsilonDecay: 0.95,
-    gamma: 0.9
+    gamma: 0.9,
+    alpha: 1
 };
 
 export interface TeachingConfig {
@@ -19,6 +20,7 @@ export interface TeachingConfig {
     epsilon?: number;
     epsilonDecay?: number;
     epsilonMin?: number;
+    alpha?: number;
 }
 
 export enum TeachingState {
@@ -95,47 +97,59 @@ export class Teacher {
         // If learning is ended, we only test : we only do forward prop through network
         if (this.state == TeachingState.TESTING) {
             this.agents.forEach(a => actions.set(a.Name, a.forward(inputs, this.currentEpsilon, false)));
-            return actions;
+        } else {
+
+            //Update lesson
+            this.currentLessonLength += 1;
+
+            if (this.currentLessonLength >= this.config.lessonLength)
+                this.state = TeachingState.LEARNING;
+
+
+            if (this.state == TeachingState.EXPERIENCING) {
+                this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
+            } else if (this.state == TeachingState.LEARNING) {
+                if (this.onLessonEnded)
+                    this.onLessonEnded(this.name, this.lessonsTaught);
+
+                for (let agent of Array.from(this.agents.keys())) {
+                    await agent.learn(this.config.gamma, this.config.alpha);
+                }
+
+                this.updateParameters();
+
+                this.lessonsTaught += 1;
+                this.currentLessonLength = 0;
+
+                if (this.lessonsTaught >= this.config.lessonsQuantity) {
+                    this.state = TeachingState.TESTING;
+                    if (this.onTeachingEnded)
+                        this.onTeachingEnded(this.name);
+                } else {
+                    this.state = TeachingState.EXPERIENCING;
+                }
+
+                this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
+
+                if (this.onLearningLessonEnded)
+                    this.onLearningLessonEnded(this.name);
+
+            }
         }
 
-        //Update lesson
-        this.currentLessonLength += 1;
-
-        if (this.currentLessonLength >= this.config.lessonLength)
-            this.state = TeachingState.LEARNING;
-
-
-        if (this.state == TeachingState.EXPERIENCING) {
-            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
-        } else if (this.state == TeachingState.LEARNING) {
-            if (this.onLessonEnded)
-                this.onLessonEnded(this.name, this.lessonsTaught);
-
-            for (let agent of Array.from(this.agents.keys())) {
-                await agent.learn(this.config.gamma);
-            }
-
-            this.updateParameters();
-
-            this.lessonsTaught += 1;
-            this.currentLessonLength = 0;
-
-            if (this.lessonsTaught >= this.config.lessonsQuantity) {
-                this.state = TeachingState.TESTING;
-                if (this.onTeachingEnded)
-                    this.onTeachingEnded(this.name);
-            } else {
-                this.state = TeachingState.EXPERIENCING;
-            }
-
-            this.agents.forEach(a => actions.set(a.Name, a.listen(inputs, this.currentEpsilon)));
-
-            if (this.onLearningLessonEnded)
-                this.onLearningLessonEnded(this.name);
-
-        }
+        // reset reward for everyone
+        this.agents.forEach(a => a.setReward(0.));
 
         return actions;
+    }
+
+    stopTeaching() {
+        this.state = TeachingState.TESTING;
+    }
+
+    startTeaching() {
+        if(this.lessonsTaught < this.config.lessonsQuantity)
+            this.state = TeachingState.EXPERIENCING;
     }
 
     updateParameters() {
