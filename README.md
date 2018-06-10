@@ -93,6 +93,7 @@ const teacherConfig = {
 };
 
 const agentConfig = {
+    model: model,                          // Our model corresponding to the agent
     memorySize: 5000,                      // The size of the agent's memory (Q-Learning)
     batchSize: 128,                        // How many tensors will be given to the network when fit
     temporalWindow: temporalWindow         // The temporal window giving previous inputs & actions
