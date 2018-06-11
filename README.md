@@ -94,9 +94,11 @@ const teacherConfig = {
 
 const agentConfig = {
     model: model,                          // Our model corresponding to the agent
-    memorySize: 5000,                      // The size of the agent's memory (Q-Learning)
-    batchSize: 128,                        // How many tensors will be given to the network when fit
-    temporalWindow: temporalWindow         // The temporal window giving previous inputs & actions
+    agentConfig: {
+        memorySize: 5000,                      // The size of the agent's memory (Q-Learning)
+        batchSize: 128,                        // How many tensors will be given to the network when fit
+        temporalWindow: temporalWindow         // The temporal window giving previous inputs & actions
+    }
 };
 
 const academy = new ReImprove.Academy();    // First we need an academy to host everything
