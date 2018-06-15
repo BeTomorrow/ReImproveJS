@@ -5,7 +5,7 @@ import {range} from 'lodash';
 import generated from "sinon-chai";
 import {LayerType, Model} from "../src/reimprove";
 import {Teacher, TeachingState} from "../src/reimprove/teacher";
-import {Agent} from "../src/reimprove/agent";
+import {DQAgent} from "../src/reimprove/algorithms/deepq/dqagent";
 
 use(generated);
 
@@ -21,7 +21,7 @@ model.addLayer(LayerType.DENSE, {units: numActions, activation: 'relu'});
 model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
 
 const teacher = new Teacher({lessonsQuantity: lessons, lessonLength: lessonLength, gamma: 0.8, epsilonDecay: 0.990});
-const agent = new Agent(model);
+const agent = new DQAgent(model);
 
 
 

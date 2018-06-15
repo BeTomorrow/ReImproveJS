@@ -1,5 +1,5 @@
 import * as tflayers from '@tensorflow/tfjs-layers';
-import {Tensor, tidy} from '@tensorflow/tfjs-core';
+import {Tensor, tidy, io} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 import {NeuralNetwork} from "./networks";
 import v4 from 'uuid/v4';
@@ -34,6 +34,7 @@ const DEFAULT_LAYER_CONFIG: LayerConfig = {
     useBias: false
 };
 
+
 interface ToTfLayerConfig {
     [key: string]: any;
 }
@@ -58,8 +59,13 @@ export class Model {
         this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
 
-    async loadFromFile(file: string) {
-        this.model = await tflayers.loadModel(file);
+    static async loadFromFile(file: string | {json: File, weights: File}): Promise<Model> {
+        let model = new Model();
+        if(typeof file === "string")
+            model.model = await tflayers.loadModel(file);
+        else
+            model.model = await tflayers.loadModel(io.browserFiles([file.json, file.weights]));
+        return model;
     }
 
     /**
@@ -136,6 +142,10 @@ export class Model {
 
     get InputSize(): number {
         return this.model.layers[0].batchInputShape[1];
+    }
+
+    set FitConfig(fitConfig: tflayers.ModelFitConfig) {
+        this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
 
     /**

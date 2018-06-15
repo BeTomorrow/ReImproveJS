@@ -1,8 +1,9 @@
-import {Agent, AgentConfig} from "./agent";
+import {DQAgent} from "./algorithms/deepq/dqagent";
 import {Teacher, TeacherTrackingInformation, TeachingConfig} from "./teacher";
 import {v4} from 'uuid';
 import {Model} from "./model";
 import {LearningDataLogger} from "./misc/learning_data_logger";
+import {DQAgentConfig} from "./algorithms/AgentConfig";
 
 const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
     parentLogsElement: null,
@@ -36,7 +37,7 @@ export interface BuildAgentConfig {
     /** The agent cannot have no model. But multiple agents can share the same one */
     model: Model;
     /** The agent configuration, defaulted if not present */
-    agentConfig?: AgentConfig;
+    agentConfig?: DQAgentConfig;
 }
 
 /**
@@ -44,7 +45,7 @@ export interface BuildAgentConfig {
  */
 export class Academy {
 
-    private agents: Map<string, Agent>;
+    private agents: Map<string, DQAgent>;
     private teachers: Map<string, Teacher>;
     private assigments: Map<string, string>;
 
@@ -53,7 +54,7 @@ export class Academy {
 
     constructor(config?: AcademyConfig) {
         this.config = {...DEFAULT_ACADEMY_CONFIG, ...config};
-        this.agents = new Map<string, Agent>();
+        this.agents = new Map<string, DQAgent>();
         this.teachers = new Map<string, Teacher>();
         this.assigments = new Map<string, string>();
 
@@ -63,7 +64,7 @@ export class Academy {
     }
 
     addAgent(config: BuildAgentConfig, name?: string): string {
-        let agent = new Agent(config.model, config.agentConfig, name);
+        let agent = new DQAgent(config.model, config.agentConfig, name);
         if (!agent.Name)
             agent.Name = v4();
 
@@ -109,7 +110,7 @@ export class Academy {
             const agentsActions = await this.teachers.get(input.teacherName).teach(input.agentsInput);
             agentsActions.forEach((value, key) => {
                 if (actions.has(key))
-                    throw new Error("Agent " + key + " has already registered an action.");
+                    throw new Error("Dqagent " + key + " has already registered an action.");
 
                 actions.set(key, value);
             });

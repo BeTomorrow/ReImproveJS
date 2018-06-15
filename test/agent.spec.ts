@@ -1,14 +1,14 @@
 import {expect} from "chai";
-import {Agent} from "../src/reimprove/agent";
+import {DQAgent} from "../src/reimprove/algorithms/deepq/dqagent";
 
 const batchSize = 18;
-const agent = new Agent(null, {batchSize: batchSize});
+const agent = new DQAgent(null, {batchSize: batchSize});
 
-describe('Agent', () => {
+describe('Dqagent', () => {
     beforeEach(() => agent.reset());
 
     it('Should have the right configuration', () => {
-        expect(agent.Config).to.deep.equal({
+        expect(agent.AgentConfig).to.deep.equal({
             memorySize: 30000,
             batchSize: batchSize,
             temporalWindow: 1

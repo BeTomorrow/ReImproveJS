@@ -1,4 +1,5 @@
-import {Agent, AgentTrackingInformation} from "./agent";
+import {DQAgent} from "./algorithms/deepq/dqagent";
+import {AgentTrackingInformation} from "./algorithms/AgentConfig";
 
 
 const DEFAULT_TEACHING_CONFIG: TeachingConfig = {
@@ -47,7 +48,7 @@ export class Teacher {
     config: TeachingConfig;
     state: TeachingState;
 
-    agents: Set<Agent>;
+    agents: Set<DQAgent>;
 
     currentLessonLength: number;
     lessonsTaught: number;
@@ -60,7 +61,7 @@ export class Teacher {
 
     constructor(config?: TeachingConfig, name?: string) {
         this.config = {...DEFAULT_TEACHING_CONFIG, ...config};
-        this.agents = new Set<Agent>();
+        this.agents = new Set<DQAgent>();
         this.currentLessonLength = 0;
         this.lessonsTaught = 0;
         this.state = TeachingState.NONE;
@@ -72,11 +73,11 @@ export class Teacher {
         this.name = name;
     }
 
-    affectStudent(agent: Agent) {
+    affectStudent(agent: DQAgent) {
         this.agents.add(agent);
     }
 
-    removeStudent(agent: Agent): boolean {
+    removeStudent(agent: DQAgent): boolean {
         return this.agents.delete(agent);
     }
 
@@ -94,9 +95,9 @@ export class Teacher {
         }
 
         let actions = new Map<string, number>();
-        // If learning is ended, we only test : we only do forward prop through network
+        // If learning is ended, we only test : we only do infer prop through network
         if (this.state == TeachingState.TESTING) {
-            this.agents.forEach(a => actions.set(a.Name, a.forward(inputs, this.currentEpsilon, false)));
+            this.agents.forEach(a => actions.set(a.Name, a.infer(inputs, this.config.epsilonMin, false)));
         } else {
 
             //Update lesson

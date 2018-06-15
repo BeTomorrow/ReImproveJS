@@ -1,32 +1,22 @@
-import {Memento, MementoTensor, Memory} from "./memory";
-import {Model} from "./model";
+import {Memento, MementoTensor, Memory} from "../../memory";
+import {Model} from "../../model";
 import {Tensor, tensor, tensor2d, tidy} from "@tensorflow/tfjs-core";
 import {range, random} from "lodash";
-import {TypedWindow} from "./misc/typed_window";
+import {TypedWindow} from "../../misc/typed_window";
+import {DQAgentConfig, AgentTrackingInformation} from "../AgentConfig";
+import {AbstractAgent} from "../abstract_agent";
 
 const MEM_WINDOW_MIN_SIZE = 2;
 const HIST_WINDOW_SIZE = 100;
 const HIST_WINDOW_MIN_SIZE = 0;
 
-const DEFAULT_AGENT_CONFIG: AgentConfig = {
+const DEFAULT_AGENT_CONFIG: DQAgentConfig = {
     memorySize: 30000,
     batchSize: 32,
     temporalWindow: 1
 };
 
-export interface AgentConfig {
-    memorySize?: number;
-    batchSize?: number;
-    temporalWindow?: number;
-}
-
-export interface AgentTrackingInformation {
-    averageLoss: number;
-    averageReward: number;
-    name: string;
-}
-
-export class Agent {
+export class DQAgent extends AbstractAgent {
     private done: boolean;
     private currentReward: number;
 
@@ -39,22 +29,22 @@ export class Agent {
     private readonly netInputWindowSize: number;
 
     private memory: Memory;
-    private readonly agentConfig: AgentConfig;
 
     private forwardPasses: number;
 
 
-    constructor(private model: Model, agentConfig?: AgentConfig, private name?: string) {
-        this.agentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig};
+    constructor(private model: Model, agentConfig?: DQAgentConfig, name?: string) {
+        super(agentConfig, name);
+        this.AgentConfig = {...DEFAULT_AGENT_CONFIG, ...agentConfig} as DQAgentConfig;
         this.done = false;
         this.currentReward = 0;
 
         this.lossesHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, -1);
         this.rewardsHistory = new TypedWindow<number>(HIST_WINDOW_SIZE, HIST_WINDOW_MIN_SIZE, null);
 
-        this.memory = new Memory({size: <number>this.agentConfig.memorySize});
+        this.memory = new Memory({size: <number>this.AgentConfig.memorySize});
 
-        this.netInputWindowSize = Math.max(<number>this.agentConfig.temporalWindow, MEM_WINDOW_MIN_SIZE);
+        this.netInputWindowSize = Math.max(<number>this.AgentConfig.temporalWindow, MEM_WINDOW_MIN_SIZE);
         this.actionsBuffer = new Array(this.netInputWindowSize);
         this.inputsBuffer = new Array(this.netInputWindowSize);
         this.statesBuffer = new Array(this.netInputWindowSize);
@@ -66,7 +56,7 @@ export class Agent {
         return tidy(() => {
             let finalInput = input.clone();
 
-            for (let i = 0; i < <number>this.agentConfig.temporalWindow; ++i) {
+            for (let i = 0; i < <number>this.AgentConfig.temporalWindow; ++i) {
                 // Here we concatenate input with previous input
                 finalInput = finalInput.concat(this.statesBuffer[this.netInputWindowSize - 1 - i], 1);
 
@@ -87,13 +77,13 @@ export class Agent {
         return this.model.predict(input).getAction();
     }
 
-    forward(input: number[], epsilon: number, keepTensors: boolean = true): number {
+    infer(input: number[], epsilon: number, keepTensors: boolean = true): number {
         this.forwardPasses += 1;
 
         let action;
         let netInput;
         const tensorInput = tensor2d(input, [1, input.length]);
-        if (this.forwardPasses > <number>this.agentConfig.temporalWindow) {
+        if (this.forwardPasses > <number>this.AgentConfig.temporalWindow) {
             netInput = this.createNeuralNetInput(tensorInput);
 
             if (random(0, 1, true) < epsilon) {
@@ -110,7 +100,7 @@ export class Agent {
         }
 
         const stateShifted = this.statesBuffer.shift();
-        if(stateShifted)
+        if (stateShifted)
             stateShifted.dispose();
         this.statesBuffer.push(tensorInput);
 
@@ -131,7 +121,7 @@ export class Agent {
 
         this.rewardsHistory.add(this.currentReward);
 
-        if (this.forwardPasses <= <number>this.agentConfig.temporalWindow + 1) return;
+        if (this.forwardPasses <= <number>this.AgentConfig.temporalWindow + 1) return;
 
         // Save experience
         this.memory.remember({
@@ -146,7 +136,7 @@ export class Agent {
         return tidy(() => {
             let target = memento.reward;
             if (!this.done) {
-                target = alpha*(memento.reward + gamma * (this.model.predict(memento.nextState.tensor).getHighestValue()));
+                target = alpha * (memento.reward + gamma * (this.model.predict(memento.nextState.tensor).getHighestValue()));
             }
 
             let future_target = this.model.predict(memento.state.tensor).getValue();
@@ -156,14 +146,14 @@ export class Agent {
     }
 
     listen(input: number[], epsilon: number): number {
-        let action = this.forward(input, epsilon, true);
+        let action = this.infer(input, epsilon, true);
         this.memorize();
 
         return action;
     }
 
     async learn(gamma: number, alpha: number) {
-        const trainData = this.memory.sample(<number>this.agentConfig.batchSize)
+        const trainData = this.memory.sample(<number>this.AgentConfig.batchSize)
             .map(memento => this.createTrainingDataFromMemento(memento, gamma, alpha))
             .reduce((previousValue, currentValue) => {
                     const res = {
@@ -204,23 +194,19 @@ export class Agent {
         this.forwardPasses = 0;
     }
 
-    get Config() {
+    get AgentConfig(): DQAgentConfig {
         return this.agentConfig;
     }
 
-    set Name(name: string) {
-        this.name = name;
-    }
-
-    get Name() {
-        return this.name;
+    set AgentConfig(config: DQAgentConfig) {
+        this.setAgentConfig(config);
     }
 
     getTrackingInformation(): AgentTrackingInformation {
         return {
             averageReward: this.rewardsHistory.mean(),
             averageLoss: this.lossesHistory.mean(),
-            name: this.name
+            name: this.Name
         }
     }
 }
