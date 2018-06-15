@@ -27,6 +27,7 @@ export class QState {
 
     get Data(): QStateData { return this.data; }
     get Reward(): number { return this.reward; }
+    set Reward(reward: number) { this.reward = reward; }
     get Transitions(): QTransition[] { return Array.from(this.transitions.values()); }
     setFinal(): QState { this.final = true; return this; }
     set Final(final: boolean) { this.final = final; }

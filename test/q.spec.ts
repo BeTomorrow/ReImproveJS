@@ -93,5 +93,6 @@ describe("QLearning", () => {
         expect(qagent.History.length).to.be.eq(4);
         expect(qagent.History.map(h => h.Action.Name)).to.be.deep.eq(["RIGHT", "RIGHT", "JUMPRIGHT", "RIGHT"]);
         expect(s3.takeAction(qmatrix.action("RIGHT")).Q).to.be.below(0.);
+        expect(qagent.CurrentState).to.be.deep.eq(finalgood);
     })
 });

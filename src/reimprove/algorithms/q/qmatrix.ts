@@ -1,4 +1,4 @@
-import {QAction} from "./qaction";
+import {QAction, QActionData} from "./qaction";
 import {QState, QStateData} from "./qstate";
 import {QTransition} from "./qtransition";
 
@@ -16,13 +16,13 @@ export class QMatrix {
         this.transitions = [];
     }
 
-    registerAction(action: QAction) {
-        this.actions.set(action.Name, action);
+    registerAction(action: QAction | string, data?: QActionData) {
+        this.actions.set(typeof action === "string" ? action : action.Name, typeof action === "string" ? new QAction(action, data) : action);
     }
 
     registerState(data: QStateData, reward: number = 0.): QState {
         if (this.states.has(this.hash(data)))
-            return null;
+            return this.states.get(this.hash(data));
         const state = new QState(data, reward);
         this.states.set(this.hash(data), state);
         return state;
@@ -50,8 +50,12 @@ export class QMatrix {
         }
     }
 
-    getStateFromData(data: QStateData): QState {
+    getStateFromData(data: QStateData): QState | undefined{
         return this.states.get(this.hash(data));
+    }
+
+    exists(data: QStateData): boolean {
+        return this.states.has(this.hash(data));
     }
 
     private checkAndGetState(state: QState | QStateData | string): QState | undefined {
@@ -82,7 +86,7 @@ export class QMatrix {
      */
     setStateAsFinal(state: QState | QStateData | string): boolean {
         const final = this.checkAndGetState(state);
-        if(final !== undefined && !final.Final) {
+        if (final !== undefined && !final.Final) {
             final.Final = true;
             return true;
         }
@@ -97,7 +101,7 @@ export class QMatrix {
      */
     removeStateFromFinals(state: QState | string | QStateData): boolean {
         const temps = this.checkAndGetState(state);
-        if(temps !== undefined && temps.Final) {
+        if (temps !== undefined && temps.Final) {
             temps.Final = false;
             return true;
         } else {
@@ -115,7 +119,19 @@ export class QMatrix {
         this.transitions.forEach(t => t.Q = 0.0);
     }
 
-    get InitialState() { return this.initialState; }
-    get FinalStates() { return Array.from(this.states.values()).filter(state => state.Final)}
-    get HashFunction() { return this.hash; }
+    get InitialState() {
+        return this.initialState;
+    }
+
+    get FinalStates() {
+        return Array.from(this.states.values()).filter(state => state.Final)
+    }
+
+    get HashFunction() {
+        return this.hash;
+    }
+
+    get States() {
+        return Array.from(this.states.values());
+    }
 }

@@ -12,6 +12,7 @@ export class QAgent extends AbstractAgent {
     private currentState: QState;
 
     private qmatrix: QMatrix;
+    private lossOnAlreadyVisited: boolean;
 
     constructor(qmatrix?: QMatrix, config?: QAgentConfig, name?: string) {
         super(config, name);
@@ -20,6 +21,7 @@ export class QAgent extends AbstractAgent {
         this.previousTransition = null;
         this.currentState = qmatrix ? qmatrix.InitialState : null;
         this.qmatrix = qmatrix;
+        this.lossOnAlreadyVisited = false;
     }
 
     getTrackingInformation(): AgentTrackingInformation {
@@ -48,13 +50,14 @@ export class QAgent extends AbstractAgent {
 
     learn(gamma: number): void {
         this.checkQMatrix();
-        if(this.previousTransition) {
-            this.previousTransition.Q = this.previousTransition.To.Reward + gamma * QAgent.bestAction(...this.previousTransition.To.Transitions).Q;
+        if (this.previousTransition) {
+            const reward = this.previousTransition.To.Reward - (this.lossOnAlreadyVisited && this.history.indexOf(this.previousTransition) !== this.history.length - 1 ? 1 : 0);
+            this.previousTransition.Q = reward + gamma * QAgent.bestAction(...this.previousTransition.To.Transitions).Q;
         }
     }
 
     private checkQMatrix(): void {
-        if(!this.qmatrix)
+        if (!this.qmatrix)
             throw new Error("No QMatrix associated to this agent. Please create one");
     }
 
@@ -82,8 +85,13 @@ export class QAgent extends AbstractAgent {
         return this.history;
     }
 
-    set CurrentState(state: QState) { this.currentState = state; }
-    get CurrentState(): QState { return this.currentState; }
+    set CurrentState(state: QState) {
+        this.currentState = state;
+    }
+
+    get CurrentState(): QState {
+        return this.currentState;
+    }
 
     get AgentConfig(): QAgentConfig {
         return undefined;
@@ -91,5 +99,9 @@ export class QAgent extends AbstractAgent {
 
     reset(): void {
 
+    }
+
+    setLossOnAlreadyVisitedState(toggle: boolean): void {
+        this.lossOnAlreadyVisited = toggle;
     }
 }
