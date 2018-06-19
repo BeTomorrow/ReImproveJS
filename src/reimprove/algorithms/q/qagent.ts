@@ -1,9 +1,14 @@
 import {AbstractAgent} from "../abstract_agent";
-import {AgentTrackingInformation, QAgentConfig} from "../AgentConfig";
+import {AgentTrackingInformation, QAgentConfig} from "../agent_config";
 import {QTransition} from "./qtransition";
-import {QState} from "./qstate";
+import {QState, QStateData} from "./qstate";
 import {QMatrix} from "./qmatrix";
 
+const DEFAULT_QAGENT_CONFIG: QAgentConfig = {
+    createMatrixDynamically: false,
+    dataHash: null,
+    gamma: 0.9
+};
 
 export class QAgent extends AbstractAgent {
 
@@ -14,14 +19,35 @@ export class QAgent extends AbstractAgent {
     private qmatrix: QMatrix;
     private lossOnAlreadyVisited: boolean;
 
-    constructor(qmatrix?: QMatrix, config?: QAgentConfig, name?: string) {
+    constructor(config: QAgentConfig, qmatrix?: QMatrix, name?: string) {
+        if ((!qmatrix || (qmatrix && !qmatrix.HashFunction)) && !config.dataHash)
+            throw new Error("A hash function MUST be provided in the config parameter in order to hash correctly QStateData.");
+
+        if (qmatrix && !qmatrix.InitialState)
+            throw new Error("Please provide an initial state for your QMatrix (qmatrix.setInitialState())");
+
+        if (!qmatrix && !config.initialState)
+            throw new Error("Please provide initial state data for your agent !");
+
         super(config, name);
+        this.AgentConfig = {...this.AgentConfig, ...{...DEFAULT_QAGENT_CONFIG, ...config}};
         this.history = [];
 
         this.previousTransition = null;
-        this.currentState = qmatrix ? qmatrix.InitialState : null;
-        this.qmatrix = qmatrix;
+        this.qmatrix = qmatrix ? qmatrix : new QMatrix(config.dataHash);
+        if (!this.qmatrix.HashFunction) {
+            this.qmatrix.HashFunction = config.dataHash;
+        }
+        this.currentState = qmatrix ? qmatrix.InitialState : this.qmatrix.registerState(config.initialState);
         this.lossOnAlreadyVisited = false;
+
+        if (!qmatrix) {
+            if (!config.createMatrixDynamically || !config.actions)
+                throw new Error("Need actions and flag to create matrix dynamically. You should provide them or provide precreated QMatrix.");
+
+            config.actions.forEach(a => this.qmatrix.registerAction(a));
+            this.qmatrix.Actions.forEach(a => this.qmatrix.registerTransition(a.Name, this.currentState, null));
+        }
     }
 
     getTrackingInformation(): AgentTrackingInformation {
@@ -30,35 +56,46 @@ export class QAgent extends AbstractAgent {
 
     restart(): void {
         this.history = [];
-        this.checkQMatrix();
         this.currentState = this.qmatrix.InitialState;
     }
 
-    infer(): QTransition | undefined {
-        this.checkQMatrix();
-        if (this.currentState) {
-            const action = QAgent.bestAction(...this.currentState.Transitions);
-            this.previousTransition = this.currentState.takeAction(action.Action);
+    infer(data?: QStateData): QTransition {
+        const action = QAgent.bestAction(...this.currentState.Transitions);
+        this.previousTransition = this.currentState.takeAction(action.Action);
+        if(!this.previousTransition.To) {
+            let state: QState;
+            if(this.qmatrix.exists(data)) {
+                state = this.qmatrix.getStateFromData(data);
+            } else {
+                state = this.qmatrix.registerState(data);
+                this.qmatrix.Actions.forEach(a => this.qmatrix.registerTransition(a.Name, state, null));
+            }
+
+            this.previousTransition.To = state;
+            this.currentState = state;
+        } else {
             this.currentState = this.previousTransition.To;
-
-            this.history.push(this.previousTransition);
-
-            return this.previousTransition;
         }
-        return undefined;
+
+        this.history.push(this.previousTransition);
+
+        return this.previousTransition;
     }
 
-    learn(gamma: number): void {
-        this.checkQMatrix();
+    isPerforming(): boolean {
+        return !this.currentState.Final;
+    }
+
+    learn(): void {
         if (this.previousTransition) {
             const reward = this.previousTransition.To.Reward - (this.lossOnAlreadyVisited && this.history.indexOf(this.previousTransition) !== this.history.length - 1 ? 1 : 0);
-            this.previousTransition.Q = reward + gamma * QAgent.bestAction(...this.previousTransition.To.Transitions).Q;
+            this.previousTransition.Q = reward + this.AgentConfig.gamma * QAgent.bestAction(...this.previousTransition.To.Transitions).Q;
         }
     }
 
-    private checkQMatrix(): void {
-        if (!this.qmatrix)
-            throw new Error("No QMatrix associated to this agent. Please create one");
+    finalState(reward: number, state?: QState): void {
+        this.qmatrix.setStateAsFinal(state ? state : this.currentState);
+        this.currentState.Reward = reward;
     }
 
     private static bestAction(...values: QTransition[]): QTransition {
@@ -94,7 +131,11 @@ export class QAgent extends AbstractAgent {
     }
 
     get AgentConfig(): QAgentConfig {
-        return undefined;
+        return this.agentConfig as QAgentConfig;
+    }
+
+    set AgentConfig(config: QAgentConfig) {
+        this.setAgentConfig(config);
     }
 
     reset(): void {

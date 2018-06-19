@@ -3,7 +3,7 @@ import {Teacher, TeacherTrackingInformation, TeachingConfig} from "./teacher";
 import {v4} from 'uuid';
 import {Model} from "./model";
 import {LearningDataLogger} from "./misc/learning_data_logger";
-import {DQAgentConfig} from "./algorithms/AgentConfig";
+import {DQAgentConfig} from "./algorithms/agent_config";
 
 const DEFAULT_ACADEMY_CONFIG: AcademyConfig = {
     parentLogsElement: null,

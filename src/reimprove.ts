@@ -1,6 +1,6 @@
 export {Model, LayerType} from "./reimprove/model";
 export {Academy, BuildAgentConfig} from "./reimprove/academy";
-export {AgentConfig} from "./reimprove/algorithms/AgentConfig";
+export {AgentConfig} from "./reimprove/algorithms/agent_config";
 export {TeachingConfig} from "./reimprove/teacher";
 
 export {

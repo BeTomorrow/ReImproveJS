@@ -1,3 +1,6 @@
+import {QAction} from "./q/qaction";
+import {QStateData} from "./q/qstate";
+
 export interface AgentConfig {
     memorySize?: number;
 }
@@ -8,7 +11,12 @@ export interface DQAgentConfig extends AgentConfig {
 }
 
 export interface QAgentConfig extends AgentConfig {
-
+    createMatrixDynamically?: boolean;
+    actions?: Array<QAction | string>;
+    startingData?: QStateData;
+    dataHash: (data:QStateData) => string;
+    initialState?: QStateData;
+    gamma?: number;
 }
 
 export interface AgentTrackingInformation {

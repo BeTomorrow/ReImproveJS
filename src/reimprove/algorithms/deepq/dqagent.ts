@@ -3,7 +3,7 @@ import {Model} from "../../model";
 import {Tensor, tensor, tensor2d, tidy} from "@tensorflow/tfjs-core";
 import {range, random} from "lodash";
 import {TypedWindow} from "../../misc/typed_window";
-import {DQAgentConfig, AgentTrackingInformation} from "../AgentConfig";
+import {DQAgentConfig, AgentTrackingInformation} from "../agent_config";
 import {AbstractAgent} from "../abstract_agent";
 
 const MEM_WINDOW_MIN_SIZE = 2;

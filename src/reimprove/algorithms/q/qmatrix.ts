@@ -8,9 +8,10 @@ export class QMatrix {
     private states: Map<string, QState>;
     private transitions: Array<QTransition>;
 
+
     private initialState: QState;
 
-    constructor(private hashFunction: (data: QStateData) => string) {
+    constructor(private hashFunction?: (data: QStateData) => string) {
         this.actions = new Map<string, QAction>();
         this.states = new Map<string, QState>();
         this.transitions = [];
@@ -21,10 +22,12 @@ export class QMatrix {
     }
 
     registerState(data: QStateData, reward: number = 0.): QState {
+        if(!this.hashFunction)
+            throw new Error("Unable to register a state without a hash function.");
         if (this.states.has(this.hash(data)))
             return this.states.get(this.hash(data));
         const state = new QState(data, reward);
-        this.states.set(this.hash(data), state);
+        this.states.set(this.hash(state.Data), state);
         return state;
     }
 
@@ -46,8 +49,14 @@ export class QMatrix {
         try {
             return this.hashFunction(data);
         } catch (exception) {
-            throw new Error("Unable to hash the object, are you sure you gave a defined QStateData ?");
+            console.error("Unable to hash the object, are you sure you gave a defined QStateData ? : " + exception);
+            console.error("Falling on default hash func ... [ PLEASE PROVIDE A HASH FUNCTION ]");
+            return QMatrix.defaultHash(data);
         }
+    }
+
+    static defaultHash(data: QStateData): string {
+        return JSON.stringify(data);
     }
 
     getStateFromData(data: QStateData): QState | undefined{
@@ -128,10 +137,18 @@ export class QMatrix {
     }
 
     get HashFunction() {
-        return this.hash;
+        return this.hashFunction;
     }
 
-    get States() {
+    set HashFunction(func: (data: QStateData) => string) {
+        this.hashFunction = func;
+    }
+
+    get States(): Array<QState> {
         return Array.from(this.states.values());
+    }
+
+    get Actions(): Array<QAction> {
+        return Array.from(this.actions.values());
     }
 }

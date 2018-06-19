@@ -1,4 +1,4 @@
-import {AgentConfig, AgentTrackingInformation} from "./AgentConfig";
+import {AgentConfig, AgentTrackingInformation} from "./agent_config";
 import {QAction} from "./q/qaction";
 import {QTransition} from "./q/qtransition";
 
@@ -22,6 +22,6 @@ export abstract class AbstractAgent {
     abstract getTrackingInformation(): AgentTrackingInformation;
     abstract reset(): void;
 
-    abstract learn(gamma?: number, alpha?: number): void;
+    // abstract learn(gamma?: number, alpha?: number, data?: QStateData): void;
     abstract infer(input: number[] | QAction, epsilon?: number, keepTensors?: boolean): number | QTransition;
 }

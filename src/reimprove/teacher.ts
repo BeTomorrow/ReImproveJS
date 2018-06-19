@@ -1,5 +1,5 @@
 import {DQAgent} from "./algorithms/deepq/dqagent";
-import {AgentTrackingInformation} from "./algorithms/AgentConfig";
+import {AgentTrackingInformation} from "./algorithms/agent_config";
 
 
 const DEFAULT_TEACHING_CONFIG: TeachingConfig = {

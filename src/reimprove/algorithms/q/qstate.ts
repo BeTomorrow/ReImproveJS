@@ -8,17 +8,20 @@ export interface QStateData {
 export class QState {
     private transitions: Map<QAction, QTransition>;
     private final: boolean;
+    private id: number;
 
-    constructor(private data: QStateData, private reward: number) {
+    private static stateId: number = 0;
+
+    constructor(private readonly data: QStateData, private reward: number) {
         this.transitions = new Map<QAction, QTransition>();
         this.final = false;
+        this.id = QState.stateId++;
     }
 
-    setTransition(action: QAction, to: QState): boolean {
-        if(this.transitions.has(action))
-            return false;
-        this.transitions.set(action, new QTransition(this, to, action));
-        return true;
+    setTransition(action: QAction, to: QState): QTransition {
+        if(!this.transitions.has(action) || this.transitions.get(action) === null)
+            return this.transitions.set(action, new QTransition(this, to, action)).get(action);
+        return null;
     }
 
     takeAction(action: QAction): QTransition {
@@ -32,4 +35,5 @@ export class QState {
     setFinal(): QState { this.final = true; return this; }
     set Final(final: boolean) { this.final = final; }
     get Final() { return this.final; }
+    get Id(): number { return this.id; }
 }

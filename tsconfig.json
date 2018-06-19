@@ -33,6 +33,12 @@
     "strictPropertyInitialization": true,
     "target": "es5"
   },
+  "directive-selector": [
+    true,
+    "attribute",
+    "app",
+    "camelCase"
+  ],
   "include": [
     "src/**/*.ts"
   ],
