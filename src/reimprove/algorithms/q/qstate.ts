@@ -8,7 +8,7 @@ export interface QStateData {
 export class QState {
     private transitions: Map<QAction, QTransition>;
     private final: boolean;
-    private id: number;
+    private readonly id: number;
 
     private static stateId: number = 0;
 
@@ -18,9 +18,9 @@ export class QState {
         this.id = QState.stateId++;
     }
 
-    setTransition(action: QAction, to: QState): QTransition {
+    setTransition(action: QAction, transition: QTransition): QTransition {
         if(!this.transitions.has(action) || this.transitions.get(action) === null)
-            return this.transitions.set(action, new QTransition(this, to, action)).get(action);
+            return this.transitions.set(action, transition).get(action);
         return null;
     }
 

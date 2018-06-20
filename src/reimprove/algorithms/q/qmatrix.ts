@@ -2,6 +2,20 @@ import {QAction, QActionData} from "./qaction";
 import {QState, QStateData} from "./qstate";
 import {QTransition} from "./qtransition";
 
+export interface GraphNode {
+    id: number;
+    label: string;
+    color?: string;
+}
+
+export interface GraphEdge {
+    from: number;
+    to: number;
+    id: number;
+    label: string;
+    arrows: string;
+    color: string;
+}
 
 export class QMatrix {
     private actions: Map<string, QAction>;
@@ -22,7 +36,7 @@ export class QMatrix {
     }
 
     registerState(data: QStateData, reward: number = 0.): QState {
-        if(!this.hashFunction)
+        if (!this.hashFunction)
             throw new Error("Unable to register a state without a hash function.");
         if (this.states.has(this.hash(data)))
             return this.states.get(this.hash(data));
@@ -33,12 +47,27 @@ export class QMatrix {
 
     registerTransition(action: string, from: QState, to: QState, oppositeActionName?: string): QTransition {
         const qaction = this.action(action);
-        const transition = new QTransition(from, to, qaction);
-        from.setTransition(qaction, to);
-        if (oppositeActionName)
-            to.setTransition(this.action(oppositeActionName), from);
+
+        let transition = new QTransition(from, to, qaction);
+        from.setTransition(qaction, transition);
         this.transitions.push(transition);
+
+        if (oppositeActionName) {
+            transition = new QTransition(to, from, qaction);
+            to.setTransition(this.action(oppositeActionName), transition);
+            this.transitions.push(transition);
+        }
+
         return transition;
+    }
+
+    updateTransition(id: number, to: QState): QTransition | undefined {
+        const trans = this.transitions.find(t => t.Id === id);
+        if (trans) {
+            trans.To = to;
+            return trans;
+        }
+        return undefined;
     }
 
     action(name: string): QAction {
@@ -59,7 +88,7 @@ export class QMatrix {
         return JSON.stringify(data);
     }
 
-    getStateFromData(data: QStateData): QState | undefined{
+    getStateFromData(data: QStateData): QState | undefined {
         return this.states.get(this.hash(data));
     }
 
@@ -151,4 +180,40 @@ export class QMatrix {
     get Actions(): Array<QAction> {
         return Array.from(this.actions.values());
     }
+
+    getGraphData(): { nodes: GraphNode[], edges: GraphEdge[] } {
+        const nodes: GraphNode[] = this.States.map(s => ({
+            id: s.Id,
+            label: JSON.stringify(s.Data),
+            color: getColor(s.Reward)
+        }));
+        const edges: GraphEdge[] = this.transitions
+            .filter(t => t.To && t.From)
+            .map(t => ({
+                id: t.Id,
+                to: t.To.Id,
+                from: t.From.Id,
+                label: `${t.Q}-${t.Action.Name}`,
+                color: getColor(t.Q),
+                arrows: 'to'
+            }));
+
+        return {nodes: nodes, edges: edges};
+    }
+}
+
+function getColor(value: number) {
+    //value from 0 to 1
+    const hue = parseInt(((1 - value) * 120).toString(10));
+    const h = hue;
+    const s = 1;
+    const l = 0.5;
+
+    const c = (1 - Math.abs(2 * l - 1)) * s;
+    const x = c * (1 - Math.abs(h / 60 % 2 - 1));
+    const m = l - c / 2;
+
+    const values = hue < 60 ? [c, x, 0] : [x, c, 0];
+    const rgb = [(values[0] + m) * 255, (values[1] + m) * 255, (values[2] + m) * 255];
+    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 }

@@ -109,7 +109,7 @@ describe("QLearning", () => {
         });
 
         while (qagent.isPerforming()) {
-            switch (qagent.infer(data).Action.Name) {
+            switch (qagent.infer().Action.Name) {
                 case "LEFT":
                     data.x -= data.x > 0 ? 1 : 0;
                     break;
@@ -119,7 +119,7 @@ describe("QLearning", () => {
             }
 
 
-            qagent.learn();
+            qagent.learn(data);
             console.log(`State : ${qagent.CurrentState.Data.x}`);
 
             if (data.x === 3 && data.y === 0)
@@ -127,5 +127,30 @@ describe("QLearning", () => {
         }
 
         expect(data).to.be.deep.equal({x: 3, y: 0});
+    });
+
+    it("should produce a good graph output", () => {
+        const data = {x: 0, y: 0};
+        const gamma = 0.9;
+
+        qagent = new QAgent({
+            dataHash: hash,
+            initialState: data,
+            gamma: gamma,
+            createMatrixDynamically: true,
+            actions: ["LEFT", "RIGHT"]
+        });
+
+        let graph = qagent.getStatesGraph();
+
+        expect(graph.nodes.length).to.be.equal(1);
+        expect(graph.edges.length).to.be.equal(0);
+
+        qagent.infer();
+        qagent.learn({x:1, y:0});
+
+        graph = qagent.getStatesGraph();
+        expect(graph.nodes.length).to.be.equal(2);
+        expect(graph.edges.length).to.be.equal(1);
     });
 });
