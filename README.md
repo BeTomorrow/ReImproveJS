@@ -128,7 +128,7 @@ async function step(time) {
     
     let inputs = getInputs();          // Need to give a number[] of your inputs for one teacher.
     await academy.step([               // Let the magic operate ...
-        {teacherName: teacher, inputs: inputs}
+        {teacherName: teacher, agentInputs: inputs}
     ]);
     
 }
