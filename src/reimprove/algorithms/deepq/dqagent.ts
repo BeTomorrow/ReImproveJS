@@ -77,12 +77,19 @@ export class DQAgent extends AbstractAgent {
         return this.model.predict(input).getAction();
     }
 
-    infer(input: number[], epsilon: number, keepTensors: boolean = true): number {
+    infer(input: number[] | number[][], epsilon: number, keepTensors: boolean = true): number {
         this.forwardPasses += 1;
 
         let action;
         let netInput;
-        const tensorInput = tensor2d(input, [1, input.length]);
+        let tensorInput;
+        if(Array.isArray(input) && Array.isArray(input[0]))
+            tensorInput = tensor(input);
+        else if (Array.isArray(input))
+            tensorInput = tensor2d([input as number[]], [1, input.length]);
+        else
+            throw new Error("Unable to create convenient tensor for training.");
+
         if (this.forwardPasses > <number>this.AgentConfig.temporalWindow) {
             netInput = this.createNeuralNetInput(tensorInput);
 
@@ -145,7 +152,7 @@ export class DQAgent extends AbstractAgent {
         });
     }
 
-    listen(input: number[], epsilon: number): number {
+    listen(input: number[] | number[][], epsilon: number): number {
         let action = this.infer(input, epsilon, true);
         this.memorize();
 

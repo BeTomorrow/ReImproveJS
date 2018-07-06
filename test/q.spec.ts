@@ -25,7 +25,7 @@ qmatrix.setStateAsInitial({x: 0, y: 0});
 qmatrix.setStateAsFinal({x: 2, y: 0});
 
 
-describe("QLearning", () => {
+describe.skip("QLearning", () => {
     beforeEach(() => {
         qagent = new QAgent({dataHash: hash, gamma: 0.9}, qmatrix);
     });

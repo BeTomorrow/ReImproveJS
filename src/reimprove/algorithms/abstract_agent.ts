@@ -23,5 +23,5 @@ export abstract class AbstractAgent {
     abstract reset(): void;
 
     // abstract learn(gamma?: number, alpha?: number, data?: QStateData): void;
-    abstract infer(input: number[] | QAction, epsilon?: number, keepTensors?: boolean): number | QTransition;
+    abstract infer(input: number[] | number[][] | QAction, epsilon?: number, keepTensors?: boolean): number | QTransition;
 }
