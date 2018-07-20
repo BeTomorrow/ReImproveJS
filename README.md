@@ -71,7 +71,7 @@ const model = new ReImprove.Model.FromNetwork(network, modelFitConfig);
 
 // Finally compile the model, we also exactly use tfjs's optimizers and loss functions
 // (So feel free to choose one among tfjs's)
-model.compile({loss: 'crossEntropy', optimizer: 'sgd'})
+model.compile({loss: 'meanSquaredError', optimizer: 'sgd'})
 
 ```
 
@@ -128,7 +128,7 @@ async function step(time) {
     
     let inputs = getInputs();          // Need to give a number[] of your inputs for one teacher.
     await academy.step([               // Let the magic operate ...
-        {teacherName: teacher, agentInputs: inputs}
+        {teacherName: teacher, agentsInput: inputs}
     ]);
     
 }
