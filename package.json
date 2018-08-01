@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "private": false,
   "description": "A library using TensorFlow.js for Deep Reinforcement Learning",
-  "main": "./dist/index.js",
+  "main": "./dist/reimprove.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
