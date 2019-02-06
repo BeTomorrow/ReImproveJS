@@ -142,4 +142,9 @@ Rewards are reset to 0 at each new step.
 __Please be careful__ : Convolutional networks are implemented and operational as models, but currently not 
 fully implemented and tested in the Reinforcement Learning, so please __do not use them__ for now.
 
+Exemples
+-----------------
+
+Here an exemple made by [@RGBKnights](https://github.com/RGBKnights) : https://gist.github.com/RGBKnights/756b5f51465cc22d0ca39205979ad2a1
+
 
