@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/Pravez/ReImproveJS#readme",
   "dependencies": {
-    "@tensorflow/tfjs": "^0.11.2",
+    "@tensorflow/tfjs": "^1.2.1",
     "@types/lodash": "^4.14.109",
     "@types/uuid": "^3.4.3",
     "lodash": "^4.17.10",
@@ -44,11 +44,11 @@
     "mocha": "^5.2.0",
     "sinon": "^5.0.10",
     "sinon-chai": "^3.1.0",
-    "ts-node": "^6.0.5",
+    "ts-node": "^8.3.0",
     "tsify": "^4.0.0",
-    "typedoc": "^0.11.1",
-    "typedoc-plugin-markdown": "^1.1.12",
-    "typescript": "^2.8.3",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^2.0.4",
+    "typescript": "^3.5.2",
     "uglify-js": "^3.3.27"
   },
   "files": [
