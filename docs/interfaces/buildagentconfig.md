@@ -1,4 +1,6 @@
-[ReImproveJS](../README.md) > [BuildAgentConfig](../interfaces/buildagentconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [BuildAgentConfig](buildagentconfig.md) /
 
 # Interface: BuildAgentConfig
 
@@ -6,39 +8,33 @@ Configuration to build an agent
 
 ## Hierarchy
 
-**BuildAgentConfig**
+* **BuildAgentConfig**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
-* [agentConfig](buildagentconfig.md#agentconfig)
+* [agentConfig](buildagentconfig.md#optional-agentconfig)
 * [model](buildagentconfig.md#model)
-
----
 
 ## Properties
 
-<a id="agentconfig"></a>
+### `Optional` agentConfig
 
-### `<Optional>` agentConfig
+● **agentConfig**? : *[DQAgentConfig](dqagentconfig.md)*
 
-**● agentConfig**: *[AgentConfig](agentconfig.md)*
-
-*Defined in [reimprove/academy.ts:39](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L39)*
+*Defined in [reimprove/academy.ts:40](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L40)*
 
 The agent configuration, defaulted if not present
 
 ___
-<a id="model"></a>
 
 ###  model
 
-**● model**: *[Model](../classes/model.md)*
+● **model**: *[Model](../classes/model.md)*
 
-*Defined in [reimprove/academy.ts:37](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L37)*
+*Defined in [reimprove/academy.ts:38](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L38)*
 
 The agent cannot have no model. But multiple agents can share the same one
 
 ___
-

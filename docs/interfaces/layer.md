@@ -1,67 +1,60 @@
-[ReImproveJS](../README.md) > [Layer](../interfaces/layer.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [Layer](layer.md) /
 
 # Interface: Layer
 
 ## Hierarchy
 
-**Layer**
+* **Layer**
 
-↳  [ConvolutionalNetworkLayer](convolutionalnetworklayer.md)
+  * [ConvolutionalNetworkLayer](convolutionalnetworklayer.md)
 
-↳  [NeuralNetworkLayer](neuralnetworklayer.md)
+  * [NeuralNetworkLayer](neuralnetworklayer.md)
 
-↳  [FlattenLayer](flattenlayer.md)
+  * [FlattenLayer](flattenlayer.md)
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
-* [activation](layer.md#activation)
-* [inputShape](layer.md#inputshape)
-* [name](layer.md#name)
-* [useBias](layer.md#usebias)
-
----
+* [activation](layer.md#optional-activation)
+* [inputShape](layer.md#optional-inputshape)
+* [name](layer.md#optional-name)
+* [useBias](layer.md#optional-usebias)
 
 ## Properties
 
-<a id="activation"></a>
+### `Optional` activation
 
-### `<Optional>` activation
+● **activation**? : *string | any*
 
-**● activation**: * `string` &#124; `any`
-*
-
-*Defined in [reimprove/networks.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L4)*
+*Defined in [reimprove/networks.ts:4](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L4)*
 
 ___
-<a id="inputshape"></a>
 
-### `<Optional>` inputShape
+### `Optional` inputShape
 
-**● inputShape**: *`number`[]*
+● **inputShape**? : *number[]*
 
-*Defined in [reimprove/networks.ts:8](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L8)*
+*Defined in [reimprove/networks.ts:8](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L8)*
 
 Do not use this field
 
 ___
-<a id="name"></a>
 
-### `<Optional>` name
+### `Optional` name
 
-**● name**: *`string`*
+● **name**? : *string*
 
-*Defined in [reimprove/networks.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L6)*
-
-___
-<a id="usebias"></a>
-
-### `<Optional>` useBias
-
-**● useBias**: *`boolean`*
-
-*Defined in [reimprove/networks.ts:5](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L5)*
+*Defined in [reimprove/networks.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L6)*
 
 ___
 
+### `Optional` useBias
+
+● **useBias**? : *boolean*
+
+*Defined in [reimprove/networks.ts:5](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L5)*
+
+___

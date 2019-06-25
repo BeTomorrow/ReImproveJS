@@ -1,18 +1,20 @@
-[ReImproveJS](../README.md) > [Teacher](../classes/teacher.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [Teacher](teacher.md) /
 
 # Class: Teacher
 
 ## Hierarchy
 
-**Teacher**
+* **Teacher**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](teacher.md#constructor)
 
-### Properties
+#### Properties
 
 * [agents](teacher.md#agents)
 * [config](teacher.md#config)
@@ -25,15 +27,15 @@
 * [onTeachingEnded](teacher.md#onteachingended)
 * [state](teacher.md#state)
 
-### Accessors
+#### Accessors
 
-* [Name](teacher.md#name-1)
-* [OnLearningLessonEnded](teacher.md#onlearninglessonended-1)
-* [OnLessonEnded](teacher.md#onlessonended-1)
-* [OnTeachingEnded](teacher.md#onteachingended-1)
-* [State](teacher.md#state-1)
+* [Name](teacher.md#name)
+* [OnLearningLessonEnded](teacher.md#onlearninglessonended)
+* [OnLessonEnded](teacher.md#onlessonended)
+* [OnTeachingEnded](teacher.md#onteachingended)
+* [State](teacher.md#state)
 
-### Methods
+#### Methods
 
 * [affectStudent](teacher.md#affectstudent)
 * [getData](teacher.md#getdata)
@@ -41,363 +43,371 @@
 * [reset](teacher.md#reset)
 * [resetLesson](teacher.md#resetlesson)
 * [start](teacher.md#start)
+* [startTeaching](teacher.md#startteaching)
 * [stop](teacher.md#stop)
+* [stopTeaching](teacher.md#stopteaching)
 * [teach](teacher.md#teach)
 * [updateParameters](teacher.md#updateparameters)
 
----
-
 ## Constructors
-
-<a id="constructor"></a>
 
 ###  constructor
 
-⊕ **new Teacher**(config?: *[TeachingConfig](../interfaces/teachingconfig.md)*, name?: *`string`*): [Teacher](teacher.md)
+\+ **new Teacher**(`config?`: [TeachingConfig](../interfaces/teachingconfig.md), `name?`: string): *[Teacher](teacher.md)*
 
-*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L57)*
+*Defined in [reimprove/teacher.ts:60](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L60)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| `Optional` config | [TeachingConfig](../interfaces/teachingconfig.md) |
-| `Optional` name | `string` |
+Name | Type |
+------ | ------ |
+`config?` | [TeachingConfig](../interfaces/teachingconfig.md) |
+`name?` | string |
 
-**Returns:** [Teacher](teacher.md)
+**Returns:** *[Teacher](teacher.md)*
 
 ___
 
 ## Properties
 
-<a id="agents"></a>
-
 ###  agents
 
-**● agents**: *`Set`<[Agent](agent.md)>*
+● **agents**: *`Set<DQAgent>`*
 
-*Defined in [reimprove/teacher.ts:48](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L48)*
+*Defined in [reimprove/teacher.ts:51](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L51)*
 
 ___
-<a id="config"></a>
 
 ###  config
 
-**● config**: *[TeachingConfig](../interfaces/teachingconfig.md)*
+● **config**: *[TeachingConfig](../interfaces/teachingconfig.md)*
 
-*Defined in [reimprove/teacher.ts:45](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L45)*
+*Defined in [reimprove/teacher.ts:48](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L48)*
 
 ___
-<a id="currentepsilon"></a>
 
 ###  currentEpsilon
 
-**● currentEpsilon**: *`number`*
+● **currentEpsilon**: *number*
 
-*Defined in [reimprove/teacher.ts:57](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L57)*
+*Defined in [reimprove/teacher.ts:60](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L60)*
 
 ___
-<a id="currentlessonlength"></a>
 
 ###  currentLessonLength
 
-**● currentLessonLength**: *`number`*
+● **currentLessonLength**: *number*
 
-*Defined in [reimprove/teacher.ts:50](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L50)*
+*Defined in [reimprove/teacher.ts:53](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L53)*
 
 ___
-<a id="lessonstaught"></a>
 
 ###  lessonsTaught
 
-**● lessonsTaught**: *`number`*
+● **lessonsTaught**: *number*
 
-*Defined in [reimprove/teacher.ts:51](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L51)*
+*Defined in [reimprove/teacher.ts:54](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L54)*
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+● **name**: *string*
 
-*Defined in [reimprove/teacher.ts:44](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L44)*
+*Defined in [reimprove/teacher.ts:47](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L47)*
 
 ___
-<a id="onlearninglessonended"></a>
 
 ###  onLearningLessonEnded
 
-**● onLearningLessonEnded**: *`function`*
+● **onLearningLessonEnded**: *function*
 
-*Defined in [reimprove/teacher.ts:53](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L53)*
+*Defined in [reimprove/teacher.ts:56](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L56)*
 
-#### Type declaration
-▸(teacher: *`string`*): `void`
+#### Type declaration:
+
+▸ (`teacher`: string): *void*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| teacher | `string` |
-
-**Returns:** `void`
+Name | Type |
+------ | ------ |
+`teacher` | string |
 
 ___
-<a id="onlessonended"></a>
 
 ###  onLessonEnded
 
-**● onLessonEnded**: *`function`*
+● **onLessonEnded**: *function*
 
-*Defined in [reimprove/teacher.ts:54](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L54)*
+*Defined in [reimprove/teacher.ts:57](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L57)*
 
-#### Type declaration
-▸(teacher: *`string`*, lessonNumber: *`number`*): `void`
+#### Type declaration:
+
+▸ (`teacher`: string, `lessonNumber`: number): *void*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| teacher | `string` |
-| lessonNumber | `number` |
-
-**Returns:** `void`
+Name | Type |
+------ | ------ |
+`teacher` | string |
+`lessonNumber` | number |
 
 ___
-<a id="onteachingended"></a>
 
 ###  onTeachingEnded
 
-**● onTeachingEnded**: *`function`*
+● **onTeachingEnded**: *function*
 
-*Defined in [reimprove/teacher.ts:55](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L55)*
+*Defined in [reimprove/teacher.ts:58](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L58)*
 
-#### Type declaration
-▸(teacher: *`string`*): `void`
+#### Type declaration:
+
+▸ (`teacher`: string): *void*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| teacher | `string` |
-
-**Returns:** `void`
+Name | Type |
+------ | ------ |
+`teacher` | string |
 
 ___
-<a id="state"></a>
 
 ###  state
 
-**● state**: *[TeachingState](../enums/teachingstate.md)*
+● **state**: *[TeachingState](../enums/teachingstate.md)*
 
-*Defined in [reimprove/teacher.ts:46](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L46)*
+*Defined in [reimprove/teacher.ts:49](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L49)*
 
 ___
 
 ## Accessors
 
-<a id="name-1"></a>
-
 ###  Name
 
-getName(): `string`setName(name: *`string`*): `void`
+● **get Name**(): *string*
 
-*Defined in [reimprove/teacher.ts:195](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L195)*
+*Defined in [reimprove/teacher.ts:210](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L210)*
 
-**Returns:** `string`
+**Returns:** *string*
 
-*Defined in [reimprove/teacher.ts:191](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L191)*
+● **set Name**(`name`: string): *void*
+
+*Defined in [reimprove/teacher.ts:206](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L206)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| name | `string` |
+Name | Type |
+------ | ------ |
+`name` | string |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="onlearninglessonended-1"></a>
 
 ###  OnLearningLessonEnded
 
-setOnLearningLessonEnded(callback: *`function`*): `void`
+● **set OnLearningLessonEnded**(`callback`: function): *void*
 
-*Defined in [reimprove/teacher.ts:179](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L179)*
+*Defined in [reimprove/teacher.ts:194](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L194)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback | `function` |
+■` callback`: *function*
 
-**Returns:** `void`
+▸ (`teacher`: string): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+
+**Returns:** *void*
 
 ___
-<a id="onlessonended-1"></a>
 
 ###  OnLessonEnded
 
-setOnLessonEnded(callback: *`function`*): `void`
+● **set OnLessonEnded**(`callback`: function): *void*
 
-*Defined in [reimprove/teacher.ts:183](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L183)*
+*Defined in [reimprove/teacher.ts:198](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L198)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback | `function` |
+■` callback`: *function*
 
-**Returns:** `void`
+▸ (`teacher`: string, `lessonNumber`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+`lessonNumber` | number |
+
+**Returns:** *void*
 
 ___
-<a id="onteachingended-1"></a>
 
 ###  OnTeachingEnded
 
-setOnTeachingEnded(callback: *`function`*): `void`
+● **set OnTeachingEnded**(`callback`: function): *void*
 
-*Defined in [reimprove/teacher.ts:187](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L187)*
+*Defined in [reimprove/teacher.ts:202](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L202)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| callback | `function` |
+■` callback`: *function*
 
-**Returns:** `void`
+▸ (`teacher`: string): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+
+**Returns:** *void*
 
 ___
-<a id="state-1"></a>
 
 ###  State
 
-getState(): [TeachingState](../enums/teachingstate.md)
+● **get State**(): *[TeachingState](../enums/teachingstate.md)*
 
-*Defined in [reimprove/teacher.ts:199](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L199)*
+*Defined in [reimprove/teacher.ts:214](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L214)*
 
-**Returns:** [TeachingState](../enums/teachingstate.md)
+**Returns:** *[TeachingState](../enums/teachingstate.md)*
 
 ___
 
 ## Methods
 
-<a id="affectstudent"></a>
-
 ###  affectStudent
 
-▸ **affectStudent**(agent: *[Agent](agent.md)*): `void`
+▸ **affectStudent**(`agent`: [DQAgent](dqagent.md)): *void*
 
-*Defined in [reimprove/teacher.ts:73](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L73)*
+*Defined in [reimprove/teacher.ts:76](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L76)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| agent | [Agent](agent.md) |
+Name | Type |
+------ | ------ |
+`agent` | [DQAgent](dqagent.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="getdata"></a>
 
 ###  getData
 
-▸ **getData**(): [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
+▸ **getData**(): *[TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)*
 
-*Defined in [reimprove/teacher.ts:150](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L150)*
+*Defined in [reimprove/teacher.ts:165](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L165)*
 
-**Returns:** [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
+**Returns:** *[TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)*
 
 ___
-<a id="removestudent"></a>
 
 ###  removeStudent
 
-▸ **removeStudent**(agent: *[Agent](agent.md)*): `boolean`
+▸ **removeStudent**(`agent`: [DQAgent](dqagent.md)): *boolean*
 
-*Defined in [reimprove/teacher.ts:77](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L77)*
+*Defined in [reimprove/teacher.ts:80](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L80)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| agent | [Agent](agent.md) |
+Name | Type |
+------ | ------ |
+`agent` | [DQAgent](dqagent.md) |
 
-**Returns:** `boolean`
+**Returns:** *boolean*
 
 ___
-<a id="reset"></a>
 
 ###  reset
 
-▸ **reset**(): `void`
+▸ **reset**(): *void*
 
-*Defined in [reimprove/teacher.ts:169](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L169)*
+*Defined in [reimprove/teacher.ts:184](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L184)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="resetlesson"></a>
 
 ###  resetLesson
 
-▸ **resetLesson**(): `void`
+▸ **resetLesson**(): *void*
 
-*Defined in [reimprove/teacher.ts:164](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L164)*
+*Defined in [reimprove/teacher.ts:179](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L179)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="start"></a>
 
 ###  start
 
-▸ **start**(): `void`
+▸ **start**(): *void*
 
-*Defined in [reimprove/teacher.ts:81](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L81)*
+*Defined in [reimprove/teacher.ts:84](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L84)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="stop"></a>
+
+###  startTeaching
+
+▸ **startTeaching**(): *void*
+
+*Defined in [reimprove/teacher.ts:151](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L151)*
+
+**Returns:** *void*
+
+___
 
 ###  stop
 
-▸ **stop**(): `void`
+▸ **stop**(): *void*
 
-*Defined in [reimprove/teacher.ts:175](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L175)*
+*Defined in [reimprove/teacher.ts:190](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L190)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="teach"></a>
+
+###  stopTeaching
+
+▸ **stopTeaching**(): *void*
+
+*Defined in [reimprove/teacher.ts:147](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L147)*
+
+**Returns:** *void*
+
+___
 
 ###  teach
 
-▸ **teach**(inputs: *`number`[]*): `Promise`<`Map`<`string`, `number`>>
+▸ **teach**(`inputs`: number[]): *`Promise<Map<string, number>>`*
 
-*Defined in [reimprove/teacher.ts:87](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L87)*
+*Defined in [reimprove/teacher.ts:90](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L90)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| inputs | `number`[] |
+Name | Type |
+------ | ------ |
+`inputs` | number[] |
 
-**Returns:** `Promise`<`Map`<`string`, `number`>>
+**Returns:** *`Promise<Map<string, number>>`*
 
 ___
-<a id="updateparameters"></a>
 
 ###  updateParameters
 
-▸ **updateParameters**(): `void`
+▸ **updateParameters**(): *void*
 
-*Defined in [reimprove/teacher.ts:141](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L141)*
+*Defined in [reimprove/teacher.ts:156](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L156)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-

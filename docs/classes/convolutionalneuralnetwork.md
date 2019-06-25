@@ -1,31 +1,36 @@
-[ReImproveJS](../README.md) > [ConvolutionalNeuralNetwork](../classes/convolutionalneuralnetwork.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [ConvolutionalNeuralNetwork](convolutionalneuralnetwork.md) /
 
 # Class: ConvolutionalNeuralNetwork
 
+**`deprecated`** Do not use convolutional networks with ReImproveJS for now, they are not fully implemented and tested in
+the library.
+
 ## Hierarchy
 
- [NeuralNetwork](neuralnetwork.md)
+* [NeuralNetwork](neuralnetwork.md)
 
-**↳ ConvolutionalNeuralNetwork**
+  * **ConvolutionalNeuralNetwork**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](convolutionalneuralnetwork.md#constructor)
 
-### Properties
+#### Properties
 
-* [convolutionalLayers](convolutionalneuralnetwork.md#convolutionallayers)
-* [flattenLayer](convolutionalneuralnetwork.md#flattenlayer)
-* [inputShape](convolutionalneuralnetwork.md#inputshape)
+* [convolutionalLayers](convolutionalneuralnetwork.md#private-convolutionallayers)
+* [flattenLayer](convolutionalneuralnetwork.md#private-flattenlayer)
+* [inputShape](convolutionalneuralnetwork.md#protected-inputshape)
 
-### Accessors
+#### Accessors
 
-* [FlattenLayer](convolutionalneuralnetwork.md#flattenlayer-1)
-* [InputShape](convolutionalneuralnetwork.md#inputshape-1)
+* [FlattenLayer](convolutionalneuralnetwork.md#flattenlayer)
+* [InputShape](convolutionalneuralnetwork.md#inputshape)
 
-### Methods
+#### Methods
 
 * [addConvolutionalLayer](convolutionalneuralnetwork.md#addconvolutionallayer)
 * [addConvolutionalLayers](convolutionalneuralnetwork.md#addconvolutionallayers)
@@ -35,307 +40,261 @@
 * [createLayers](convolutionalneuralnetwork.md#createlayers)
 * [getLayers](convolutionalneuralnetwork.md#getlayers)
 
-### Object literals
+#### Object literals
 
-* [DEFAULT_CONV_LAYER](convolutionalneuralnetwork.md#default_conv_layer)
-* [DEFAULT_POOLING_LAYER](convolutionalneuralnetwork.md#default_pooling_layer)
-
----
+* [DEFAULT_CONV_LAYER](convolutionalneuralnetwork.md#static-private-default_conv_layer)
+* [DEFAULT_POOLING_LAYER](convolutionalneuralnetwork.md#static-private-default_pooling_layer)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new ConvolutionalNeuralNetwork**(): [ConvolutionalNeuralNetwork](convolutionalneuralnetwork.md)
+\+ **new ConvolutionalNeuralNetwork**(): *[ConvolutionalNeuralNetwork](convolutionalneuralnetwork.md)*
 
 *Overrides [NeuralNetwork](neuralnetwork.md).[constructor](neuralnetwork.md#constructor)*
 
-*Defined in [reimprove/networks.ts:117](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L117)*
+*Defined in [reimprove/networks.ts:121](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L121)*
 
-**Returns:** [ConvolutionalNeuralNetwork](convolutionalneuralnetwork.md)
+**Returns:** *[ConvolutionalNeuralNetwork](convolutionalneuralnetwork.md)*
 
 ___
 
 ## Properties
 
-<a id="convolutionallayers"></a>
+### `Private` convolutionalLayers
 
-### `<Private>` convolutionalLayers
+● **convolutionalLayers**: *[ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)[]*
 
-**● convolutionalLayers**: *[ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)[]*
-
-*Defined in [reimprove/networks.ts:103](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L103)*
+*Defined in [reimprove/networks.ts:107](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L107)*
 
 ___
-<a id="flattenlayer"></a>
 
-### `<Private>` flattenLayer
+### `Private` flattenLayer
 
-**● flattenLayer**: *[FlattenLayer](../interfaces/flattenlayer.md)*
+● **flattenLayer**: *[FlattenLayer](../interfaces/flattenlayer.md)*
 
-*Defined in [reimprove/networks.ts:104](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L104)*
+*Defined in [reimprove/networks.ts:108](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L108)*
 
 ___
-<a id="inputshape"></a>
 
-### `<Protected>` inputShape
+### `Protected` inputShape
 
-**● inputShape**: *`number`[]*
+● **inputShape**: *number[]*
 
-*Inherited from [NeuralNetwork](neuralnetwork.md).[inputShape](neuralnetwork.md#inputshape)*
+*Inherited from [NeuralNetwork](neuralnetwork.md).[inputShape](neuralnetwork.md#protected-inputshape)*
 
-*Defined in [reimprove/networks.ts:55](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L55)*
+*Defined in [reimprove/networks.ts:55](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L55)*
 
 ___
 
 ## Accessors
 
-<a id="flattenlayer-1"></a>
-
 ###  FlattenLayer
 
-setFlattenLayer(layer: *[FlattenLayer](../interfaces/flattenlayer.md)*): `void`
+● **set FlattenLayer**(`layer`: [FlattenLayer](../interfaces/flattenlayer.md)): *void*
 
-*Defined in [reimprove/networks.ts:158](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L158)*
+*Defined in [reimprove/networks.ts:162](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L162)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| layer | [FlattenLayer](../interfaces/flattenlayer.md) |
+Name | Type |
+------ | ------ |
+`layer` | [FlattenLayer](../interfaces/flattenlayer.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="inputshape-1"></a>
 
 ###  InputShape
 
-setInputShape(shape: *`number`[]*): `void`
+● **set InputShape**(`shape`: number[]): *void*
 
-*Inherited from [NeuralNetwork](neuralnetwork.md).[InputShape](neuralnetwork.md#inputshape-1)*
+*Inherited from [NeuralNetwork](neuralnetwork.md).[InputShape](neuralnetwork.md#inputshape)*
 
-*Defined in [reimprove/networks.ts:85](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L85)*
+*Defined in [reimprove/networks.ts:85](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L85)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| shape | `number`[] |
+Name | Type |
+------ | ------ |
+`shape` | number[] |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
 
 ## Methods
 
-<a id="addconvolutionallayer"></a>
-
 ###  addConvolutionalLayer
 
-▸ **addConvolutionalLayer**(layer: * `number` &#124; [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)*): `void`
+▸ **addConvolutionalLayer**(`layer`: number | [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)): *void*
 
-*Defined in [reimprove/networks.ts:129](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L129)*
+*Defined in [reimprove/networks.ts:133](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L133)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| layer |  `number` &#124; [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)|
+Name | Type |
+------ | ------ |
+`layer` | number \| [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="addconvolutionallayers"></a>
 
 ###  addConvolutionalLayers
 
-▸ **addConvolutionalLayers**(layers: *`Array`< `number` &#124; [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)>*): `void`
+▸ **addConvolutionalLayers**(`layers`: `Array<number | ConvolutionalNetworkLayer>`): *void*
 
-*Defined in [reimprove/networks.ts:142](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L142)*
+*Defined in [reimprove/networks.ts:146](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L146)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| layers | `Array`< `number` &#124; [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)> |
+Name | Type |
+------ | ------ |
+`layers` | `Array<number \| ConvolutionalNetworkLayer>` |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="addmaxpooling2dlayer"></a>
 
 ###  addMaxPooling2DLayer
 
-▸ **addMaxPooling2DLayer**(layer?: *[MaxPooling2DLayer](../interfaces/maxpooling2dlayer.md)*): `void`
+▸ **addMaxPooling2DLayer**(`layer?`: [MaxPooling2DLayer](../interfaces/maxpooling2dlayer.md)): *void*
 
-*Defined in [reimprove/networks.ts:125](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L125)*
+*Defined in [reimprove/networks.ts:129](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L129)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| `Optional` layer | [MaxPooling2DLayer](../interfaces/maxpooling2dlayer.md) |
+Name | Type |
+------ | ------ |
+`layer?` | [MaxPooling2DLayer](../interfaces/maxpooling2dlayer.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="addneuralnetworklayer"></a>
 
 ###  addNeuralNetworkLayer
 
-▸ **addNeuralNetworkLayer**(layer: * `number` &#124; [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md)*): `void`
+▸ **addNeuralNetworkLayer**(`layer`: number | [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md)): *void*
 
 *Inherited from [NeuralNetwork](neuralnetwork.md).[addNeuralNetworkLayer](neuralnetwork.md#addneuralnetworklayer)*
 
-*Defined in [reimprove/networks.ts:69](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L69)*
+*Defined in [reimprove/networks.ts:69](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L69)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| layer |  `number` &#124; [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md)|
+Name | Type |
+------ | ------ |
+`layer` | number \| [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="addneuralnetworklayers"></a>
 
 ###  addNeuralNetworkLayers
 
-▸ **addNeuralNetworkLayers**(layers: *`Array`< `number` &#124; [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md)>*): `void`
+▸ **addNeuralNetworkLayers**(`layers`: `Array<number | NeuralNetworkLayer>`): *void*
 
 *Inherited from [NeuralNetwork](neuralnetwork.md).[addNeuralNetworkLayers](neuralnetwork.md#addneuralnetworklayers)*
 
-*Defined in [reimprove/networks.ts:81](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L81)*
+*Defined in [reimprove/networks.ts:81](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L81)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| layers | `Array`< `number` &#124; [NeuralNetworkLayer](../interfaces/neuralnetworklayer.md)> |
+Name | Type |
+------ | ------ |
+`layers` | `Array<number \| NeuralNetworkLayer>` |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="createlayers"></a>
 
 ###  createLayers
 
-▸ **createLayers**(includeInputShape?: *`boolean`*): `Array`<`any`>
+▸ **createLayers**(`includeInputShape`: boolean): *`Array<any>`*
 
 *Overrides [NeuralNetwork](neuralnetwork.md).[createLayers](neuralnetwork.md#createlayers)*
 
-*Defined in [reimprove/networks.ts:146](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L146)*
+*Defined in [reimprove/networks.ts:150](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L150)*
 
 **Parameters:**
 
-| Param | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` includeInputShape | `boolean` | true |
+Name | Type | Default |
+------ | ------ | ------ |
+`includeInputShape` | boolean | true |
 
-**Returns:** `Array`<`any`>
+**Returns:** *`Array<any>`*
 
 ___
-<a id="getlayers"></a>
 
 ###  getLayers
 
-▸ **getLayers**(): [Layer](../interfaces/layer.md)[]
+▸ **getLayers**(): *[Layer](../interfaces/layer.md)[]*
 
 *Overrides [NeuralNetwork](neuralnetwork.md).[getLayers](neuralnetwork.md#getlayers)*
 
-*Defined in [reimprove/networks.ts:162](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L162)*
+*Defined in [reimprove/networks.ts:166](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L166)*
 
-**Returns:** [Layer](../interfaces/layer.md)[]
+**Returns:** *[Layer](../interfaces/layer.md)[]*
 
 ___
 
 ## Object literals
 
-<a id="default_conv_layer"></a>
+### `Static` `Private` DEFAULT_CONV_LAYER
 
-### `<Static>``<Private>` DEFAULT_CONV_LAYER
+### ■ **DEFAULT_CONV_LAYER**: *object*
 
-**DEFAULT_CONV_LAYER**: *`object`*
+*Defined in [reimprove/networks.ts:110](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L110)*
 
-*Defined in [reimprove/networks.ts:106](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L106)*
+###  activation
 
-<a id="default_conv_layer.activation"></a>
+● **activation**: *string* = "relu"
 
-####  activation
+*Defined in [reimprove/networks.ts:113](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L113)*
 
-**● activation**: *`string`* = "relu"
+###  filters
 
-*Defined in [reimprove/networks.ts:109](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L109)*
+● **filters**: *number* = 32
 
-___
-<a id="default_conv_layer.filters"></a>
+*Defined in [reimprove/networks.ts:111](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L111)*
 
-####  filters
+###  kernelSize
 
-**● filters**: *`number`* = 32
+● **kernelSize**: *number* = 3
 
-*Defined in [reimprove/networks.ts:107](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L107)*
+*Defined in [reimprove/networks.ts:112](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L112)*
 
-___
-<a id="default_conv_layer.kernelsize"></a>
+###  type
 
-####  kernelSize
+● **type**: *"convolutional"* = "convolutional"
 
-**● kernelSize**: *`number`* = 3
-
-*Defined in [reimprove/networks.ts:108](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L108)*
-
-___
-<a id="default_conv_layer.type"></a>
-
-####  type
-
-**● type**: *"convolutional"* = "convolutional"
-
-*Defined in [reimprove/networks.ts:110](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L110)*
+*Defined in [reimprove/networks.ts:114](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L114)*
 
 ___
 
-___
-<a id="default_pooling_layer"></a>
+### `Static` `Private` DEFAULT_POOLING_LAYER
 
-### `<Static>``<Private>` DEFAULT_POOLING_LAYER
+### ■ **DEFAULT_POOLING_LAYER**: *object*
 
-**DEFAULT_POOLING_LAYER**: *`object`*
+*Defined in [reimprove/networks.ts:117](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L117)*
 
-*Defined in [reimprove/networks.ts:113](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L113)*
+###  poolSize
 
-<a id="default_pooling_layer.poolsize"></a>
+● **poolSize**: *number* = 2
 
-####  poolSize
+*Defined in [reimprove/networks.ts:118](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L118)*
 
-**● poolSize**: *`number`* = 2
+###  strides
 
-*Defined in [reimprove/networks.ts:114](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L114)*
+● **strides**: *null* =  null
 
-___
-<a id="default_pooling_layer.strides"></a>
+*Defined in [reimprove/networks.ts:119](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L119)*
 
-####  strides
+###  type
 
-**● strides**: *`null`* =  null
+● **type**: *"maxpooling"* = "maxpooling"
 
-*Defined in [reimprove/networks.ts:115](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L115)*
+*Defined in [reimprove/networks.ts:120](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L120)*
 
 ___
-<a id="default_pooling_layer.type-1"></a>
-
-####  type
-
-**● type**: *"maxpooling"* = "maxpooling"
-
-*Defined in [reimprove/networks.ts:116](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L116)*
-
-___
-
-___
-

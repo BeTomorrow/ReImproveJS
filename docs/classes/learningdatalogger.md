@@ -1,167 +1,153 @@
-[ReImproveJS](../README.md) > [LearningDataLogger](../classes/learningdatalogger.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [LearningDataLogger](learningdatalogger.md) /
 
 # Class: LearningDataLogger
 
 ## Hierarchy
 
-**LearningDataLogger**
+* **LearningDataLogger**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](learningdatalogger.md#constructor)
 
-### Properties
+#### Properties
 
-* [academy](learningdatalogger.md#academy)
-* [memory](learningdatalogger.md#memory)
-* [parent](learningdatalogger.md#parent)
-* [tables](learningdatalogger.md#tables)
+* [academy](learningdatalogger.md#private-academy)
+* [memory](learningdatalogger.md#private-memory)
+* [parent](learningdatalogger.md#private-parent)
+* [tables](learningdatalogger.md#private-tables)
 
-### Methods
+#### Methods
 
 * [createMemoryTable](learningdatalogger.md#creatememorytable)
 * [createTeacherTable](learningdatalogger.md#createteachertable)
 * [dispose](learningdatalogger.md#dispose)
 * [updateTables](learningdatalogger.md#updatetables)
-* [tableStyle](learningdatalogger.md#tablestyle)
-
----
+* [tableStyle](learningdatalogger.md#static-tablestyle)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new LearningDataLogger**(element: * `string` &#124; `HTMLElement`*, academy: *[Academy](academy.md)*): [LearningDataLogger](learningdatalogger.md)
+\+ **new LearningDataLogger**(`element`: string | `HTMLElement`, `academy`: [Academy](academy.md)): *[LearningDataLogger](learningdatalogger.md)*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:9](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L9)*
+*Defined in [reimprove/misc/learning_data_logger.ts:9](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L9)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| element |  `string` &#124; `HTMLElement`|
-| academy | [Academy](academy.md) |
+Name | Type |
+------ | ------ |
+`element` | string \| `HTMLElement` |
+`academy` | [Academy](academy.md) |
 
-**Returns:** [LearningDataLogger](learningdatalogger.md)
+**Returns:** *[LearningDataLogger](learningdatalogger.md)*
 
 ___
 
 ## Properties
 
-<a id="academy"></a>
+### `Private` academy
 
-### `<Private>` academy
+● **academy**: *[Academy](academy.md)*
 
-**● academy**: *[Academy](academy.md)*
-
-*Defined in [reimprove/misc/learning_data_logger.ts:11](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L11)*
+*Defined in [reimprove/misc/learning_data_logger.ts:11](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L11)*
 
 ___
-<a id="memory"></a>
 
-### `<Private>` memory
+### `Private` memory
 
-**● memory**: *`HTMLTableElement`*
+● **memory**: *`HTMLTableElement`*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:9](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L9)*
-
-___
-<a id="parent"></a>
-
-### `<Private>` parent
-
-**● parent**: *`HTMLElement`*
-
-*Defined in [reimprove/misc/learning_data_logger.ts:7](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L7)*
+*Defined in [reimprove/misc/learning_data_logger.ts:9](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L9)*
 
 ___
-<a id="tables"></a>
 
-### `<Private>` tables
+### `Private` parent
 
-**● tables**: *`object`[]*
+● **parent**: *`HTMLElement`*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:8](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L8)*
+*Defined in [reimprove/misc/learning_data_logger.ts:7](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L7)*
+
+___
+
+### `Private` tables
+
+● **tables**: *object[]*
+
+*Defined in [reimprove/misc/learning_data_logger.ts:8](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L8)*
 
 ___
 
 ## Methods
 
-<a id="creatememorytable"></a>
-
 ###  createMemoryTable
 
-▸ **createMemoryTable**(): `void`
+▸ **createMemoryTable**(): *void*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L25)*
+*Defined in [reimprove/misc/learning_data_logger.ts:25](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L25)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="createteachertable"></a>
 
 ###  createTeacherTable
 
-▸ **createTeacherTable**(teacherName: *`string`*): `void`
+▸ **createTeacherTable**(`teacherName`: string): *void*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:45](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L45)*
+*Defined in [reimprove/misc/learning_data_logger.ts:45](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L45)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| teacherName | `string` |
+Name | Type |
+------ | ------ |
+`teacherName` | string |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="dispose"></a>
 
 ###  dispose
 
-▸ **dispose**(): `void`
+▸ **dispose**(): *void*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:94](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L94)*
+*Defined in [reimprove/misc/learning_data_logger.ts:94](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L94)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="updatetables"></a>
 
 ###  updateTables
 
-▸ **updateTables**(showMemory?: *`boolean`*): `void`
+▸ **updateTables**(`showMemory`: boolean): *void*
 
-*Defined in [reimprove/misc/learning_data_logger.ts:73](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L73)*
-
-**Parameters:**
-
-| Param | Type | Default value |
-| ------ | ------ | ------ |
-| `Default value` showMemory | `boolean` | false |
-
-**Returns:** `void`
-
-___
-<a id="tablestyle"></a>
-
-### `<Static>` tableStyle
-
-▸ **tableStyle**(table: *`HTMLTableElement`*): `void`
-
-*Defined in [reimprove/misc/learning_data_logger.ts:100](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/learning_data_logger.ts#L100)*
+*Defined in [reimprove/misc/learning_data_logger.ts:73](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L73)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| table | `HTMLTableElement` |
+Name | Type | Default |
+------ | ------ | ------ |
+`showMemory` | boolean | false |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
 
+### `Static` tableStyle
+
+▸ **tableStyle**(`table`: `HTMLTableElement`): *void*
+
+*Defined in [reimprove/misc/learning_data_logger.ts:100](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/learning_data_logger.ts#L100)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`table` | `HTMLTableElement` |
+
+**Returns:** *void*
+
+___

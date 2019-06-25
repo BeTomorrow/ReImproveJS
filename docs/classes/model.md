@@ -1,4 +1,6 @@
-[ReImproveJS](../README.md) > [Model](../classes/model.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [Model](model.md) /
 
 # Class: Model
 
@@ -6,231 +8,255 @@ The Model class is handling everything concerning the neural network
 
 ## Hierarchy
 
-**Model**
+* **Model**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](model.md#constructor)
 
-### Properties
+#### Properties
 
 * [fitConfig](model.md#fitconfig)
-* [model](model.md#model-1)
+* [model](model.md#model)
 
-### Accessors
+#### Accessors
 
+* [FitConfig](model.md#fitconfig)
 * [InputSize](model.md#inputsize)
 * [OutputSize](model.md#outputsize)
 
-### Methods
+#### Methods
 
 * [addLayer](model.md#addlayer)
 * [compile](model.md#compile)
+* [export](model.md#export)
 * [fit](model.md#fit)
-* [loadFromFile](model.md#loadfromfile)
 * [predict](model.md#predict)
 * [randomOutput](model.md#randomoutput)
-* [FromNetwork](model.md#fromnetwork)
-
----
+* [FromNetwork](model.md#static-fromnetwork)
+* [loadFromFile](model.md#static-loadfromfile)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new Model**(config?: *`SequentialConfig`*, fitConfig?: *`ModelFitConfig`*): [Model](model.md)
+\+ **new Model**(`config?`: `SequentialArgs`, `fitConfig?`: `ModelFitArgs`): *[Model](model.md)*
 
-*Defined in [reimprove/model.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L47)*
+*Defined in [reimprove/model.ts:48](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L48)*
 
-The sequential config is truly optional and is to use only if you want to provide a complete tf.layers implementation of your model. Currently only dense layers are supported but convolutions etc will be implemented quickly. The \[\[ModelFitConfig\]\] is concerning the steps, steps per epoch etc ... which is how is the model going to train itself, which is handled by TensorFlowJS.
+The sequential config is truly optional and is to use only if you want to provide a complete tf.layers implementation
+of your model. Currently only dense layers are supported but convolutions etc will be implemented quickly. The [[ModelFitConfig]]
+is concerning the steps, steps per epoch etc ... which is how is the model going to train itself, which is handled by TensorFlowJS.
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| `Optional` config | `SequentialConfig` |  - |
-| `Optional` fitConfig | `ModelFitConfig` |   |
+Name | Type | Description |
+------ | ------ | ------ |
+`config?` | `SequentialArgs` | - |
+`fitConfig?` | `ModelFitArgs` |   |
 
-**Returns:** [Model](model.md)
+**Returns:** *[Model](model.md)*
 
 ___
 
 ## Properties
 
-<a id="fitconfig"></a>
-
 ###  fitConfig
 
-**● fitConfig**: *`ModelFitConfig`*
+● **fitConfig**: *`ModelFitArgs`*
 
-*Defined in [reimprove/model.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L47)*
+*Defined in [reimprove/model.ts:48](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L48)*
 
 ___
-<a id="model-1"></a>
 
 ###  model
 
-**● model**: *`Model`*
+● **model**: *`LayersModel`*
 
-*Defined in [reimprove/model.ts:46](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L46)*
+*Defined in [reimprove/model.ts:47](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L47)*
 
 ___
 
 ## Accessors
 
-<a id="inputsize"></a>
+###  FitConfig
+
+● **set FitConfig**(`fitConfig`: `ModelFitArgs`): *void*
+
+*Defined in [reimprove/model.ts:147](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L147)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`fitConfig` | `ModelFitArgs` |
+
+**Returns:** *void*
+
+___
 
 ###  InputSize
 
-getInputSize(): `number`
+● **get InputSize**(): *number*
 
-*Defined in [reimprove/model.ts:127](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L127)*
+*Defined in [reimprove/model.ts:143](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L143)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="outputsize"></a>
 
 ###  OutputSize
 
-getOutputSize(): `number`
+● **get OutputSize**(): *number*
 
-*Defined in [reimprove/model.ts:123](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L123)*
+*Defined in [reimprove/model.ts:139](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L139)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
 
 ## Methods
 
-<a id="addlayer"></a>
-
 ###  addLayer
 
-▸ **addLayer**(type: *[LayerType](../enums/layertype.md)*, config: *[LayerConfig](../interfaces/layerconfig.md)*): `void`
+▸ **addLayer**(`type`: [LayerType](../enums/layertype.md), `config`: [LayerConfig](../interfaces/layerconfig.md)): *void*
 
-*Defined in [reimprove/model.ts:71](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L71)*
+*Defined in [reimprove/model.ts:87](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L87)*
 
 Method to just add a layer to the model, concatenating it with the previous ones.
-*__deprecated__*: Please now use [NeuralNetwork](neuralnetwork.md)
+
+**`deprecated`** Please now use [NeuralNetwork](neuralnetwork.md)
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| type | [LayerType](../enums/layertype.md) |  a type among DENSE, FLATTEN or CONV2D |
-| config | [LayerConfig](../interfaces/layerconfig.md) |  - |
+Name | Type | Description |
+------ | ------ | ------ |
+`type` | [LayerType](../enums/layertype.md) | a type among DENSE, FLATTEN or CONV2D |
+`config` | [LayerConfig](../interfaces/layerconfig.md) | - |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="compile"></a>
 
 ###  compile
 
-▸ **compile**(config: *`ModelCompileConfig`*): [Model](model.md)
+▸ **compile**(`config`: `ModelCompileArgs`): *[Model](model.md)*
 
-*Defined in [reimprove/model.ts:105](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L105)*
+*Defined in [reimprove/model.ts:121](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L121)*
 
-To compile the model, refer to \[\[ModelCompileConfig\]\] to know exactly what to use, but essentially, give the optimizer ('sgd', 'crossEntropy' , ...) and the loss function ('meanSquaredError', ...), see TFJS's documentation for the exhaustive list.
+To compile the model, refer to [[ModelCompileConfig]] to know exactly what to use, but essentially, give the optimizer ('sgd', 'crossEntropy' , ...)
+and the loss function ('meanSquaredError', ...), see TFJS's documentation for the exhaustive list.
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| config | `ModelCompileConfig` |  - |
+Name | Type |
+------ | ------ |
+`config` | `ModelCompileArgs` |
 
-**Returns:** [Model](model.md)
+**Returns:** *[Model](model.md)*
 
 ___
-<a id="fit"></a>
+
+###  export
+
+▸ **export**(`destination`: string, `place`: string): *`Promise<void>`*
+
+*Defined in [reimprove/model.ts:77](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L77)*
+
+Export model to as destination.
+
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`destination` | string | - | Can be one of 'downloads' (triggers browser download) [default], 'localstorage', 'indexeddb' or in http request 'http', 'https'. |
+`place` | string | "downloads" | - |
+
+**Returns:** *`Promise<void>`*
+
+___
 
 ###  fit
 
-▸ **fit**(x: *`Tensor`*, y: *`Tensor`*): `Promise`<`any`>
+▸ **fit**(`x`: `Tensor`, `y`: `Tensor`): *`Promise<any>`*
 
-*Defined in [reimprove/model.ts:114](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L114)*
-
-**Parameters:**
-
-| Param | Type |
-| ------ | ------ |
-| x | `Tensor` |
-| y | `Tensor` |
-
-**Returns:** `Promise`<`any`>
-
-___
-<a id="loadfromfile"></a>
-
-###  loadFromFile
-
-▸ **loadFromFile**(file: *`string`*): `Promise`<`void`>
-
-*Defined in [reimprove/model.ts:61](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L61)*
+*Defined in [reimprove/model.ts:130](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L130)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| file | `string` |
+Name | Type |
+------ | ------ |
+`x` | `Tensor` |
+`y` | `Tensor` |
 
-**Returns:** `Promise`<`void`>
+**Returns:** *`Promise<any>`*
 
 ___
-<a id="predict"></a>
 
 ###  predict
 
-▸ **predict**(x: *`Tensor`*, config?: *`ModelPredictConfig`*): [Result](result.md)
+▸ **predict**(`x`: `Tensor`, `config?`: `ModelPredictConfig`): *[Result](result.md)*
 
-*Defined in [reimprove/model.ts:110](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L110)*
+*Defined in [reimprove/model.ts:126](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L126)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| x | `Tensor` |
-| `Optional` config | `ModelPredictConfig` |
+Name | Type |
+------ | ------ |
+`x` | `Tensor` |
+`config?` | `ModelPredictConfig` |
 
-**Returns:** [Result](result.md)
+**Returns:** *[Result](result.md)*
 
 ___
-<a id="randomoutput"></a>
 
 ###  randomOutput
 
-▸ **randomOutput**(): `number`
+▸ **randomOutput**(): *number*
 
-*Defined in [reimprove/model.ts:118](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L118)*
+*Defined in [reimprove/model.ts:134](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L134)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="fromnetwork"></a>
 
-### `<Static>` FromNetwork
+### `Static` FromNetwork
 
-▸ **FromNetwork**(network: *[NeuralNetwork](neuralnetwork.md)*, fitConfig?: *`ModelFitConfig`*, name?: *`string`*): [Model](model.md)
+▸ **FromNetwork**(`network`: [NeuralNetwork](neuralnetwork.md), `fitConfig?`: `ModelFitArgs`, `name`: string): *[Model](model.md)*
 
-*Defined in [reimprove/model.ts:140](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L140)*
+*Defined in [reimprove/model.ts:160](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L160)*
 
-Static method to create a [Model](model.md) from a [NeuralNetwork](neuralnetwork.md). The fit config is optional as well as the name. It returns a prepared model, but not compiled.
-*__constructor__*: 
+Static method to create a [Model](model.md) from a [NeuralNetwork](neuralnetwork.md). The fit config is optional as well as the name. It
+returns a prepared model, but not compiled.
+
+**`constructor`** 
 
 **Parameters:**
 
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| network | [NeuralNetwork](neuralnetwork.md) | - |  - |
-| `Optional` fitConfig | `ModelFitConfig` | - |  - |
-| `Default value` name | `string` |  v4() |  - |
+Name | Type | Default |
+------ | ------ | ------ |
+`network` | [NeuralNetwork](neuralnetwork.md) | - |
+`fitConfig?` | `ModelFitArgs` | - |
+`name` | string |  v4() |
 
-**Returns:** [Model](model.md)
+**Returns:** *[Model](model.md)*
 
 ___
 
+### `Static` loadFromFile
+
+▸ **loadFromFile**(`file`: string | object): *`Promise<Model>`*
+
+*Defined in [reimprove/model.ts:62](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L62)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`file` | string \| object |
+
+**Returns:** *`Promise<Model>`*
+
+___

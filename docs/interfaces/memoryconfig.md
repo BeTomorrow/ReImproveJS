@@ -1,28 +1,25 @@
-[ReImproveJS](../README.md) > [MemoryConfig](../interfaces/memoryconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [MemoryConfig](memoryconfig.md) /
 
 # Interface: MemoryConfig
 
 ## Hierarchy
 
-**MemoryConfig**
+* **MemoryConfig**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [size](memoryconfig.md#size)
 
----
-
 ## Properties
-
-<a id="size"></a>
 
 ###  size
 
-**● size**: *`number`*
+● **size**: *number*
 
-*Defined in [reimprove/memory.ts:5](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L5)*
+*Defined in [reimprove/memory.ts:5](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L5)*
 
 ___
-

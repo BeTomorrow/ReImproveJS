@@ -1,86 +1,77 @@
-[ReImproveJS](../README.md) > [ConvolutionalNetworkLayer](../interfaces/convolutionalnetworklayer.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [ConvolutionalNetworkLayer](convolutionalnetworklayer.md) /
 
 # Interface: ConvolutionalNetworkLayer
 
 ## Hierarchy
 
- [Layer](layer.md)
+* [Layer](layer.md)
 
-**↳ ConvolutionalNetworkLayer**
+  * **ConvolutionalNetworkLayer**
 
-↳  [ConvolutionalLayer](convolutionallayer.md)
+  * [ConvolutionalLayer](convolutionallayer.md)
 
-↳  [MaxPooling2DLayer](maxpooling2dlayer.md)
+  * [MaxPooling2DLayer](maxpooling2dlayer.md)
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
-* [activation](convolutionalnetworklayer.md#activation)
-* [inputShape](convolutionalnetworklayer.md#inputshape)
-* [name](convolutionalnetworklayer.md#name)
+* [activation](convolutionalnetworklayer.md#optional-activation)
+* [inputShape](convolutionalnetworklayer.md#optional-inputshape)
+* [name](convolutionalnetworklayer.md#optional-name)
 * [type](convolutionalnetworklayer.md#type)
-* [useBias](convolutionalnetworklayer.md#usebias)
-
----
+* [useBias](convolutionalnetworklayer.md#optional-usebias)
 
 ## Properties
 
-<a id="activation"></a>
+### `Optional` activation
 
-### `<Optional>` activation
+● **activation**? : *string | any*
 
-**● activation**: * `string` &#124; `any`
-*
+*Inherited from [Layer](layer.md).[activation](layer.md#optional-activation)*
 
-*Inherited from [Layer](layer.md).[activation](layer.md#activation)*
-
-*Defined in [reimprove/networks.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L4)*
+*Defined in [reimprove/networks.ts:4](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L4)*
 
 ___
-<a id="inputshape"></a>
 
-### `<Optional>` inputShape
+### `Optional` inputShape
 
-**● inputShape**: *`number`[]*
+● **inputShape**? : *number[]*
 
-*Inherited from [Layer](layer.md).[inputShape](layer.md#inputshape)*
+*Inherited from [Layer](layer.md).[inputShape](layer.md#optional-inputshape)*
 
-*Defined in [reimprove/networks.ts:8](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L8)*
+*Defined in [reimprove/networks.ts:8](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L8)*
 
 Do not use this field
 
 ___
-<a id="name"></a>
 
-### `<Optional>` name
+### `Optional` name
 
-**● name**: *`string`*
+● **name**? : *string*
 
-*Inherited from [Layer](layer.md).[name](layer.md#name)*
+*Inherited from [Layer](layer.md).[name](layer.md#optional-name)*
 
-*Defined in [reimprove/networks.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L6)*
+*Defined in [reimprove/networks.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L6)*
 
 ___
-<a id="type"></a>
 
 ###  type
 
-**● type**: * "convolutional" &#124; "maxpooling"
-*
+● **type**: *"convolutional" | "maxpooling"*
 
-*Defined in [reimprove/networks.ts:12](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L12)*
-
-___
-<a id="usebias"></a>
-
-### `<Optional>` useBias
-
-**● useBias**: *`boolean`*
-
-*Inherited from [Layer](layer.md).[useBias](layer.md#usebias)*
-
-*Defined in [reimprove/networks.ts:5](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L5)*
+*Defined in [reimprove/networks.ts:12](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L12)*
 
 ___
 
+### `Optional` useBias
+
+● **useBias**? : *boolean*
+
+*Inherited from [Layer](layer.md).[useBias](layer.md#optional-usebias)*
+
+*Defined in [reimprove/networks.ts:5](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L5)*
+
+___

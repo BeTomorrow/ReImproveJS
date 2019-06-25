@@ -1,10 +1,12 @@
-[ReImproveJS](../README.md) > [TeachingState](../enums/teachingstate.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [TeachingState](teachingstate.md) /
 
 # Enumeration: TeachingState
 
-## Index
+### Index
 
-### Enumeration members
+#### Enumeration members
 
 * [EXPERIENCING](teachingstate.md#experiencing)
 * [LEARNING](teachingstate.md#learning)
@@ -12,53 +14,44 @@
 * [STOPPED](teachingstate.md#stopped)
 * [TESTING](teachingstate.md#testing)
 
----
-
 ## Enumeration members
-
-<a id="experiencing"></a>
 
 ###  EXPERIENCING
 
-**EXPERIENCING**:  = 0
+● **EXPERIENCING**: = 0
 
-*Defined in [reimprove/teacher.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L25)*
+*Defined in [reimprove/teacher.ts:28](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L28)*
 
 ___
-<a id="learning"></a>
 
 ###  LEARNING
 
-**LEARNING**:  = 1
+● **LEARNING**: = 1
 
-*Defined in [reimprove/teacher.ts:26](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L26)*
+*Defined in [reimprove/teacher.ts:29](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L29)*
 
 ___
-<a id="none"></a>
 
 ###  NONE
 
-**NONE**:  =  -1
+● **NONE**: =  -1
 
-*Defined in [reimprove/teacher.ts:28](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L28)*
+*Defined in [reimprove/teacher.ts:31](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L31)*
 
 ___
-<a id="stopped"></a>
 
 ###  STOPPED
 
-**STOPPED**:  =  -2
+● **STOPPED**: =  -2
 
-*Defined in [reimprove/teacher.ts:29](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L29)*
+*Defined in [reimprove/teacher.ts:32](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L32)*
 
 ___
-<a id="testing"></a>
 
 ###  TESTING
 
-**TESTING**:  = 2
+● **TESTING**: = 2
 
-*Defined in [reimprove/teacher.ts:27](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L27)*
+*Defined in [reimprove/teacher.ts:30](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L30)*
 
 ___
-

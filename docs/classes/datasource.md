@@ -1,12 +1,9 @@
-[ReImproveJS](../README.md) > [DataSource](../classes/datasource.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [DataSource](datasource.md) /
 
 # Class: DataSource
 
 ## Hierarchy
 
-**DataSource**
-
-## Index
-
----
-
+* **DataSource**

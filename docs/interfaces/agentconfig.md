@@ -1,48 +1,29 @@
-[ReImproveJS](../README.md) > [AgentConfig](../interfaces/agentconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [AgentConfig](agentconfig.md) /
 
 # Interface: AgentConfig
 
 ## Hierarchy
 
-**AgentConfig**
+* **AgentConfig**
 
-## Index
+  * [DQAgentConfig](dqagentconfig.md)
 
-### Properties
+  * [QAgentConfig](qagentconfig.md)
 
-* [batchSize](agentconfig.md#batchsize)
-* [memorySize](agentconfig.md#memorysize)
-* [temporalWindow](agentconfig.md#temporalwindow)
+### Index
 
----
+#### Properties
+
+* [memorySize](agentconfig.md#optional-memorysize)
 
 ## Properties
 
-<a id="batchsize"></a>
+### `Optional` memorySize
 
-### `<Optional>` batchSize
+● **memorySize**? : *number*
 
-**● batchSize**: *`number`*
-
-*Defined in [reimprove/agent.ts:19](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L19)*
+*Defined in [reimprove/algorithms/agent_config.ts:5](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/algorithms/agent_config.ts#L5)*
 
 ___
-<a id="memorysize"></a>
-
-### `<Optional>` memorySize
-
-**● memorySize**: *`number`*
-
-*Defined in [reimprove/agent.ts:18](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L18)*
-
-___
-<a id="temporalwindow"></a>
-
-### `<Optional>` temporalWindow
-
-**● temporalWindow**: *`number`*
-
-*Defined in [reimprove/agent.ts:20](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L20)*
-
-___
-

@@ -1,4 +1,6 @@
-[ReImproveJS](../README.md) > [AcademyStepInput](../interfaces/academystepinput.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [AcademyStepInput](academystepinput.md) /
 
 # Interface: AcademyStepInput
 
@@ -6,35 +8,29 @@ Input to give at each step of the Academy, where you specify the target teacher 
 
 ## Hierarchy
 
-**AcademyStepInput**
+* **AcademyStepInput**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [agentsInput](academystepinput.md#agentsinput)
 * [teacherName](academystepinput.md#teachername)
 
----
-
 ## Properties
-
-<a id="agentsinput"></a>
 
 ###  agentsInput
 
-**● agentsInput**: *`number`[]*
+● **agentsInput**: *number[]*
 
-*Defined in [reimprove/academy.ts:31](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L31)*
+*Defined in [reimprove/academy.ts:32](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L32)*
 
 ___
-<a id="teachername"></a>
 
 ###  teacherName
 
-**● teacherName**: *`string`*
+● **teacherName**: *string*
 
-*Defined in [reimprove/academy.ts:30](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L30)*
+*Defined in [reimprove/academy.ts:31](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L31)*
 
 ___
-

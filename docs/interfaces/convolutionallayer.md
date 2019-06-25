@@ -1,114 +1,102 @@
-[ReImproveJS](../README.md) > [ConvolutionalLayer](../interfaces/convolutionallayer.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [ConvolutionalLayer](convolutionallayer.md) /
 
 # Interface: ConvolutionalLayer
 
 ## Hierarchy
 
-↳  [ConvolutionalNetworkLayer](convolutionalnetworklayer.md)
+  * [ConvolutionalNetworkLayer](convolutionalnetworklayer.md)
 
-**↳ ConvolutionalLayer**
+  * **ConvolutionalLayer**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
-* [activation](convolutionallayer.md#activation)
+* [activation](convolutionallayer.md#optional-activation)
 * [filters](convolutionallayer.md#filters)
-* [inputShape](convolutionallayer.md#inputshape)
+* [inputShape](convolutionallayer.md#optional-inputshape)
 * [kernelSize](convolutionallayer.md#kernelsize)
-* [name](convolutionallayer.md#name)
-* [strides](convolutionallayer.md#strides)
+* [name](convolutionallayer.md#optional-name)
+* [strides](convolutionallayer.md#optional-strides)
 * [type](convolutionallayer.md#type)
-* [useBias](convolutionallayer.md#usebias)
-
----
+* [useBias](convolutionallayer.md#optional-usebias)
 
 ## Properties
 
-<a id="activation"></a>
+### `Optional` activation
 
-### `<Optional>` activation
+● **activation**? : *string | any*
 
-**● activation**: * `string` &#124; `any`
-*
+*Inherited from [Layer](layer.md).[activation](layer.md#optional-activation)*
 
-*Inherited from [Layer](layer.md).[activation](layer.md#activation)*
-
-*Defined in [reimprove/networks.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L4)*
+*Defined in [reimprove/networks.ts:4](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L4)*
 
 ___
-<a id="filters"></a>
 
 ###  filters
 
-**● filters**: *`number`*
+● **filters**: *number*
 
-*Defined in [reimprove/networks.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L17)*
+*Defined in [reimprove/networks.ts:17](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L17)*
 
 ___
-<a id="inputshape"></a>
 
-### `<Optional>` inputShape
+### `Optional` inputShape
 
-**● inputShape**: *`number`[]*
+● **inputShape**? : *number[]*
 
-*Inherited from [Layer](layer.md).[inputShape](layer.md#inputshape)*
+*Inherited from [Layer](layer.md).[inputShape](layer.md#optional-inputshape)*
 
-*Defined in [reimprove/networks.ts:8](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L8)*
+*Defined in [reimprove/networks.ts:8](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L8)*
 
 Do not use this field
 
 ___
-<a id="kernelsize"></a>
 
 ###  kernelSize
 
-**● kernelSize**: *`number`*
+● **kernelSize**: *number*
 
-*Defined in [reimprove/networks.ts:19](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L19)*
-
-___
-<a id="name"></a>
-
-### `<Optional>` name
-
-**● name**: *`string`*
-
-*Inherited from [Layer](layer.md).[name](layer.md#name)*
-
-*Defined in [reimprove/networks.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L6)*
+*Defined in [reimprove/networks.ts:19](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L19)*
 
 ___
-<a id="strides"></a>
 
-### `<Optional>` strides
+### `Optional` name
 
-**● strides**: * `number` &#124; `number`[]
-*
+● **name**? : *string*
 
-*Defined in [reimprove/networks.ts:18](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L18)*
+*Inherited from [Layer](layer.md).[name](layer.md#optional-name)*
+
+*Defined in [reimprove/networks.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L6)*
 
 ___
-<a id="type"></a>
+
+### `Optional` strides
+
+● **strides**? : *number | number[]*
+
+*Defined in [reimprove/networks.ts:18](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L18)*
+
+___
 
 ###  type
 
-**● type**: *"convolutional"*
+● **type**: *"convolutional"*
 
 *Overrides [ConvolutionalNetworkLayer](convolutionalnetworklayer.md).[type](convolutionalnetworklayer.md#type)*
 
-*Defined in [reimprove/networks.ts:16](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L16)*
-
-___
-<a id="usebias"></a>
-
-### `<Optional>` useBias
-
-**● useBias**: *`boolean`*
-
-*Inherited from [Layer](layer.md).[useBias](layer.md#usebias)*
-
-*Defined in [reimprove/networks.ts:5](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/networks.ts#L5)*
+*Defined in [reimprove/networks.ts:16](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L16)*
 
 ___
 
+### `Optional` useBias
+
+● **useBias**? : *boolean*
+
+*Inherited from [Layer](layer.md).[useBias](layer.md#optional-usebias)*
+
+*Defined in [reimprove/networks.ts:5](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/networks.ts#L5)*
+
+___
