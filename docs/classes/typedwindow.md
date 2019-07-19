@@ -1,140 +1,129 @@
-[ReImproveJS](../README.md) > [TypedWindow](../classes/typedwindow.md)
+> ## [ReImproveJS](../README.md)
 
-# Class: TypedWindow
+[Globals](../globals.md) / [TypedWindow](typedwindow.md) /
+
+# Class: TypedWindow <**T**>
 
 ## Type parameters
-#### T 
+
+■` T`
+
 ## Hierarchy
 
-**TypedWindow**
+* **TypedWindow**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](typedwindow.md#constructor)
 
-### Properties
+#### Properties
 
-* [minSize](typedwindow.md#minsize)
-* [nullValue](typedwindow.md#nullvalue)
-* [size](typedwindow.md#size)
-* [window](typedwindow.md#window)
+* [minSize](typedwindow.md#private-minsize)
+* [nullValue](typedwindow.md#private-nullvalue)
+* [size](typedwindow.md#private-size)
+* [window](typedwindow.md#private-window)
 
-### Accessors
+#### Accessors
 
-* [Window](typedwindow.md#window-1)
+* [Window](typedwindow.md#window)
 
-### Methods
+#### Methods
 
 * [add](typedwindow.md#add)
 * [mean](typedwindow.md#mean)
 
----
-
 ## Constructors
-
-<a id="constructor"></a>
 
 ###  constructor
 
-⊕ **new TypedWindow**(size: *`number`*, minSize: *`number`*, nullValue: *`T`*): [TypedWindow](typedwindow.md)
+\+ **new TypedWindow**(`size`: number, `minSize`: number, `nullValue`: `T`): *[TypedWindow](typedwindow.md)*
 
-*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L4)*
+*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L4)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| size | `number` |
-| minSize | `number` |
-| nullValue | `T` |
+Name | Type |
+------ | ------ |
+`size` | number |
+`minSize` | number |
+`nullValue` | `T` |
 
-**Returns:** [TypedWindow](typedwindow.md)
+**Returns:** *[TypedWindow](typedwindow.md)*
 
 ___
 
 ## Properties
 
-<a id="minsize"></a>
+### `Private` minSize
 
-### `<Private>` minSize
+● **minSize**: *number*
 
-**● minSize**: *`number`*
-
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L6)*
 
 ___
-<a id="nullvalue"></a>
 
-### `<Private>` nullValue
+### `Private` nullValue
 
-**● nullValue**: *`T`*
+● **nullValue**: *`T`*
 
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
-
-___
-<a id="size"></a>
-
-### `<Private>` size
-
-**● size**: *`number`*
-
-*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L6)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L6)*
 
 ___
-<a id="window"></a>
 
-### `<Private>` window
+### `Private` size
 
-**● window**: *`Array`<`T`>*
+● **size**: *number*
 
-*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L4)*
+*Defined in [reimprove/misc/typed_window.ts:6](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L6)*
+
+___
+
+### `Private` window
+
+● **window**: *`Array<T>`*
+
+*Defined in [reimprove/misc/typed_window.ts:4](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L4)*
 
 ___
 
 ## Accessors
 
-<a id="window-1"></a>
-
 ###  Window
 
-getWindow(): `T`[]
+● **get Window**(): *`T`[]*
 
-*Defined in [reimprove/misc/typed_window.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L25)*
+*Defined in [reimprove/misc/typed_window.ts:25](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L25)*
 
-**Returns:** `T`[]
+**Returns:** *`T`[]*
 
 ___
 
 ## Methods
 
-<a id="add"></a>
-
 ###  add
 
-▸ **add**(value: *`T`*): `void`
+▸ **add**(`value`: `T`): *void*
 
-*Defined in [reimprove/misc/typed_window.ts:10](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L10)*
+*Defined in [reimprove/misc/typed_window.ts:10](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L10)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| value | `T` |
+Name | Type |
+------ | ------ |
+`value` | `T` |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="mean"></a>
 
 ###  mean
 
-▸ **mean**(): `number`
+▸ **mean**(): *number*
 
-*Defined in [reimprove/misc/typed_window.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/misc/typed_window.ts#L17)*
+*Defined in [reimprove/misc/typed_window.ts:17](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/misc/typed_window.ts#L17)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-

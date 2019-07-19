@@ -1,194 +1,178 @@
-[ReImproveJS](../README.md) > [Memory](../classes/memory.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [Memory](memory.md) /
 
 # Class: Memory
 
 ## Hierarchy
 
-**Memory**
+* **Memory**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](memory.md#constructor)
 
-### Properties
+#### Properties
 
 * [config](memory.md#config)
 * [currentSize](memory.md#currentsize)
-* [memory](memory.md#memory-1)
+* [memory](memory.md#memory)
 
-### Accessors
+#### Accessors
 
-* [CurrentSize](memory.md#currentsize-1)
+* [CurrentSize](memory.md#currentsize)
 * [Size](memory.md#size)
 
-### Methods
+#### Methods
 
 * [merge](memory.md#merge)
 * [remember](memory.md#remember)
 * [reset](memory.md#reset)
 * [sample](memory.md#sample)
-* [freeMemento](memory.md#freememento)
-
----
+* [freeMemento](memory.md#static-private-freememento)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new Memory**(config: *[MemoryConfig](../interfaces/memoryconfig.md)*): [Memory](memory.md)
+\+ **new Memory**(`config`: [MemoryConfig](../interfaces/memoryconfig.md)): *[Memory](memory.md)*
 
-*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L24)*
+*Defined in [reimprove/memory.ts:24](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L24)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| config | [MemoryConfig](../interfaces/memoryconfig.md) |
+Name | Type |
+------ | ------ |
+`config` | [MemoryConfig](../interfaces/memoryconfig.md) |
 
-**Returns:** [Memory](memory.md)
+**Returns:** *[Memory](memory.md)*
 
 ___
 
 ## Properties
 
-<a id="config"></a>
-
 ###  config
 
-**● config**: *[MemoryConfig](../interfaces/memoryconfig.md)*
+● **config**: *[MemoryConfig](../interfaces/memoryconfig.md)*
 
-*Defined in [reimprove/memory.ts:21](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L21)*
+*Defined in [reimprove/memory.ts:21](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L21)*
 
 ___
-<a id="currentsize"></a>
 
 ###  currentSize
 
-**● currentSize**: *`number`*
+● **currentSize**: *number*
 
-*Defined in [reimprove/memory.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L24)*
+*Defined in [reimprove/memory.ts:24](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L24)*
 
 ___
-<a id="memory-1"></a>
 
 ###  memory
 
-**● memory**: *`Array`<[Memento](../interfaces/memento.md)>*
+● **memory**: *`Array<Memento>`*
 
-*Defined in [reimprove/memory.ts:23](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L23)*
+*Defined in [reimprove/memory.ts:23](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L23)*
 
 ___
 
 ## Accessors
 
-<a id="currentsize-1"></a>
-
 ###  CurrentSize
 
-getCurrentSize(): `number`
+● **get CurrentSize**(): *number*
 
-*Defined in [reimprove/memory.ts:54](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L54)*
+*Defined in [reimprove/memory.ts:54](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L54)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
-<a id="size"></a>
 
 ###  Size
 
-getSize(): `number`
+● **get Size**(): *number*
 
-*Defined in [reimprove/memory.ts:58](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L58)*
+*Defined in [reimprove/memory.ts:58](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L58)*
 
-**Returns:** `number`
+**Returns:** *number*
 
 ___
 
 ## Methods
 
-<a id="merge"></a>
-
 ###  merge
 
-▸ **merge**(other: *[Memory](memory.md)*): `void`
+▸ **merge**(`other`: [Memory](memory.md)): *void*
 
-*Defined in [reimprove/memory.ts:80](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L80)*
+*Defined in [reimprove/memory.ts:80](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L80)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| other | [Memory](memory.md) |
+Name | Type |
+------ | ------ |
+`other` | [Memory](memory.md) |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="remember"></a>
 
 ###  remember
 
-▸ **remember**(memento: *[Memento](../interfaces/memento.md)*, replaceIfFull?: *`boolean`*): `void`
+▸ **remember**(`memento`: [Memento](../interfaces/memento.md), `replaceIfFull`: boolean): *void*
 
-*Defined in [reimprove/memory.ts:33](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L33)*
+*Defined in [reimprove/memory.ts:33](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L33)*
 
 **Parameters:**
 
-| Param | Type | Default value |
-| ------ | ------ | ------ |
-| memento | [Memento](../interfaces/memento.md) | - |
-| `Default value` replaceIfFull | `boolean` | true |
+Name | Type | Default |
+------ | ------ | ------ |
+`memento` | [Memento](../interfaces/memento.md) | - |
+`replaceIfFull` | boolean | true |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="reset"></a>
 
 ###  reset
 
-▸ **reset**(): `void`
+▸ **reset**(): *void*
 
-*Defined in [reimprove/memory.ts:71](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L71)*
+*Defined in [reimprove/memory.ts:71](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L71)*
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="sample"></a>
 
 ###  sample
 
-▸ **sample**(batchSize: *`number`*, unique?: *`boolean`*): [Memento](../interfaces/memento.md)[]
+▸ **sample**(`batchSize`: number, `unique`: boolean): *[Memento](../interfaces/memento.md)[]*
 
-*Defined in [reimprove/memory.ts:46](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L46)*
-
-**Parameters:**
-
-| Param | Type | Default value |
-| ------ | ------ | ------ |
-| batchSize | `number` | - |
-| `Default value` unique | `boolean` | true |
-
-**Returns:** [Memento](../interfaces/memento.md)[]
-
-___
-<a id="freememento"></a>
-
-### `<Static>``<Private>` freeMemento
-
-▸ **freeMemento**(memento: *[Memento](../interfaces/memento.md)*): `void`
-
-*Defined in [reimprove/memory.ts:62](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L62)*
+*Defined in [reimprove/memory.ts:46](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L46)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| memento | [Memento](../interfaces/memento.md) |
+Name | Type | Default |
+------ | ------ | ------ |
+`batchSize` | number | - |
+`unique` | boolean | true |
 
-**Returns:** `void`
+**Returns:** *[Memento](../interfaces/memento.md)[]*
 
 ___
 
+### `Static` `Private` freeMemento
+
+▸ **freeMemento**(`memento`: [Memento](../interfaces/memento.md)): *void*
+
+*Defined in [reimprove/memory.ts:62](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L62)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`memento` | [Memento](../interfaces/memento.md) |
+
+**Returns:** *void*
+
+___

@@ -1,14 +1,16 @@
-[ReImproveJS](../README.md) > [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [TeacherTrackingInformation](teachertrackinginformation.md) /
 
 # Interface: TeacherTrackingInformation
 
 ## Hierarchy
 
-**TeacherTrackingInformation**
+* **TeacherTrackingInformation**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [currentLessonLength](teachertrackinginformation.md#currentlessonlength)
 * [epsilon](teachertrackinginformation.md#epsilon)
@@ -18,71 +20,60 @@
 * [name](teachertrackinginformation.md#name)
 * [students](teachertrackinginformation.md#students)
 
----
-
 ## Properties
-
-<a id="currentlessonlength"></a>
 
 ###  currentLessonLength
 
-**● currentLessonLength**: *`number`*
+● **currentLessonLength**: *number*
 
-*Defined in [reimprove/teacher.ts:36](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L36)*
+*Defined in [reimprove/teacher.ts:39](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L39)*
 
 ___
-<a id="epsilon"></a>
 
 ###  epsilon
 
-**● epsilon**: *`number`*
+● **epsilon**: *number*
 
-*Defined in [reimprove/teacher.ts:35](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L35)*
+*Defined in [reimprove/teacher.ts:38](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L38)*
 
 ___
-<a id="gamma"></a>
 
 ###  gamma
 
-**● gamma**: *`number`*
+● **gamma**: *number*
 
-*Defined in [reimprove/teacher.ts:34](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L34)*
+*Defined in [reimprove/teacher.ts:37](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L37)*
 
 ___
-<a id="lessonnumber"></a>
 
 ###  lessonNumber
 
-**● lessonNumber**: *`number`*
+● **lessonNumber**: *number*
 
-*Defined in [reimprove/teacher.ts:37](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L37)*
+*Defined in [reimprove/teacher.ts:40](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L40)*
 
 ___
-<a id="maxlessons"></a>
 
 ###  maxLessons
 
-**● maxLessons**: *`number`*
+● **maxLessons**: *number*
 
-*Defined in [reimprove/teacher.ts:38](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L38)*
+*Defined in [reimprove/teacher.ts:41](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L41)*
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+● **name**: *string*
 
-*Defined in [reimprove/teacher.ts:33](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L33)*
+*Defined in [reimprove/teacher.ts:36](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L36)*
 
 ___
-<a id="students"></a>
 
 ###  students
 
-**● students**: *[AgentTrackingInformation](agenttrackinginformation.md)[]*
+● **students**: *[AgentTrackingInformation](agenttrackinginformation.md)[]*
 
-*Defined in [reimprove/teacher.ts:39](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L39)*
+*Defined in [reimprove/teacher.ts:42](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L42)*
 
 ___
-

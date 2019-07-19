@@ -1,10 +1,10 @@
 import * as tflayers from '@tensorflow/tfjs-layers';
-import {Tensor, tidy, io} from '@tensorflow/tfjs-core';
+import {Tensor, tidy, io, ModelPredictConfig} from '@tensorflow/tfjs-core';
 import {random} from 'lodash';
 import {NeuralNetwork} from "./networks";
 import v4 from 'uuid/v4';
 
-const DEFAULT_MODEL_FIT_CONFIG: tflayers.ModelFitConfig = {
+const DEFAULT_MODEL_FIT_CONFIG: tflayers.ModelFitArgs = {
     epochs: 10,
     stepsPerEpoch: 200
 };
@@ -44,17 +44,17 @@ interface ToTfLayerConfig {
  */
 export class Model {
 
-    model: tflayers.Model;
-    fitConfig: tflayers.ModelFitConfig;
+    model: tflayers.LayersModel;
+    fitConfig: tflayers.ModelFitArgs;
 
     /**
      * The sequential config is truly optional and is to use only if you want to provide a complete tf.layers implementation
      * of your model. Currently only dense layers are supported but convolutions etc will be implemented quickly. The [[ModelFitConfig]]
      * is concerning the steps, steps per epoch etc ... which is how is the model going to train itself, which is handled by TensorFlowJS.
-     * @param {SequentialConfig} config
-     * @param {ModelFitConfig} fitConfig
+     * @param {SequentialArgs} config
+     * @param {ModelFitArgs} fitConfig
      */
-    constructor(config?: tflayers.SequentialConfig, fitConfig?: tflayers.ModelFitConfig) {
+    constructor(config?: tflayers.SequentialArgs, fitConfig?: tflayers.ModelFitArgs) {
         this.model = new tflayers.Sequential(config);
         this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
@@ -62,9 +62,9 @@ export class Model {
     static async loadFromFile(file: string | {json: File, weights: File}): Promise<Model> {
         let model = new Model();
         if(typeof file === "string")
-            model.model = await tflayers.loadModel(file);
+            model.model = await tflayers.loadLayersModel(file);
         else
-            model.model = await tflayers.loadModel(io.browserFiles([file.json, file.weights]));
+            model.model = await tflayers.loadLayersModel(io.browserFiles([file.json, file.weights]));
         return model;
     }
 
@@ -115,15 +115,15 @@ export class Model {
     /**
      * To compile the model, refer to [[ModelCompileConfig]] to know exactly what to use, but essentially, give the optimizer ('sgd', 'crossEntropy' , ...)
      * and the loss function ('meanSquaredError', ...), see TFJS's documentation for the exhaustive list.
-     * @param {ModelCompileConfig} config
+     * @param {ModelCompileArgs} config
      * @returns {Model}
      */
-    compile(config: tflayers.ModelCompileConfig): Model {
+    compile(config: tflayers.ModelCompileArgs): Model {
         this.model.compile(config);
         return this;
     }
 
-    predict(x: Tensor, config?: tflayers.ModelPredictConfig): Result {
+    predict(x: Tensor, config?: ModelPredictConfig): Result {
         return new Result(<Tensor> this.model.predict(x, config));
     }
 
@@ -144,7 +144,7 @@ export class Model {
         return this.model.layers[0].batchInputShape[1];
     }
 
-    set FitConfig(fitConfig: tflayers.ModelFitConfig) {
+    set FitConfig(fitConfig: tflayers.ModelFitArgs) {
         this.fitConfig = {...DEFAULT_MODEL_FIT_CONFIG, ...fitConfig};
     }
 
@@ -157,7 +157,7 @@ export class Model {
      * @returns {Model}
      * @constructor
      */
-    static FromNetwork(network: NeuralNetwork, fitConfig?: tflayers.ModelFitConfig, name: string = v4()): Model {
+    static FromNetwork(network: NeuralNetwork, fitConfig?: tflayers.ModelFitArgs, name: string = v4()): Model {
         return new Model({
             name: name,
             layers: network.createLayers()

@@ -1,38 +1,34 @@
-[ReImproveJS](../README.md) > [MementoTensor](../interfaces/mementotensor.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [MementoTensor](mementotensor.md) /
 
 # Interface: MementoTensor
 
 ## Hierarchy
 
-**MementoTensor**
+* **MementoTensor**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [references](mementotensor.md#references)
 * [tensor](mementotensor.md#tensor)
 
----
-
 ## Properties
-
-<a id="references"></a>
 
 ###  references
 
-**● references**: *`number`*
+● **references**: *number*
 
-*Defined in [reimprove/memory.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L17)*
+*Defined in [reimprove/memory.ts:17](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L17)*
 
 ___
-<a id="tensor"></a>
 
 ###  tensor
 
-**● tensor**: *`Tensor`*
+● **tensor**: *`Tensor`*
 
-*Defined in [reimprove/memory.ts:16](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/memory.ts#L16)*
+*Defined in [reimprove/memory.ts:16](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/memory.ts#L16)*
 
 ___
-

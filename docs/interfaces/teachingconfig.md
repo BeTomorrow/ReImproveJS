@@ -1,88 +1,88 @@
-[ReImproveJS](../README.md) > [TeachingConfig](../interfaces/teachingconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [TeachingConfig](teachingconfig.md) /
 
 # Interface: TeachingConfig
 
 ## Hierarchy
 
-**TeachingConfig**
+* **TeachingConfig**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
-* [epsilon](teachingconfig.md#epsilon)
-* [epsilonDecay](teachingconfig.md#epsilondecay)
-* [epsilonMin](teachingconfig.md#epsilonmin)
-* [gamma](teachingconfig.md#gamma)
-* [lessonLength](teachingconfig.md#lessonlength)
-* [lessonsQuantity](teachingconfig.md#lessonsquantity)
-* [lessonsWithRandom](teachingconfig.md#lessonswithrandom)
-
----
+* [alpha](teachingconfig.md#optional-alpha)
+* [epsilon](teachingconfig.md#optional-epsilon)
+* [epsilonDecay](teachingconfig.md#optional-epsilondecay)
+* [epsilonMin](teachingconfig.md#optional-epsilonmin)
+* [gamma](teachingconfig.md#optional-gamma)
+* [lessonLength](teachingconfig.md#optional-lessonlength)
+* [lessonsQuantity](teachingconfig.md#optional-lessonsquantity)
+* [lessonsWithRandom](teachingconfig.md#optional-lessonswithrandom)
 
 ## Properties
 
-<a id="epsilon"></a>
+### `Optional` alpha
 
-### `<Optional>` epsilon
+● **alpha**? : *number*
 
-**● epsilon**: *`number`*
-
-*Defined in [reimprove/teacher.ts:19](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L19)*
-
-___
-<a id="epsilondecay"></a>
-
-### `<Optional>` epsilonDecay
-
-**● epsilonDecay**: *`number`*
-
-*Defined in [reimprove/teacher.ts:20](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L20)*
-
-___
-<a id="epsilonmin"></a>
-
-### `<Optional>` epsilonMin
-
-**● epsilonMin**: *`number`*
-
-*Defined in [reimprove/teacher.ts:21](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L21)*
-
-___
-<a id="gamma"></a>
-
-### `<Optional>` gamma
-
-**● gamma**: *`number`*
-
-*Defined in [reimprove/teacher.ts:18](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L18)*
-
-___
-<a id="lessonlength"></a>
-
-### `<Optional>` lessonLength
-
-**● lessonLength**: *`number`*
-
-*Defined in [reimprove/teacher.ts:15](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L15)*
-
-___
-<a id="lessonsquantity"></a>
-
-### `<Optional>` lessonsQuantity
-
-**● lessonsQuantity**: *`number`*
-
-*Defined in [reimprove/teacher.ts:16](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L16)*
-
-___
-<a id="lessonswithrandom"></a>
-
-### `<Optional>` lessonsWithRandom
-
-**● lessonsWithRandom**: *`number`*
-
-*Defined in [reimprove/teacher.ts:17](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/teacher.ts#L17)*
+*Defined in [reimprove/teacher.ts:24](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L24)*
 
 ___
 
+### `Optional` epsilon
+
+● **epsilon**? : *number*
+
+*Defined in [reimprove/teacher.ts:21](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L21)*
+
+___
+
+### `Optional` epsilonDecay
+
+● **epsilonDecay**? : *number*
+
+*Defined in [reimprove/teacher.ts:22](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L22)*
+
+___
+
+### `Optional` epsilonMin
+
+● **epsilonMin**? : *number*
+
+*Defined in [reimprove/teacher.ts:23](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L23)*
+
+___
+
+### `Optional` gamma
+
+● **gamma**? : *number*
+
+*Defined in [reimprove/teacher.ts:20](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L20)*
+
+___
+
+### `Optional` lessonLength
+
+● **lessonLength**? : *number*
+
+*Defined in [reimprove/teacher.ts:17](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L17)*
+
+___
+
+### `Optional` lessonsQuantity
+
+● **lessonsQuantity**? : *number*
+
+*Defined in [reimprove/teacher.ts:18](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L18)*
+
+___
+
+### `Optional` lessonsWithRandom
+
+● **lessonsWithRandom**? : *number*
+
+*Defined in [reimprove/teacher.ts:19](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/teacher.ts#L19)*
+
+___

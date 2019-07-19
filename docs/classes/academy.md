@@ -1,4 +1,6 @@
-[ReImproveJS](../README.md) > [Academy](../classes/academy.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [Academy](academy.md) /
 
 # Class: Academy
 
@@ -6,27 +8,27 @@ Class to interact with when creating the environment and updating it.
 
 ## Hierarchy
 
-**Academy**
+* **Academy**
 
-## Index
+### Index
 
-### Constructors
+#### Constructors
 
 * [constructor](academy.md#constructor)
 
-### Properties
+#### Properties
 
-* [agents](academy.md#agents)
-* [assigments](academy.md#assigments)
-* [config](academy.md#config)
-* [logger](academy.md#logger)
-* [teachers](academy.md#teachers)
+* [agents](academy.md#private-agents)
+* [assigments](academy.md#private-assigments)
+* [config](academy.md#private-config)
+* [logger](academy.md#private-logger)
+* [teachers](academy.md#private-teachers)
 
-### Accessors
+#### Accessors
 
-* [Teachers](academy.md#teachers-1)
+* [Teachers](academy.md#teachers)
 
-### Methods
+#### Methods
 
 * [OnLearningLessonEnded](academy.md#onlearninglessonended)
 * [OnLessonEnded](academy.md#onlessonended)
@@ -43,372 +45,401 @@ Class to interact with when creating the environment and updating it.
 * [setRewardOfAgent](academy.md#setrewardofagent)
 * [step](academy.md#step)
 * [toggleLogs](academy.md#togglelogs)
-
----
+* [toggleTeaching](academy.md#toggleteaching)
 
 ## Constructors
 
-<a id="constructor"></a>
-
 ###  constructor
 
-⊕ **new Academy**(config?: *[AcademyConfig](../interfaces/academyconfig.md)*): [Academy](academy.md)
+\+ **new Academy**(`config?`: [AcademyConfig](../interfaces/academyconfig.md)): *[Academy](academy.md)*
 
-*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L52)*
+*Defined in [reimprove/academy.ts:53](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L53)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| `Optional` config | [AcademyConfig](../interfaces/academyconfig.md) |
+Name | Type |
+------ | ------ |
+`config?` | [AcademyConfig](../interfaces/academyconfig.md) |
 
-**Returns:** [Academy](academy.md)
+**Returns:** *[Academy](academy.md)*
 
 ___
 
 ## Properties
 
-<a id="agents"></a>
+### `Private` agents
 
-### `<Private>` agents
+● **agents**: *`Map<string, DQAgent>`*
 
-**● agents**: *`Map`<`string`, [Agent](agent.md)>*
-
-*Defined in [reimprove/academy.ts:47](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L47)*
+*Defined in [reimprove/academy.ts:48](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L48)*
 
 ___
-<a id="assigments"></a>
 
-### `<Private>` assigments
+### `Private` assigments
 
-**● assigments**: *`Map`<`string`, `string`>*
+● **assigments**: *`Map<string, string>`*
 
-*Defined in [reimprove/academy.ts:49](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L49)*
-
-___
-<a id="config"></a>
-
-### `<Private>` config
-
-**● config**: *[AcademyConfig](../interfaces/academyconfig.md)*
-
-*Defined in [reimprove/academy.ts:52](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L52)*
+*Defined in [reimprove/academy.ts:50](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L50)*
 
 ___
-<a id="logger"></a>
 
-### `<Private>` logger
+### `Private` config
 
-**● logger**: *[LearningDataLogger](learningdatalogger.md)*
+● **config**: *[AcademyConfig](../interfaces/academyconfig.md)*
 
-*Defined in [reimprove/academy.ts:51](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L51)*
+*Defined in [reimprove/academy.ts:53](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L53)*
 
 ___
-<a id="teachers"></a>
 
-### `<Private>` teachers
+### `Private` logger
 
-**● teachers**: *`Map`<`string`, [Teacher](teacher.md)>*
+● **logger**: *[LearningDataLogger](learningdatalogger.md)*
 
-*Defined in [reimprove/academy.ts:48](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L48)*
+*Defined in [reimprove/academy.ts:52](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L52)*
+
+___
+
+### `Private` teachers
+
+● **teachers**: *`Map<string, Teacher>`*
+
+*Defined in [reimprove/academy.ts:49](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L49)*
 
 ___
 
 ## Accessors
 
-<a id="teachers-1"></a>
-
 ###  Teachers
 
-getTeachers(): `string`[]
+● **get Teachers**(): *string[]*
 
-*Defined in [reimprove/academy.ts:208](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L208)*
+*Defined in [reimprove/academy.ts:209](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L209)*
 
 Gives the list of teachers
-*__constructor__*: 
 
-**Returns:** `string`[]
+**`constructor`** 
+
+**Returns:** *string[]*
 
 ___
 
 ## Methods
 
-<a id="onlearninglessonended"></a>
-
 ###  OnLearningLessonEnded
 
-▸ **OnLearningLessonEnded**(teacherName: *`string`*, callback: *`function`*): `void`
+▸ **OnLearningLessonEnded**(`teacherName`: string, `callback`: function): *void*
 
-*Defined in [reimprove/academy.ts:151](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L151)*
+*Defined in [reimprove/academy.ts:152](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L152)*
 
 Callback which will be called each time the model's fit ends after the end of the lesson.
-*__constructor__*: 
+
+**`constructor`** 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| teacherName | `string` |  The target teacher which will call the callback |
-| callback | `function` |  The callback, giving the teacher name |
+■` teacherName`: *string*
 
-**Returns:** `void`
+The target teacher which will call the callback
+
+■` callback`: *function*
+
+The callback, giving the teacher name
+
+▸ (`teacher`: string): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+
+**Returns:** *void*
 
 ___
-<a id="onlessonended"></a>
 
 ###  OnLessonEnded
 
-▸ **OnLessonEnded**(teacherName: *`string`*, callback: *`function`*): `void`
+▸ **OnLessonEnded**(`teacherName`: string, `callback`: function): *void*
 
-*Defined in [reimprove/academy.ts:162](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L162)*
+*Defined in [reimprove/academy.ts:163](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L163)*
 
 Callback called when a lesson is ended
-*__constructor__*: 
+
+**`constructor`** 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| teacherName | `string` |  The target teacher which will call the callback |
-| callback | `function` |  The callback, giving the teacher name and the index of the just ended lesson. |
+■` teacherName`: *string*
 
-**Returns:** `void`
+The target teacher which will call the callback
+
+■` callback`: *function*
+
+The callback, giving the teacher name and the index of the just ended lesson.
+
+▸ (`teacher`: string, `lessonNumber`: number): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+`lessonNumber` | number |
+
+**Returns:** *void*
 
 ___
-<a id="onteachingended"></a>
 
 ###  OnTeachingEnded
 
-▸ **OnTeachingEnded**(teacherName: *`string`*, callback: *`function`*): `void`
+▸ **OnTeachingEnded**(`teacherName`: string, `callback`: function): *void*
 
-*Defined in [reimprove/academy.ts:173](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L173)*
+*Defined in [reimprove/academy.ts:174](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L174)*
 
 Callback called when a lesson is ended
-*__constructor__*: 
+
+**`constructor`** 
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| teacherName | `string` |  The target teacher which will call the callback |
-| callback | `function` |  The callback, giving the teacher name |
+■` teacherName`: *string*
 
-**Returns:** `void`
+The target teacher which will call the callback
+
+■` callback`: *function*
+
+The callback, giving the teacher name
+
+▸ (`teacher`: string): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+
+**Returns:** *void*
 
 ___
-<a id="addagent"></a>
 
 ###  addAgent
 
-▸ **addAgent**(config: *[BuildAgentConfig](../interfaces/buildagentconfig.md)*, name?: *`string`*): `string`
+▸ **addAgent**(`config`: [BuildAgentConfig](../interfaces/buildagentconfig.md), `name?`: string): *string*
 
-*Defined in [reimprove/academy.ts:65](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L65)*
+*Defined in [reimprove/academy.ts:66](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L66)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| config | [BuildAgentConfig](../interfaces/buildagentconfig.md) |
-| `Optional` name | `string` |
+Name | Type |
+------ | ------ |
+`config` | [BuildAgentConfig](../interfaces/buildagentconfig.md) |
+`name?` | string |
 
-**Returns:** `string`
+**Returns:** *string*
 
 ___
-<a id="addrewardtoagent"></a>
 
 ###  addRewardToAgent
 
-▸ **addRewardToAgent**(name: *`string`*, reward: *`number`*): `void`
+▸ **addRewardToAgent**(`name`: string, `reward`: number): *void*
 
-*Defined in [reimprove/academy.ts:130](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L130)*
+*Defined in [reimprove/academy.ts:131](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L131)*
 
-Add a reward to an agent, given its name. Be careful to give a reward normalized between -1.0 and 1.0 for an optimal learn.
+Add a reward to an agent, given its name. Be careful to give a reward normalized between -1.0 and 1.0 for an optimal
+learn.
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| name | `string` |  - |
-| reward | `number` |   |
+Name | Type | Description |
+------ | ------ | ------ |
+`name` | string | - |
+`reward` | number |   |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="addteacher"></a>
 
 ###  addTeacher
 
-▸ **addTeacher**(config?: *[TeachingConfig](../interfaces/teachingconfig.md)*, name?: *`string`*): `string`
+▸ **addTeacher**(`config?`: [TeachingConfig](../interfaces/teachingconfig.md), `name?`: string): *string*
 
-*Defined in [reimprove/academy.ts:75](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L75)*
+*Defined in [reimprove/academy.ts:76](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L76)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| `Optional` config | [TeachingConfig](../interfaces/teachingconfig.md) |
-| `Optional` name | `string` |
+Name | Type |
+------ | ------ |
+`config?` | [TeachingConfig](../interfaces/teachingconfig.md) |
+`name?` | string |
 
-**Returns:** `string`
+**Returns:** *string*
 
 ___
-<a id="assignteachertoagent"></a>
 
 ###  assignTeacherToAgent
 
-▸ **assignTeacherToAgent**(agentName: *`string`*, teacherName: *`string`*): `void`
+▸ **assignTeacherToAgent**(`agentName`: string, `teacherName`: string): *void*
 
-*Defined in [reimprove/academy.ts:85](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L85)*
+*Defined in [reimprove/academy.ts:86](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L86)*
 
 **Parameters:**
 
-| Param | Type |
-| ------ | ------ |
-| agentName | `string` |
-| teacherName | `string` |
+Name | Type |
+------ | ------ |
+`agentName` | string |
+`teacherName` | string |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="createlogger"></a>
 
 ###  createLogger
 
-▸ **createLogger**(parent: *`HTMLElement`*): `void`
+▸ **createLogger**(`parent`: `HTMLElement`): *void*
 
-*Defined in [reimprove/academy.ts:225](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L225)*
+*Defined in [reimprove/academy.ts:226](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L226)*
 
 If not given in the configuration options in the constructor, you can choose to create the logger here
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| parent | `HTMLElement` |   |
+Name | Type | Description |
+------ | ------ | ------ |
+`parent` | `HTMLElement` |   |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="getteacherdata"></a>
 
 ###  getTeacherData
 
-▸ **getTeacherData**(name: *`string`*): [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
+▸ **getTeacherData**(`name`: string): *[TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)*
 
-*Defined in [reimprove/academy.ts:217](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L217)*
+*Defined in [reimprove/academy.ts:218](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L218)*
 
 Used for logs, returning the tracking informations of a teacher, see [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| name | `string` |  - |
+Name | Type |
+------ | ------ |
+`name` | string |
 
-**Returns:** [TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)
+**Returns:** *[TeacherTrackingInformation](../interfaces/teachertrackinginformation.md)*
 
 ___
-<a id="reset"></a>
 
 ###  reset
 
-▸ **reset**(): `void`
+▸ **reset**(): *void*
 
-*Defined in [reimprove/academy.ts:189](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L189)*
+*Defined in [reimprove/academy.ts:190](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L190)*
 
 Function resetting everything in the academy, calling first [resetTeachersAndAgents](academy.md#resetteachersandagents), then cleaning everything concerning teachers and agents.
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="resetteacherlesson"></a>
 
 ###  resetTeacherLesson
 
-▸ **resetTeacherLesson**(teacherName: *`string`*): `void`
+▸ **resetTeacherLesson**(`teacherName`: string): *void*
 
-*Defined in [reimprove/academy.ts:199](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L199)*
+*Defined in [reimprove/academy.ts:200](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L200)*
 
 Resets to 0 the current state of the lesson. It cannot forget
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| teacherName | `string` |   |
+Name | Type | Description |
+------ | ------ | ------ |
+`teacherName` | string |   |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="resetteachersandagents"></a>
 
 ###  resetTeachersAndAgents
 
-▸ **resetTeachersAndAgents**(): `void`
+▸ **resetTeachersAndAgents**(): *void*
 
-*Defined in [reimprove/academy.ts:181](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L181)*
+*Defined in [reimprove/academy.ts:182](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L182)*
 
 Function to reset everything from teachers and agents (resetting parameters of teachers, and resetting memory and parameters of agents).
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="setrewardofagent"></a>
 
 ###  setRewardOfAgent
 
-▸ **setRewardOfAgent**(name: *`string`*, reward: *`number`*): `void`
+▸ **setRewardOfAgent**(`name`: string, `reward`: number): *void*
 
-*Defined in [reimprove/academy.ts:140](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L140)*
+*Defined in [reimprove/academy.ts:141](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L141)*
 
 In case where you just want to clearly set the agent's current reward for this step.
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| name | `string` |  - |
-| reward | `number` |   |
+Name | Type | Description |
+------ | ------ | ------ |
+`name` | string | - |
+`reward` | number |   |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
-<a id="step"></a>
 
 ###  step
 
-▸ **step**(inputs: * [AcademyStepInput](../interfaces/academystepinput.md)[] &#124; [AcademyStepInput](../interfaces/academystepinput.md)*): `Promise`<`Map`<`string`, `number`>>
+▸ **step**(`inputs`: [AcademyStepInput](../interfaces/academystepinput.md)[] | [AcademyStepInput](../interfaces/academystepinput.md)): *`Promise<Map<string, number>>`*
 
-*Defined in [reimprove/academy.ts:101](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L101)*
+*Defined in [reimprove/academy.ts:102](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L102)*
 
-A step in the academy, giving the teachers their inputs, and propagating it to agents. Returns a \[\[Map\]\] where you just have to pick for each agent's name its decision. At each step all the rewards are reset to 0.
+A step in the academy, giving the teachers their inputs, and propagating it to agents. Returns a [[Map]] where you
+just have to pick for each agent's name its decision. At each step all the rewards are reset to 0.
 
 **Parameters:**
 
-| Param | Type | Description |
-| ------ | ------ | ------ |
-| inputs |  [AcademyStepInput](../interfaces/academystepinput.md)[] &#124; [AcademyStepInput](../interfaces/academystepinput.md)|  You can give only one input as well as an array of inputs. |
+Name | Type | Description |
+------ | ------ | ------ |
+`inputs` | [AcademyStepInput](../interfaces/academystepinput.md)[] \| [AcademyStepInput](../interfaces/academystepinput.md) | You can give only one input as well as an array of inputs. |
 
-**Returns:** `Promise`<`Map`<`string`, `number`>>
+**Returns:** *`Promise<Map<string, number>>`*
 
 ___
-<a id="togglelogs"></a>
 
 ###  toggleLogs
 
-▸ **toggleLogs**(memory?: *`boolean`*): `void`
+▸ **toggleLogs**(`memory`: boolean): *void*
 
-*Defined in [reimprove/academy.ts:235](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/academy.ts#L235)*
+*Defined in [reimprove/academy.ts:236](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L236)*
 
 Method to toggle logs, taking an argument to toggle memory logs.
 
 **Parameters:**
 
-| Param | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `Default value` memory | `boolean` | false |   |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`memory` | boolean | false |   |
 
-**Returns:** `void`
+**Returns:** *void*
 
 ___
 
+###  toggleTeaching
+
+▸ **toggleTeaching**(`teacher`: string, `toggle`: boolean): *void*
+
+*Defined in [reimprove/academy.ts:243](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/academy.ts#L243)*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`teacher` | string |
+`toggle` | boolean |
+
+**Returns:** *void*
+
+___

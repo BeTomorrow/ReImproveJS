@@ -1,4 +1,6 @@
-[ReImproveJS](../README.md) > [LayerConfig](../interfaces/layerconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [LayerConfig](layerconfig.md) /
 
 # Interface: LayerConfig
 
@@ -6,61 +8,53 @@ Simplified layer configuration where you only give your layer, your activation f
 
 ## Hierarchy
 
-**LayerConfig**
+* **LayerConfig**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [activation](layerconfig.md#activation)
-* [inputShape](layerconfig.md#inputshape)
+* [inputShape](layerconfig.md#optional-inputshape)
 * [units](layerconfig.md#units)
-* [useBias](layerconfig.md#usebias)
-
----
+* [useBias](layerconfig.md#optional-usebias)
 
 ## Properties
 
-<a id="activation"></a>
-
 ###  activation
 
-**● activation**: *`string`*
+● **activation**: *string*
 
-*Defined in [reimprove/model.ts:27](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L27)*
+*Defined in [reimprove/model.ts:27](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L27)*
 
 The activation function ('relu', 'sigmoid', ...)
 
 ___
-<a id="inputshape"></a>
 
-### `<Optional>` inputShape
+### `Optional` inputShape
 
-**● inputShape**: *`Array`<`number`>*
+● **inputShape**? : *`Array<number>`*
 
-*Defined in [reimprove/model.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L25)*
+*Defined in [reimprove/model.ts:25](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L25)*
 
 If it is an input layer, the size of the input
 
 ___
-<a id="units"></a>
 
 ###  units
 
-**● units**: *`number`*
+● **units**: *number*
 
-*Defined in [reimprove/model.ts:23](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L23)*
+*Defined in [reimprove/model.ts:23](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L23)*
 
 Number of neurons of this layer
 
 ___
-<a id="usebias"></a>
 
-### `<Optional>` useBias
+### `Optional` useBias
 
-**● useBias**: *`boolean`*
+● **useBias**? : *boolean*
 
-*Defined in [reimprove/model.ts:28](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/model.ts#L28)*
+*Defined in [reimprove/model.ts:28](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/model.ts#L28)*
 
 ___
-

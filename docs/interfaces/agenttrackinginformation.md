@@ -1,48 +1,43 @@
-[ReImproveJS](../README.md) > [AgentTrackingInformation](../interfaces/agenttrackinginformation.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [AgentTrackingInformation](agenttrackinginformation.md) /
 
 # Interface: AgentTrackingInformation
 
 ## Hierarchy
 
-**AgentTrackingInformation**
+* **AgentTrackingInformation**
 
-## Index
+### Index
 
-### Properties
+#### Properties
 
 * [averageLoss](agenttrackinginformation.md#averageloss)
 * [averageReward](agenttrackinginformation.md#averagereward)
 * [name](agenttrackinginformation.md#name)
 
----
-
 ## Properties
-
-<a id="averageloss"></a>
 
 ###  averageLoss
 
-**● averageLoss**: *`number`*
+● **averageLoss**: *number*
 
-*Defined in [reimprove/agent.ts:24](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L24)*
+*Defined in [reimprove/algorithms/agent_config.ts:23](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/algorithms/agent_config.ts#L23)*
 
 ___
-<a id="averagereward"></a>
 
 ###  averageReward
 
-**● averageReward**: *`number`*
+● **averageReward**: *number*
 
-*Defined in [reimprove/agent.ts:25](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L25)*
+*Defined in [reimprove/algorithms/agent_config.ts:24](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/algorithms/agent_config.ts#L24)*
 
 ___
-<a id="name"></a>
 
 ###  name
 
-**● name**: *`string`*
+● **name**: *string*
 
-*Defined in [reimprove/agent.ts:26](https://github.com/Pravez/FurnishJS/blob/b206a93/src/reimprove/agent.ts#L26)*
+*Defined in [reimprove/algorithms/agent_config.ts:25](https://github.com/DevSide/ReImproveJS/blob/2368b25/src/reimprove/algorithms/agent_config.ts#L25)*
 
 ___
-

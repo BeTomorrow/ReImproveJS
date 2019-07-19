@@ -1,15 +1,13 @@
-[ReImproveJS](../README.md) > [ToTfLayerConfig](../interfaces/totflayerconfig.md)
+> ## [ReImproveJS](../README.md)
+
+[Globals](../globals.md) / [ToTfLayerConfig](totflayerconfig.md) /
 
 # Interface: ToTfLayerConfig
 
 ## Hierarchy
 
-**ToTfLayerConfig**
+* **ToTfLayerConfig**
 
 ## Indexable
 
-\[key: `string`\]:&nbsp;`any`
-## Index
-
----
-
+● \[■&#x60; key&#x60;: *string*\]: any
