@@ -1,3 +1,5 @@
+# This repository is deprecated. I cannot maintain it anymore, and cannot update issues.
+
 # ReImproveJS
 
 > A framework using TensorFlow.js for Deep Reinforcement Learning
