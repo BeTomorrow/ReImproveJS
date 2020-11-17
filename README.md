@@ -122,7 +122,7 @@ function OnSpecialGoodEvent() {
 
 // Bad event
 function OnSpecialBadEvent() {
-    academy.addRewardToAgent(agent, -1.0)        // Give a bad reward to the agent if he did something wrong
+    academy.addRewardToAgent(agent, -1.0)        // Give a bad reward to the agent if the agent did something wrong
 }
 
 // Animation loop, update loop, whatever loop you want
